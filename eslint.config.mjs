@@ -6,7 +6,13 @@ import nextTs from "eslint-config-next/typescript";
 const allowedStrings = ["·", "—", "–", "/", "|", "×", "•", ":", "+", "US$", "#"];
 
 // Attributes a user can read or hear: they must be translated too.
-const translatableAttributes = ["alt", "title", "placeholder", "aria-label", "aria-description"];
+const translatableAttributes = [
+  "alt",
+  "title",
+  "placeholder",
+  "aria-label",
+  "aria-description",
+];
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -14,12 +20,16 @@ const eslintConfig = defineConfig([
   {
     files: ["src/**/*.tsx"],
     rules: {
-      "react/jsx-no-literals": ["error", { noStrings: true, ignoreProps: true, allowedStrings }],
+      "react/jsx-no-literals": [
+        "error",
+        { noStrings: true, ignoreProps: true, allowedStrings },
+      ],
       "no-restricted-syntax": [
         "error",
         {
           selector: `JSXAttribute[name.name=/^(${translatableAttributes.join("|")})$/] > Literal[value=/[A-Za-zÁÉÍÓÚáéíóúñÑ]/]`,
-          message: "Interface text must come from next-intl messages, not a string literal.",
+          message:
+            "Interface text must come from next-intl messages, not a string literal.",
         },
       ],
     },

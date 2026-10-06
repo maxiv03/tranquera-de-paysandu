@@ -31,7 +31,8 @@ function args(message) {
   return [...names].sort().join(",");
 }
 
-const load = (locale) => flatten(JSON.parse(readFileSync(join(dir, `${locale}.json`), "utf8")));
+const load = (locale) =>
+  flatten(JSON.parse(readFileSync(join(dir, `${locale}.json`), "utf8")));
 const locales = readdirSync(dir)
   .filter((f) => f.endsWith(".json"))
   .map((f) => f.replace(".json", ""));
