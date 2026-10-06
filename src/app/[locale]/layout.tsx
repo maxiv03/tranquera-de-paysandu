@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Archivo, Bitter } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -31,8 +32,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function LocaleLayout({ children }: LayoutProps<"/[locale]">) {
+  const current = await locale();
+  if (!hasLocale(routing.locales, current)) notFound();
+
   return (
-    <html lang={await locale()} className={`${archivo.variable} ${bitter.variable}`}>
+    <html lang={current} className={`${archivo.variable} ${bitter.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
