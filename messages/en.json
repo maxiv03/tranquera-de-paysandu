@@ -75,7 +75,7 @@
     "cover": "Image of {name}"
   },
   "whatsapp": {
-    "prefix": "[Tranquera de Paysandú Demo]",
+    "prefix": "[Demo] Tranquera de Paysandú",
     "general": "Hello, I would like to ask a question.",
     "fab": "Ask on WhatsApp",
     "cta": "Message us on WhatsApp"
