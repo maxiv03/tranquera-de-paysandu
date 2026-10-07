@@ -157,6 +157,94 @@ from (values
 join public.auctions a on a.number = v.auction_number
 join public.agents g on g.name = v.agent_name;
 
+-- English content -------------------------------------------------------------------------------
+-- Optional English versions shown on /en (the app falls back to Spanish when one is missing).
+
+update public.auctions a set title_en = v.title, notes_en = v.notes
+from (values
+  (118, 'Monthly replacement fair', 'Terms: cash or 30 days. Commission 3% + VAT.'),
+  (119, 'Northern auction', 'Terms: 60 days with a bank guarantee.'),
+  (120, 'Feeder cattle auction', 'Live broadcast. Phone bids through our agents.'),
+  (121, 'Great spring auction', 'Terms: 30, 60 or 90 days. Freight arranged by the firm.'),
+  (122, 'Calf special', 'Replacement calves and heifers. Terms: cash or 30 days.')
+) as v (number, title, notes)
+where a.number = v.number;
+
+-- Breeds named the same in both languages keep breed_en empty (Spanish fallback).
+update public.lots set breed_en = case breed
+  when 'Holando' then 'Holstein'
+  when 'Cruza británica' then 'British cross'
+end
+where breed in ('Holando', 'Cruza británica');
+
+update public.lots l set description_en = v.description
+from (values
+  (118,  1, 'Weaned steer calves, even, healthy and dehorned.'),
+  (118,  2, 'Well-built black calves, vaccinated against clostridial diseases.'),
+  (118,  3, 'Yearling heifers, ready to breed in spring.'),
+  (118,  4, '2- to 3-year-old steers in good health.'),
+  (118,  5, 'Feeder cows with a good frame, to finish on grass.'),
+  (118,  6, 'Hereford × Angus cross calves, weaned 30 days ago.'),
+  (118,  7, '2-year-old black heifers, bred to an Angus bull.'),
+  (118,  8, 'Finished cull dairy cows, ready for slaughter.'),
+  (118,  9, 'Very even yearling steers, raised on native pasture.'),
+  (118, 10, 'Hardy Braford calves, ideal for backgrounding.'),
+  (119,  1, '2-year-old Hereford steers, finished on improved pasture.'),
+  (119,  2, 'Weaned calves, steers and heifers sorted by sex.'),
+  (119,  3, 'Heifers 3 months in calf to a Hereford bull.'),
+  (119,  4, 'Breeding cows with calves at foot, in good condition.'),
+  (119,  5, 'Braford steers adapted to northern pastures.'),
+  (119,  6, 'Heavy Hereford calves, dewormed and vaccinated.'),
+  (119,  7, 'Brangus heifers with very good genetics.'),
+  (119,  8, 'Angus steers ready to ship to the slaughterhouse.'),
+  (119,  9, 'Finished cows, eligible for the export quota.'),
+  (120,  1, 'Export-grade Hereford steers, very even in weight.'),
+  (120,  2, 'Spring calves, quiet and well raised.'),
+  (120,  3, 'Red and black Angus yearling heifers.'),
+  (120,  4, 'Feeder cows to recover on green forage.'),
+  (120,  5, '2-year-old Braford steers with good finish.'),
+  (120,  6, 'Grass-raised Hereford calves, early weaned.'),
+  (120,  7, 'Breeding heifers with a reproductive soundness exam.'),
+  (120,  8, 'Heavy steers, grain-finished over the last 60 days.'),
+  (121,  1, '2- to 3-year-old Hereford steers, very even, ready to ship.'),
+  (121,  2, 'Black Angus steers raised on improved pasture.'),
+  (121,  3, 'Hereford steer calves, autumn-weaned and dehorned.'),
+  (121,  4, 'British cross calves, vaccinated against foot-and-mouth and clostridial diseases.'),
+  (121,  5, 'Hereford yearling heifers, ready to breed.'),
+  (121,  6, 'Braford heifers with good structure and a quiet temperament.'),
+  (121,  7, 'Healthy feeder cows with a good frame.'),
+  (121,  8, 'Cows 5 months in calf to an Angus bull.'),
+  (121,  9, 'Braford yearling steers for backgrounding or fattening.'),
+  (121, 10, 'Heavy, even Angus calves.'),
+  (121, 11, 'Brangus heifers well adapted to eastern pastures.'),
+  (121, 12, 'Finished steers, ready for the slaughterhouse.'),
+  (121, 13, 'Weaned Hereford calves with up-to-date health records.'),
+  (121, 14, 'Black Angus calves, even in weight and size.'),
+  (121, 15, '2-year-old Braford steers, quiet, for short fattening.'),
+  (121, 16, 'Angus heifers ready to breed, with a gynecological exam.'),
+  (121, 17, 'Feeder cows with good teeth.'),
+  (121, 18, 'Spring British cross calves, very even.'),
+  (121, 19, 'Grass-raised Hereford steers with good structure.'),
+  (121, 20, 'Red Hereford yearling heifers, very even.'),
+  (121, 21, 'Braford feeder cows, healthy and in good condition.'),
+  (121, 22, 'Angus steers to finish in a feedlot.'),
+  (121, 23, 'Hardy Braford calves, ideal for the north.'),
+  (121, 24, 'Brangus heifers with very good conformation.'),
+  (121, 25, 'Angus cows in calf to an Angus bull.'),
+  (121, 26, 'Hereford yearling steers for backgrounding.'),
+  (121, 27, 'Heavy Hereford calves, autumn-weaned.'),
+  (121, 28, 'British cross heifers to breed in spring.'),
+  (122,  1, 'Weaned Hereford calves in good health.'),
+  (122,  2, 'Black Angus calves, quiet and even.'),
+  (122,  3, 'Yearling heifers in very good condition.'),
+  (122,  4, 'British cross steer calves, ready for backgrounding.'),
+  (122,  5, 'Heavy Hereford calves, double vaccinated.'),
+  (122,  6, 'Braford heifers, ready to breed this year.'),
+  (122,  7, 'Grass-raised Hereford calves, very quiet.'),
+  (122,  8, 'Weaned British cross calves, not dehorned.')
+) as v (auction_number, lot_number, description), public.auctions a
+where a.number = v.auction_number and l.auction_id = a.id and l.number = v.lot_number;
+
 -- Reference prices ------------------------------------------------------------------------------
 -- Finished auctions only: US$ per kg of live weight, in line with recent replacement markets.
 
@@ -243,5 +331,7 @@ select
   (select count(*) from public.lot_photos) as photos,
   (select count(*) from public.lots where video_url is not null) as videos,
   (select count(*) from public.lots where reference_price_usd_per_kg is not null) as priced,
+  (select count(*) from public.lots where description_en is not null) as lots_with_english,
+  (select count(*) from public.auctions where title_en is not null) as auctions_with_english,
   (select lot_count from public.auction_summaries s join public.auctions a on a.id = s.auction_id
     where a.number = 121) as lots_in_121;

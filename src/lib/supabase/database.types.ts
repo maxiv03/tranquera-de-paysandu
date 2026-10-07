@@ -51,10 +51,12 @@ export type Database = {
           id: number
           image_url: string | null
           notes: string | null
+          notes_en: string | null
           number: number
           starts_at: string
           status: Database["public"]["Enums"]["auction_status"]
           title: string | null
+          title_en: string | null
           type: Database["public"]["Enums"]["auction_type"]
           venue: string
         }
@@ -67,10 +69,12 @@ export type Database = {
           id?: never
           image_url?: string | null
           notes?: string | null
+          notes_en?: string | null
           number: number
           starts_at: string
           status?: Database["public"]["Enums"]["auction_status"]
           title?: string | null
+          title_en?: string | null
           type: Database["public"]["Enums"]["auction_type"]
           venue: string
         }
@@ -83,10 +87,12 @@ export type Database = {
           id?: never
           image_url?: string | null
           notes?: string | null
+          notes_en?: string | null
           number?: number
           starts_at?: string
           status?: Database["public"]["Enums"]["auction_status"]
           title?: string | null
+          title_en?: string | null
           type?: Database["public"]["Enums"]["auction_type"]
           venue?: string
         }
@@ -169,10 +175,12 @@ export type Database = {
           auction_id: number
           avg_weight_kg: number
           breed: string
+          breed_en: string | null
           category: Database["public"]["Enums"]["lot_category"]
           created_at: string
           department: string
           description: string | null
+          description_en: string | null
           head_count: number
           id: number
           latitude: number | null
@@ -187,10 +195,12 @@ export type Database = {
           auction_id: number
           avg_weight_kg: number
           breed: string
+          breed_en?: string | null
           category: Database["public"]["Enums"]["lot_category"]
           created_at?: string
           department: string
           description?: string | null
+          description_en?: string | null
           head_count: number
           id?: never
           latitude?: number | null
@@ -205,10 +215,12 @@ export type Database = {
           auction_id?: number
           avg_weight_kg?: number
           breed?: string
+          breed_en?: string | null
           category?: Database["public"]["Enums"]["lot_category"]
           created_at?: string
           department?: string
           description?: string | null
+          description_en?: string | null
           head_count?: number
           id?: never
           latitude?: number | null
