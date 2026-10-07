@@ -11,7 +11,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:i18n": "node scripts/check-i18n.mjs",
-    "check": "npm run typecheck && npm run lint && npm run check:i18n"
+    "check": "npm run typecheck && npm run lint && npm run check:i18n",
+    "db:link": "node scripts/supabase.mjs link --project-ref {ref}",
+    "db:push": "node scripts/supabase.mjs db push --linked",
+    "db:seed": "node scripts/supabase.mjs db query --linked -f supabase/seed.sql",
+    "db:types": "node scripts/supabase.mjs gen types typescript --linked --schema public > src/lib/supabase/database.types.ts",
+    "db:reset-demo": "npm run db:push && npm run db:seed"
   },
   "dependencies": {
     "next": "16.4.0",
