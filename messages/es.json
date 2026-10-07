@@ -3,7 +3,9 @@
     "name": "Tranquera de Paysandú",
     "shortName": "Tranquera",
     "tagline": "Negocios rurales en el litoral",
-    "description": "Remates de ganado por pantalla y ferias, embarques, campos y tasaciones desde Paysandú para todo el país."
+    "description": "Remates de ganado por pantalla y ferias, embarques, campos y tasaciones desde Paysandú para todo el país.",
+    "place": "de Paysandú",
+    "home": "Tranquera de Paysandú, ir al inicio"
   },
   "nav": {
     "home": "Inicio",
@@ -11,10 +13,13 @@
     "services": "Servicios",
     "contact": "Contacto",
     "language": "Idioma",
-    "switchTo": "Ver en español",
+    "switchTo": "View in English",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
-    "skipToContent": "Ir al contenido"
+    "skipToContent": "Ir al contenido",
+    "live": "En vivo",
+    "liveNow": "Remate en vivo ahora",
+    "main": "Navegación principal"
   },
   "home": {
     "title": "Remates de ganado con respaldo en el litoral",
@@ -24,5 +29,77 @@
     "title": "No encontramos esta página",
     "description": "Puede que el enlace esté mal escrito o que el contenido ya no esté disponible.",
     "backHome": "Volver al inicio"
+  },
+  "auctionType": {
+    "screen": "Remate por pantalla",
+    "fair": "Feria"
+  },
+  "auctionTypeShort": {
+    "screen": "Pantalla",
+    "fair": "Feria"
+  },
+  "auctionStatus": {
+    "upcoming": "Próximo",
+    "live": "En vivo",
+    "finished": "Finalizado"
+  },
+  "lotCategory": {
+    "calves": "Terneros",
+    "steers": "Novillos",
+    "heifers": "Vaquillonas",
+    "cows": "Vacas"
+  },
+  "units": {
+    "heads": "{count, plural, one {# cabeza} other {# cabezas}}",
+    "lots": "{count, plural, one {# lote} other {# lotes}}",
+    "kg": "{value} kg",
+    "time": "{time} h"
+  },
+  "auction": {
+    "title": "Remate N.º {number}",
+    "viewCatalog": "Ver catálogo",
+    "watchLive": "Ver en vivo",
+    "results": "Ver resultados"
+  },
+  "lot": {
+    "title": "Lote {number}",
+    "view": "Ver lote",
+    "heads": "Cabezas",
+    "avgWeight": "Peso promedio",
+    "breed": "Raza",
+    "category": "Categoría",
+    "location": "Ubicación"
+  },
+  "image": {
+    "noPhoto": "Sin foto disponible",
+    "cover": "Imagen de {name}"
+  },
+  "whatsapp": {
+    "prefix": "[Demo Tranquera de Paysandú]",
+    "general": "Hola, quisiera hacer una consulta.",
+    "fab": "Consultar por WhatsApp",
+    "cta": "Escribinos por WhatsApp"
+  },
+  "contactInfo": {
+    "phone": "Teléfono",
+    "whatsapp": "WhatsApp",
+    "email": "Correo",
+    "address": "Oficina"
+  },
+  "footer": {
+    "about": "Remates por pantalla y ferias, embarques a frigoríficos y negocios rurales desde Paysandú.",
+    "explore": "Explorar",
+    "contact": "Contacto",
+    "demo": "Sitio de demostración para un portfolio de desarrollo web. La empresa, las personas y los lotes son ficticios.",
+    "credits": "Créditos de imágenes y videos"
+  },
+  "filters": {
+    "all": "Todos",
+    "clear": "Limpiar filtros"
+  },
+  "common": {
+    "seeAll": "Ver todos",
+    "call": "Llamar",
+    "backTo": "Volver a {page}"
   }
 }

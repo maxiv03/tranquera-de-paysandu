@@ -3,7 +3,9 @@
     "name": "Tranquera de Paysandú",
     "shortName": "Tranquera",
     "tagline": "Rural business on the Uruguay River coast",
-    "description": "Cattle auctions on screen and at saleyards, slaughterhouse shipments, land and appraisals from Paysandú to the whole country."
+    "description": "Cattle auctions on screen and at saleyards, slaughterhouse shipments, land and appraisals from Paysandú to the whole country.",
+    "place": "de Paysandú",
+    "home": "Tranquera de Paysandú, ir al inicio"
   },
   "nav": {
     "home": "Home",
@@ -11,10 +13,13 @@
     "services": "Services",
     "contact": "Contact",
     "language": "Language",
-    "switchTo": "View in English",
+    "switchTo": "Ver en español",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "live": "Live",
+    "liveNow": "Auction live now",
+    "main": "Main navigation"
   },
   "home": {
     "title": "Cattle auctions you can trust on the Uruguay River coast",
@@ -24,5 +29,77 @@
     "title": "We couldn't find this page",
     "description": "The link may be mistyped or the content may no longer be available.",
     "backHome": "Back to home"
+  },
+  "auctionType": {
+    "screen": "Screen auction",
+    "fair": "Saleyard fair"
+  },
+  "auctionTypeShort": {
+    "screen": "Screen",
+    "fair": "Fair"
+  },
+  "auctionStatus": {
+    "upcoming": "Upcoming",
+    "live": "Live",
+    "finished": "Finished"
+  },
+  "lotCategory": {
+    "calves": "Calves",
+    "steers": "Steers",
+    "heifers": "Heifers",
+    "cows": "Cows"
+  },
+  "units": {
+    "heads": "{count, plural, one {# head} other {# head}}",
+    "lots": "{count, plural, one {# lot} other {# lots}}",
+    "kg": "{value} kg",
+    "time": "{time}"
+  },
+  "auction": {
+    "title": "Auction #{number}",
+    "viewCatalog": "View catalog",
+    "watchLive": "Watch live",
+    "results": "View results"
+  },
+  "lot": {
+    "title": "Lot {number}",
+    "view": "View lot",
+    "heads": "Head",
+    "avgWeight": "Average weight",
+    "breed": "Breed",
+    "category": "Category",
+    "location": "Location"
+  },
+  "image": {
+    "noPhoto": "No photo available",
+    "cover": "Image of {name}"
+  },
+  "whatsapp": {
+    "prefix": "[Tranquera de Paysandú Demo]",
+    "general": "Hello, I would like to ask a question.",
+    "fab": "Ask on WhatsApp",
+    "cta": "Message us on WhatsApp"
+  },
+  "contactInfo": {
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "address": "Office"
+  },
+  "footer": {
+    "about": "Screen auctions and saleyard fairs, slaughterhouse shipments and rural business from Paysandú.",
+    "explore": "Explore",
+    "contact": "Contact",
+    "demo": "Demo site for a web development portfolio. The company, people and lots are fictional.",
+    "credits": "Image and video credits"
+  },
+  "filters": {
+    "all": "All",
+    "clear": "Clear filters"
+  },
+  "common": {
+    "seeAll": "See all",
+    "call": "Call",
+    "backTo": "Back to {page}"
   }
 }
