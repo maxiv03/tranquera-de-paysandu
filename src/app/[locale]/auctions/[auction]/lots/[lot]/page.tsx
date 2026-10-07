@@ -8,10 +8,10 @@ import { StatusBadge } from "@/components/auctions/StatusBadge";
 import { AgentCard } from "@/components/lots/AgentCard";
 import { CategoryBadge } from "@/components/lots/CategoryBadge";
 import { LotGallery, type GalleryItem } from "@/components/lots/LotGallery";
-import { LotMap } from "@/components/lots/LotMap";
 import { LotNavigation } from "@/components/lots/LotNavigation";
 import { ShareButton } from "@/components/lots/ShareButton";
 import { Badge } from "@/components/ui/Badge";
+import { LocationMap } from "@/components/map/LocationMap";
 import { BrandCover } from "@/components/ui/BrandCover";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { DateBlock } from "@/components/ui/DateBlock";
@@ -148,7 +148,7 @@ function LotView({ detail }: { detail: LotDetail }) {
             <div className="flex flex-wrap items-center gap-2">
               <CategoryBadge category={lot.category} />
               {sold ? (
-                <Badge tone="accent" className="bg-accent text-white ring-accent">
+                <Badge tone="sold">
                   <Check className="size-3.5" aria-hidden="true" />
                   {t("lot.sold")}
                 </Badge>
@@ -280,7 +280,8 @@ function LotView({ detail }: { detail: LotDetail }) {
             {place}
           </p>
           <div className="mt-4">
-            <LotMap
+            <LocationMap
+              approximate
               latitude={lot.latitude}
               longitude={lot.longitude}
               label={t("lotPage.mapLabel", { lot: lot.number })}

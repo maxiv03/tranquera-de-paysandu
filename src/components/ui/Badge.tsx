@@ -6,6 +6,7 @@ const tones = {
   accent: "bg-accent-soft text-accent-hover ring-accent/15",
   straw: "bg-straw-soft text-ink ring-straw/40",
   live: "bg-live text-white ring-live",
+  sold: "bg-accent text-white ring-accent",
   solid: "bg-surface/95 text-ink ring-line backdrop-blur",
 } as const;
 

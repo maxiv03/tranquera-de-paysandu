@@ -37,7 +37,7 @@ export function LotCard({
           {title}
         </Badge>
         {sold && (
-          <Badge tone="accent" className="bg-accent text-white ring-accent">
+          <Badge tone="sold">
             <Check className="size-3.5" aria-hidden="true" />
             {t("lot.sold")}
           </Badge>

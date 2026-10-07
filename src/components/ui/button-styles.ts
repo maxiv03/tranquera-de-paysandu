@@ -1,6 +1,7 @@
 // Shared button look for <button>, internal links and external anchors.
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors " +
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-semibold " +
+  "transition-colors " +
   "disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-[1.15em] [&_svg]:shrink-0";
 
 const variants = {
