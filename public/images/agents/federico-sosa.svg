@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+<rect width="160" height="160" fill="#4a4630"/>
+<circle cx="80" cy="64" r="30" fill="#f7f3ea" opacity="0.18"/>
+<path d="M28 160C32 122 54 104 80 104S128 122 132 160Z" fill="#f7f3ea" opacity="0.18"/>
+<text x="80" y="92" text-anchor="middle" font-family="Georgia, serif" font-size="56" font-weight="700" fill="#f7f3ea">FS</text>
+</svg>
