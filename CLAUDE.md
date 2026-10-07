@@ -86,7 +86,8 @@ Reuse before creating. Current building blocks:
   `AgentCard`, `ShareButton`, `LotNavigation`.
 - `map/LocationMap`: Leaflet + OSM, lazy; `approximate` draws the area circle (lots).
 - `home/`: `HomeHero` (featured live/next auction), `Countdown` (client, renders after mount).
-- `services/`: `ServiceGrid`, `ServiceIcon` (services config in `src/lib/services.ts`).
+- `services/`: `ServiceGrid` (`exclude` on a service page), `ServiceIcon` (config, slugs and
+  linked auction type in `src/lib/services.ts`; texts in `services.<key>`).
 - `contact/`: `ContactSection` (home + contact page), `ContactForm` → server action
   `src/app/actions/contact.ts` (validates like the DB constraints, honeypot field).
 - `live/LiveLotTracker`: simulated lot in the ring (`lotIndexAt` in `src/lib/live.ts`).
@@ -122,15 +123,19 @@ Rules:
 
 ## Routes and URL state
 
-| Internal path                      | es                        | en                        |
-| ---------------------------------- | ------------------------- | ------------------------- |
-| `/auctions`                        | `/es/remates`             | `/en/auctions`            |
-| `/auctions/[auction]`              | `/es/remates/121`         | `/en/auctions/121`        |
-| `/auctions/[auction]/lots/[lot]`   | `/es/remates/121/lotes/3` | `/en/auctions/121/lots/3` |
-| `/live`                            | `/es/en-vivo`             | `/en/live`                |
-| `/services`, `/services/[service]` | `/es/servicios`           | `/en/services`            |
-| `/contact`                         | `/es/contacto`            | `/en/contact`             |
+| Internal path                    | es                        | en                            |
+| -------------------------------- | ------------------------- | ----------------------------- |
+| `/auctions`                      | `/es/remates`             | `/en/auctions`                |
+| `/auctions/[auction]`            | `/es/remates/121`         | `/en/auctions/121`            |
+| `/auctions/[auction]/lots/[lot]` | `/es/remates/121/lotes/3` | `/en/auctions/121/lots/3`     |
+| `/live`                          | `/es/en-vivo`             | `/en/live`                    |
+| `/services`                      | `/es/servicios`           | `/en/services`                |
+| `/services/[service]`            | `/es/servicios/ferias`    | `/en/services/saleyard-fairs` |
+| `/contact`                       | `/es/contacto`            | `/en/contact`                 |
 
+- Service slugs are localized (one per locale in `src/lib/services.ts`); the language switcher
+  translates them and a slug from the other locale redirects to the right one. Everything else
+  in the URL (auction and lot numbers, query params) is language-neutral.
 - Query params are language-neutral (same keys and values in both locales) so the switcher can
   copy them: auction list `view=finished`, `type=screen|fair`; catalog `category`,
   `department`, `weight=under200|200to300|300to400|over400`, `show` (phone paging). Parsing and facet counts live in
