@@ -85,7 +85,9 @@
     "phone": "Phone",
     "whatsapp": "WhatsApp",
     "email": "Email",
-    "address": "Office"
+    "address": "Office",
+    "hours": "Opening hours",
+    "hoursValue": "Monday to Friday 8 am–6 pm · Saturday 8 am–noon"
   },
   "footer": {
     "about": "Screen auctions and saleyard fairs, slaughterhouse shipments and rural business from Paysandú.",
@@ -243,31 +245,178 @@
     "learnMore": "Learn more",
     "slaughterhouse-shipments": {
       "title": "Slaughterhouse shipments",
-      "summary": "We arrange the sale and shipment of finished cattle with the main slaughterhouses in the country."
+      "summary": "We arrange the sale and shipment of finished cattle with the main slaughterhouses in the country.",
+      "description": "We negotiate the sale of finished cattle with the main slaughterhouses and arrange the shipment, looking for the best price and term for each category, weight and finish.",
+      "points": [
+        "Daily quotes from the slaughterhouses",
+        "Negotiation of price, term and slaughter date",
+        "Shipping and paperwork arranged for you",
+        "Follow-up of the carcass report and settlement"
+      ],
+      "steps": [
+        {
+          "title": "Assessment",
+          "text": "We look at the cattle and share the day's quotes."
+        },
+        {
+          "title": "Deal",
+          "text": "We close price, term and date with the chosen slaughterhouse."
+        },
+        {
+          "title": "Shipping",
+          "text": "We arrange freight and follow the slaughter until settlement."
+        }
+      ]
     },
     "private-deals": {
       "title": "Private deals",
-      "summary": "Direct sales between producers, backed by the reliability of the firm."
+      "summary": "Direct sales between producers, backed by the reliability of the firm.",
+      "description": "We connect buyers and sellers for direct cattle deals outside the auction ring. The firm guarantees the deal and handles inspection, weighing and payment.",
+      "points": [
+        "Buyers and sellers across the country",
+        "Inspection and weighing agreed by both parties",
+        "Payment guaranteed by the firm",
+        "Advice on price and terms"
+      ],
+      "steps": [
+        {
+          "title": "Request",
+          "text": "Tell us what you want to buy or sell."
+        },
+        {
+          "title": "Search",
+          "text": "We present options that match your request."
+        },
+        {
+          "title": "Closing",
+          "text": "We handle inspection, weighing and payment."
+        }
+      ]
     },
     "screen-auctions": {
       "title": "Screen auctions",
-      "summary": "Cattle filmed on the farm and sold on a broadcast, with no transport or shrink."
+      "summary": "Cattle filmed on the farm and sold on a broadcast, with no transport or shrink.",
+      "description": "We film the cattle on the farm and sell them on a live broadcast. Buyers see every lot with full details, and sellers do not move or shrink animals until the deal is closed.",
+      "points": [
+        "Filming and inspection of every lot on the farm",
+        "Online catalog with photos, video and lot details",
+        "Live broadcast with bids by phone or WhatsApp",
+        "Payment terms and guarantees arranged by the firm"
+      ],
+      "steps": [
+        {
+          "title": "Inspection",
+          "text": "An agent visits the farm, inspects the cattle and builds the lots."
+        },
+        {
+          "title": "Catalog",
+          "text": "We publish photos, video and details of every lot before the sale."
+        },
+        {
+          "title": "Auction and shipping",
+          "text": "The lots sell live and we arrange freight to destination."
+        }
+      ]
     },
     "land": {
       "title": "Land sales and leases",
-      "summary": "Livestock and crop farms on the Uruguay River coast, with advice at every step."
+      "summary": "Livestock and crop farms on the Uruguay River coast, with advice at every step.",
+      "description": "We sell and lease livestock and crop farms on the Uruguay River coast. We know the soils, water and infrastructure of each area, so our advice is grounded.",
+      "points": [
+        "Farms for sale and for lease",
+        "Survey of soils, water and infrastructure",
+        "Visits with an agent",
+        "Support through negotiation and deeds"
+      ],
+      "steps": [
+        {
+          "title": "Survey",
+          "text": "We walk the farm and assess its productive potential."
+        },
+        {
+          "title": "Marketing",
+          "text": "We present it to qualified buyers or tenants."
+        },
+        {
+          "title": "Contract",
+          "text": "We support the negotiation until signing."
+        }
+      ]
     },
     "appraisals": {
       "title": "Appraisals",
-      "summary": "Cattle and land appraisals for banks, estates and private owners."
+      "summary": "Cattle and land appraisals for banks, estates and private owners.",
+      "description": "We appraise cattle and land for banks, estates, companies and private owners, with a well-founded report based on current market values.",
+      "points": [
+        "Appraisal of herds and cattle lots",
+        "Appraisal of livestock and crop farms",
+        "Reports for banks and estates",
+        "Values based on recent transactions"
+      ],
+      "steps": [
+        {
+          "title": "Request",
+          "text": "Tell us what needs to be appraised and why."
+        },
+        {
+          "title": "Visit",
+          "text": "An appraiser walks the farm or inspects the cattle."
+        },
+        {
+          "title": "Report",
+          "text": "We deliver the signed report with its rationale."
+        }
+      ]
     },
     "transport": {
       "title": "Transport",
-      "summary": "Freight arranged with licensed carriers and tracking for every load."
+      "summary": "Freight arranged with licensed carriers and tracking for every load.",
+      "description": "We arrange cattle freight with licensed carriers for auctions, fairs, shipments and private deals, tracking every load.",
+      "points": [
+        "Licensed and insured carriers",
+        "Permits and paperwork up to date",
+        "Loads coordinated with farm and destination",
+        "Tracking until unloading"
+      ],
+      "steps": [
+        {
+          "title": "Request",
+          "text": "Send us origin, destination, head count and date."
+        },
+        {
+          "title": "Coordination",
+          "text": "We assign the truck and prepare the paperwork."
+        },
+        {
+          "title": "Trip",
+          "text": "We follow the load until it reaches its destination."
+        }
+      ]
     },
     "fairs": {
       "title": "Saleyard fairs",
-      "summary": "Replacement cattle fairs at our Paysandú saleyard and across the region."
+      "summary": "Replacement cattle fairs at our Paysandú saleyard and across the region.",
+      "description": "We run replacement cattle fairs at our Paysandú saleyard and at other yards in the region: a quick way to buy and sell calves, heifers and cows that have been inspected beforehand.",
+      "points": [
+        "Monthly fairs at the Paysandú saleyard",
+        "Health inspection and weighing on site",
+        "Lots grouped by category and weight",
+        "Collection and payment handled by the firm"
+      ],
+      "steps": [
+        {
+          "title": "Entry",
+          "text": "Register your cattle with your agent up to the week before."
+        },
+        {
+          "title": "Reception",
+          "text": "The cattle arrive at the yard and are inspected, weighed and grouped."
+        },
+        {
+          "title": "Fair",
+          "text": "They sell in the pen and we settle within the agreed term."
+        }
+      ]
     },
     "otherTitle": "Looking for something else?",
     "otherSummary": "Tell us what you need and an agent will advise you.",
@@ -294,5 +443,25 @@
     },
     "optional": "optional",
     "demoNotice": "Demo form: messages are stored but nobody answers them."
+  },
+  "servicesPage": {
+    "metaTitle": "Services",
+    "eyebrow": "Services",
+    "title": "The whole cattle business in one place",
+    "description": "Auctions, shipments, land and appraisals, with agents across the Uruguay River coast. Pick a service to see how we work.",
+    "breadcrumb": "Services",
+    "includes": "What is included",
+    "process": "How we work",
+    "ask": "Ask about this service",
+    "askMessage": "I would like information about your {service} service.",
+    "askTitle": "Shall we talk?",
+    "askDescription": "An agent will reply the same day on WhatsApp or by phone.",
+    "nextDates": "Upcoming dates",
+    "noDates": "No dates scheduled right now. Message us and we will let you know.",
+    "otherServices": "Other services"
+  },
+  "contactPage": {
+    "metaTitle": "Contact",
+    "metaDescription": "Write to us, call us or visit us in Paysandú."
   }
 }

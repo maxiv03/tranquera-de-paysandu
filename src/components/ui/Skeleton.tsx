@@ -193,3 +193,21 @@ export function LiveSkeleton() {
     </Loading>
   );
 }
+
+/** Service page: breadcrumb, image banner, text column beside the contact card. */
+export function ServiceDetailSkeleton() {
+  return (
+    <Loading className="container-page block py-6 sm:py-10">
+      <div className="h-5" />
+      <Bone className="mt-5 h-64 rounded-card sm:h-72" />
+      <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+        <div className="space-y-3">
+          <Bone className="h-5 w-full" />
+          <Bone className="h-5 w-11/12" />
+          <Bone className="h-5 w-3/4" />
+        </div>
+        <Bone className="h-48 rounded-card" />
+      </div>
+    </Loading>
+  );
+}

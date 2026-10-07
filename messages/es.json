@@ -85,7 +85,9 @@
     "phone": "Teléfono",
     "whatsapp": "WhatsApp",
     "email": "Correo",
-    "address": "Oficina"
+    "address": "Oficina",
+    "hours": "Horario",
+    "hoursValue": "Lunes a viernes de 8 a 18 h · Sábados de 8 a 12 h"
   },
   "footer": {
     "about": "Remates por pantalla y ferias, embarques a frigoríficos y negocios rurales desde Paysandú.",
@@ -226,7 +228,7 @@
     "seeSchedule": "Ver cartelera completa",
     "noUpcoming": "No hay remates programados por ahora.",
     "contactEyebrow": "Contacto",
-    "contactTitle": "Hablemos de su próximo negocio",
+    "contactTitle": "Hablemos de tu próximo negocio",
     "contactDescription": "Escribinos y un agente te responde en el día. Si preferís, consultanos directo por WhatsApp.",
     "officeTitle": "Oficina central",
     "officeMapLabel": "Mapa de la oficina en Paysandú",
@@ -243,31 +245,178 @@
     "learnMore": "Conocer más",
     "slaughterhouse-shipments": {
       "title": "Embarques a frigoríficos",
-      "summary": "Coordinamos la venta y el embarque de ganado gordo con los principales frigoríficos del país."
+      "summary": "Coordinamos la venta y el embarque de ganado gordo con los principales frigoríficos del país.",
+      "description": "Negociamos la venta de ganado gordo con los principales frigoríficos y coordinamos el embarque. Buscamos el mejor precio y plazo según la categoría, el peso y la terminación.",
+      "points": [
+        "Cotizaciones diarias de los frigoríficos",
+        "Negociación de precio, plazo y fecha de faena",
+        "Coordinación del embarque y la documentación",
+        "Seguimiento del romaneo y la liquidación"
+      ],
+      "steps": [
+        {
+          "title": "Evaluación",
+          "text": "Vemos el ganado y te pasamos las cotizaciones del día."
+        },
+        {
+          "title": "Negocio",
+          "text": "Cerramos precio, plazo y fecha con el frigorífico elegido."
+        },
+        {
+          "title": "Embarque",
+          "text": "Coordinamos el flete y seguimos la faena hasta la liquidación."
+        }
+      ]
     },
     "private-deals": {
       "title": "Negocios particulares",
-      "summary": "Compra y venta directa entre productores, con la seriedad y el respaldo de la firma."
+      "summary": "Compra y venta directa entre productores, con la seriedad y el respaldo de la firma.",
+      "description": "Acercamos compradores y vendedores para negocios directos de ganado, sin pasar por remate. La firma garantiza el negocio y acompaña la revisación, el pesaje y el pago.",
+      "points": [
+        "Base de compradores y vendedores en todo el país",
+        "Revisación y pesaje acordados entre las partes",
+        "Garantía de cobro de la firma",
+        "Asesoramiento en precio y condiciones"
+      ],
+      "steps": [
+        {
+          "title": "Pedido",
+          "text": "Nos contás qué querés comprar o vender."
+        },
+        {
+          "title": "Búsqueda",
+          "text": "Te presentamos opciones que encajan con tu pedido."
+        },
+        {
+          "title": "Cierre",
+          "text": "Acompañamos la revisación, el pesaje y el pago."
+        }
+      ]
     },
     "screen-auctions": {
       "title": "Remates por pantalla",
-      "summary": "Ganado filmado en el campo y vendido en transmisión, sin traslados ni desbaste."
+      "summary": "Ganado filmado en el campo y vendido en transmisión, sin traslados ni desbaste.",
+      "description": "Filmamos el ganado en el establecimiento y lo vendemos en una transmisión en vivo. El comprador ve cada lote con su información completa y el vendedor no traslada ni desbasta animales hasta cerrar el negocio.",
+      "points": [
+        "Filmación y revisación de cada lote en el campo",
+        "Catálogo en línea con fotos, video y datos del lote",
+        "Transmisión en vivo y ofertas por teléfono o WhatsApp",
+        "Plazos de pago y garantías coordinados por la firma"
+      ],
+      "steps": [
+        {
+          "title": "Inspección",
+          "text": "Un agente visita el campo, revisa el ganado y arma los lotes."
+        },
+        {
+          "title": "Catálogo",
+          "text": "Publicamos fotos, video y datos de cada lote antes del remate."
+        },
+        {
+          "title": "Remate y embarque",
+          "text": "Se remata en vivo y coordinamos el flete hasta destino."
+        }
+      ]
     },
     "land": {
       "title": "Venta y arrendamiento de campos",
-      "summary": "Campos ganaderos y agrícolas en el litoral, con asesoramiento en cada paso."
+      "summary": "Campos ganaderos y agrícolas en el litoral, con asesoramiento en cada paso.",
+      "description": "Vendemos y arrendamos campos ganaderos y agrícolas en el litoral. Conocemos los suelos, el agua y la infraestructura de cada zona para asesorar con criterio.",
+      "points": [
+        "Campos en venta y en arrendamiento",
+        "Relevamiento de suelos, agua e infraestructura",
+        "Visitas acompañadas por un agente",
+        "Apoyo en la negociación y la escrituración"
+      ],
+      "steps": [
+        {
+          "title": "Relevamiento",
+          "text": "Recorremos el campo y relevamos su potencial productivo."
+        },
+        {
+          "title": "Difusión",
+          "text": "Lo presentamos a compradores o arrendatarios calificados."
+        },
+        {
+          "title": "Contrato",
+          "text": "Acompañamos la negociación hasta la firma."
+        }
+      ]
     },
     "appraisals": {
       "title": "Tasaciones",
-      "summary": "Tasaciones de ganado y campos para bancos, sucesiones y particulares."
+      "summary": "Tasaciones de ganado y campos para bancos, sucesiones y particulares.",
+      "description": "Tasamos ganado y campos para bancos, sucesiones, sociedades y particulares. Entregamos un informe fundamentado con valores de mercado actualizados.",
+      "points": [
+        "Tasación de rodeos y lotes de ganado",
+        "Tasación de campos ganaderos y agrícolas",
+        "Informes para bancos y sucesiones",
+        "Valores basados en operaciones recientes"
+      ],
+      "steps": [
+        {
+          "title": "Solicitud",
+          "text": "Nos indicás qué hay que tasar y para qué."
+        },
+        {
+          "title": "Visita",
+          "text": "Un tasador recorre el campo o revisa el ganado."
+        },
+        {
+          "title": "Informe",
+          "text": "Entregamos el informe firmado con su fundamento."
+        }
+      ]
     },
     "transport": {
       "title": "Transporte",
-      "summary": "Fletes coordinados con transportistas habilitados y seguimiento de cada carga."
+      "summary": "Fletes coordinados con transportistas habilitados y seguimiento de cada carga.",
+      "description": "Coordinamos fletes de ganado con transportistas habilitados, para remates, ferias, embarques y negocios particulares, con seguimiento de cada carga.",
+      "points": [
+        "Transportistas habilitados y con seguro",
+        "Guías y documentación al día",
+        "Cargas coordinadas con el campo y el destino",
+        "Seguimiento hasta la descarga"
+      ],
+      "steps": [
+        {
+          "title": "Pedido",
+          "text": "Nos pasás origen, destino, cantidad y fecha."
+        },
+        {
+          "title": "Coordinación",
+          "text": "Asignamos el transporte y preparamos la documentación."
+        },
+        {
+          "title": "Viaje",
+          "text": "Seguimos la carga hasta que llega a destino."
+        }
+      ]
     },
     "fairs": {
       "title": "Ferias",
-      "summary": "Ferias de reposición en nuestro local de Paysandú y en la región."
+      "summary": "Ferias de reposición en nuestro local de Paysandú y en la región.",
+      "description": "Organizamos ferias de reposición en nuestro local de Paysandú y en locales de la región. Son una forma ágil de comprar y vender terneros, vaquillonas y vacas con revisación previa.",
+      "points": [
+        "Ferias mensuales en el local de Paysandú",
+        "Revisación sanitaria y pesada en el local",
+        "Lotes armados por categoría y peso",
+        "Cobro y pago gestionados por la firma"
+      ],
+      "steps": [
+        {
+          "title": "Inscripción",
+          "text": "Anotás el ganado con tu agente hasta la semana previa."
+        },
+        {
+          "title": "Recepción",
+          "text": "El ganado llega al local, se revisa, se pesa y se lotea."
+        },
+        {
+          "title": "Feria",
+          "text": "Se vende en el corral y liquidamos en el plazo acordado."
+        }
+      ]
     },
     "otherTitle": "¿Buscás otra cosa?",
     "otherSummary": "Contanos qué necesitás y un agente te asesora.",
@@ -294,5 +443,25 @@
     },
     "optional": "opcional",
     "demoNotice": "Formulario de demostración: los mensajes se guardan pero nadie los responde."
+  },
+  "servicesPage": {
+    "metaTitle": "Servicios",
+    "eyebrow": "Servicios",
+    "title": "Todo el negocio ganadero en un mismo lugar",
+    "description": "Remates, embarques, campos y tasaciones con agentes en todo el litoral. Elegí un servicio para conocer cómo trabajamos.",
+    "breadcrumb": "Servicios",
+    "includes": "Qué incluye",
+    "process": "Cómo trabajamos",
+    "ask": "Consultar por este servicio",
+    "askMessage": "Quisiera información sobre el servicio de {service}.",
+    "askTitle": "¿Hablamos?",
+    "askDescription": "Un agente te responde en el día por WhatsApp o teléfono.",
+    "nextDates": "Próximas fechas",
+    "noDates": "No hay fechas programadas por ahora. Escribinos y te avisamos.",
+    "otherServices": "Otros servicios"
+  },
+  "contactPage": {
+    "metaTitle": "Contacto",
+    "metaDescription": "Escribinos, llamanos o visitanos en Paysandú."
   }
 }
