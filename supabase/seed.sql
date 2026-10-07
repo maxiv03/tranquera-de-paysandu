@@ -90,7 +90,7 @@ from (values
   (120,  2, 'calves', 150, 'Cruza británica',  185, 'Río Negro',  -32.421, -57.392, 'Algorta',             'Ternerada de primavera, mansa y bien criada.',                              'Federico Sosa'),
   (120,  3, 'heifers', 70, 'Aberdeen Angus',   300, 'Soriano',    -33.871, -57.372, 'Cardona',             'Vaquillonas Angus de sobreaño, coloradas y negras.',                        'Federico Sosa'),
   (120,  4, 'cows',    55, 'Hereford',         440, 'Soriano',    -33.512, -57.812, 'Palmitas',            'Vacas de invernada para recuperar en verdeo.',                              'Federico Sosa'),
-  (120,  5, 'steers',  80, 'Braford',          370, 'Salto',      -31.348, -57.452, 'Ruta 31, Salto',      'Novillos Braford de 2 años con buena terminación.',                         'Lucía Pereyra'),
+  (120,  5, 'steers',  80, 'Braford',          370, 'Salto',      -31.348, -57.452, 'Ruta 31',             'Novillos Braford de 2 años con buena terminación.',                         'Lucía Pereyra'),
   (120,  6, 'calves', 100, 'Hereford',         200, 'Tacuarembó', -32.612, -55.831, 'San Gregorio de Polanco', 'Terneros Hereford de campo, destete precoz.',                          'Federico Sosa'),
   (120,  7, 'heifers', 45, 'Hereford',         345, 'Durazno',    -33.343, -55.632, 'Sarandí del Yí',      'Vaquillonas para entore, con diagnóstico de aptitud reproductiva.',         'Federico Sosa'),
   (120,  8, 'steers',  60, 'Aberdeen Angus',   480, 'Paysandú',   -31.942, -57.893, 'Quebracho',           'Novillos pesados, terminados a grano en los últimos 60 días.',              'Martín Olivera'),
@@ -101,7 +101,7 @@ from (values
   (121,  3, 'calves', 140, 'Hereford',         180, 'Paysandú',   -32.383, -57.968, 'Porvenir',            'Terneros Hereford machos, destete de otoño, descornados.',                  'Martín Olivera'),
   (121,  4, 'calves', 110, 'Cruza británica',  170, 'Tacuarembó', -32.151, -56.121, 'Curtina',             'Terneros cruza británica, vacunados contra aftosa y clostridiosis.',        'Federico Sosa'),
   (121,  5, 'heifers', 75, 'Hereford',         295, 'Salto',      -31.078, -57.842, 'Constitución',        'Vaquillonas Hereford de sobreaño, aptas para entorar.',                     'Lucía Pereyra'),
-  (121,  6, 'heifers', 60, 'Braford',          320, 'Salto',      -31.302, -57.301, 'Ruta 4, Salto',       'Vaquillonas Braford de buena estructura y temperamento manso.',             'Lucía Pereyra'),
+  (121,  6, 'heifers', 60, 'Braford',          320, 'Salto',      -31.302, -57.301, 'Ruta 4',              'Vaquillonas Braford de buena estructura y temperamento manso.',             'Lucía Pereyra'),
   (121,  7, 'cows',    50, 'Hereford',         460, 'Soriano',    -33.253, -58.004, 'Mercedes',            'Vacas de invernada de buen frame, sanas.',                                  'Federico Sosa'),
   (121,  8, 'cows',    40, 'Aberdeen Angus',   485, 'Paysandú',   -31.662, -57.902, 'Chapicuy',            'Vacas preñadas de 5 meses con toro Angus.',                                 'Martín Olivera'),
   (121,  9, 'steers',  85, 'Braford',          365, 'Tacuarembó', -32.812, -56.512, 'Paso de los Toros',   'Novillos Braford de sobreaño, para recría o invernada.',                    'Federico Sosa'),
@@ -122,6 +122,18 @@ from (values
         latitude, longitude, location_label, description, agent_name)
 join public.auctions a on a.number = v.auction_number
 join public.agents g on g.name = v.agent_name;
+
+-- Lot videos ------------------------------------------------------------------------------------
+-- A few lots have a short clip (public/videos, credited in CREDITS.md). Posters follow the
+-- naming convention <name>-poster.webp.
+
+update public.lots l set video_url = v.url
+from (values
+  (121, 1, '/videos/herd-aerial.mp4'),
+  (120, 3, '/videos/red-cattle.mp4'),
+  (121, 7, '/videos/hereford-cow.mp4')
+) as v (auction_number, lot_number, url), public.auctions a
+where a.number = v.auction_number and l.auction_id = a.id and l.number = v.lot_number;
 
 -- Lot photos ------------------------------------------------------------------------------------
 -- 1 to 3 placeholders per lot, rotating through the category's images.
@@ -144,4 +156,5 @@ select
   (select count(*) from public.lots) as lots,
   (select sum(head_count) from public.lots) as heads,
   (select count(*) from public.lot_photos) as photos,
+  (select count(*) from public.lots where video_url is not null) as videos,
   (select count(*) from public.agents) as agents;
