@@ -33,8 +33,13 @@ export function AuctionHero({ auction }: { auction: Auction }) {
           <AuctionTypeBadge type={auction.type} />
         </div>
         <div className="mt-4 flex items-center gap-4">
-          <DateBlock date={auction.startsAt} size="lg" />
-          <h1 className="text-3xl leading-tight font-bold sm:text-4xl">{title}</h1>
+          <DateBlock date={auction.startsAt} today={auction.startsToday} size="lg" />
+          <div>
+            <h1 className="text-3xl leading-tight font-bold sm:text-4xl">{title}</h1>
+            {auction.title && (
+              <p className="mt-1 text-lg font-medium text-accent">{auction.title}</p>
+            )}
+          </div>
         </div>
 
         <dl className="mt-6 grid gap-4 sm:grid-cols-2 [&_svg]:size-4 [&_svg]:text-ink-subtle">

@@ -13,5 +13,6 @@ export const formats = {
   },
   number: {
     integer: { maximumFractionDigits: 0 },
+    price: { minimumFractionDigits: 2, maximumFractionDigits: 2 },
   },
 } satisfies Formats;

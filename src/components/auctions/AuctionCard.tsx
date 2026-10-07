@@ -37,7 +37,7 @@ export function AuctionCard({
       </div>
 
       <div className="flex flex-1 gap-4 p-4">
-        <DateBlock date={auction.startsAt} />
+        <DateBlock date={auction.startsAt} today={auction.startsToday} />
         <div className="min-w-0 flex-1">
           <AuctionTypeBadge type={auction.type} />
           <h3 className="mt-2 text-xl leading-tight font-bold">
@@ -51,6 +51,9 @@ export function AuctionCard({
               {title}
             </Link>
           </h3>
+          {auction.title && (
+            <p className="mt-0.5 font-medium text-accent">{auction.title}</p>
+          )}
           <ul className="mt-2 space-y-1 text-sm text-ink-muted [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-ink-subtle">
             <li className="flex items-center gap-1.5">
               <Clock aria-hidden="true" />

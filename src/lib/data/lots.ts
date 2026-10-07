@@ -34,6 +34,7 @@ async function getLotsForAuction(auctionId: number): Promise<Lot[]> {
     locationLabel: row.location_label,
     description: row.description,
     videoUrl: row.video_url,
+    referencePriceUsdPerKg: row.reference_price_usd_per_kg,
     photos: row.lot_photos,
     agent: row.agents && {
       id: row.agents.id,

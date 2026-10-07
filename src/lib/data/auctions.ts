@@ -3,7 +3,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import type { AuctionType } from "@/lib/domain";
 import { createSupabaseClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/database.types";
-import { effectiveStatus } from "./status";
+import { effectiveStatus, isSameLocalDay } from "./status";
 import type { Auction } from "./types";
 
 type AuctionRow = Database["public"]["Tables"]["auctions"]["Row"];
@@ -20,7 +20,9 @@ export function mapAuction(
     id: row.id,
     number: row.number,
     type: row.type,
+    title: row.title,
     startsAt: row.starts_at,
+    startsToday: isSameLocalDay(row.starts_at, now),
     venue: row.venue,
     department: row.department as Auction["department"],
     status: effectiveStatus(row.status, row.starts_at, now),

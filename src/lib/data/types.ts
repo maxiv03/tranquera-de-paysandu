@@ -15,7 +15,11 @@ export type Auction = {
   id: number;
   number: number;
   type: AuctionType;
+  /** Display name, e.g. "Gran remate de primavera" (sample content, not translated). */
+  title: string | null;
   startsAt: string;
+  /** Starts today in Montevideo time (computed when the data is read). */
+  startsToday: boolean;
   venue: string;
   department: Department;
   /** Status shown to visitors: the stored status, corrected by the start time (see status.ts). */
@@ -42,6 +46,8 @@ export type Lot = {
   locationLabel: string | null;
   description: string | null;
   videoUrl: string | null;
+  /** US$ per kg of live weight; only for lots of finished auctions. */
+  referencePriceUsdPerKg: number | null;
   photos: LotPhoto[];
   agent: Agent | null;
 };
