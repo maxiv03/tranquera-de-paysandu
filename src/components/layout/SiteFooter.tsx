@@ -45,7 +45,8 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-paper/10">
-        <p className="container-page py-5 pr-20 text-xs leading-relaxed text-paper/60">
+        {/* Extra bottom space on phones so the floating buttons never cover the last line. */}
+        <p className="container-page pt-5 pb-24 text-xs leading-relaxed text-paper/60 sm:pr-20 sm:pb-5">
           {t("footer.demo")}
         </p>
       </div>
