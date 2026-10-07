@@ -83,12 +83,21 @@ Reuse before creating. Current building blocks:
 - `brand/`: `Logo`, `LogoMark`.
 - `auctions/`: `AuctionCard`, `StatusBadge` (+ `LiveDot`), `AuctionTypeBadge`.
 - `lots/`: `LotCard` (horizontal on phones), `CategoryBadge`, `LotCatalog`, `LotGallery`,
-  `LotMap` (Leaflet + OSM, lazy), `AgentCard`, `ShareButton`, `LotNavigation`.
+  `AgentCard`, `ShareButton`, `LotNavigation`.
+- `map/LocationMap`: Leaflet + OSM, lazy; `approximate` draws the area circle (lots).
+- `home/`: `HomeHero` (featured live/next auction), `Countdown` (client, renders after mount).
+- `services/`: `ServiceGrid`, `ServiceIcon` (services config in `src/lib/services.ts`).
+- `contact/`: `ContactSection` (home + contact page), `ContactForm` → server action
+  `src/app/actions/contact.ts` (validates like the DB constraints, honeypot field).
+- `live/LiveLotTracker`: simulated lot in the ring (`lotIndexAt` in `src/lib/live.ts`).
 - `ui/FilterSheet`: phone-only bottom sheet (native `<dialog>`) behind a fixed "Filter" button.
 - `layout/`: `SiteHeader`, `SiteFooter`, `MobileMenu`, `LanguageSwitcher`, `ContactList`,
   `WhatsAppButton` / `WhatsAppFab`.
 
 Rules:
+
+- Anything that depends on the current time renders after mount on the client (countdown,
+  lot in the ring) or is computed inside the cached data read (`startsToday`, `status`).
 
 - Cards are fully clickable through a stretched title link (`after:absolute after:inset-0`);
   secondary actions inside a card need `relative z-10`.
