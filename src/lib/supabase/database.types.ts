@@ -51,7 +51,6 @@ export type Database = {
           number: number
           starts_at: string
           status: Database["public"]["Enums"]["auction_status"]
-          stream_url: string | null
           type: Database["public"]["Enums"]["auction_type"]
           venue: string
         }
@@ -64,7 +63,6 @@ export type Database = {
           number: number
           starts_at: string
           status?: Database["public"]["Enums"]["auction_status"]
-          stream_url?: string | null
           type: Database["public"]["Enums"]["auction_type"]
           venue: string
         }
@@ -77,7 +75,6 @@ export type Database = {
           number?: number
           starts_at?: string
           status?: Database["public"]["Enums"]["auction_status"]
-          stream_url?: string | null
           type?: Database["public"]["Enums"]["auction_type"]
           venue?: string
         }

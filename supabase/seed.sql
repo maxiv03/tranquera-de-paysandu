@@ -1,4 +1,5 @@
--- Demo data for Tranquera de Paysandú. All names, phones and lots are fictional.
+-- Demo data for Tranquera de Paysandú. All names and lots are fictional; every agent shares the
+-- team demo WhatsApp number.
 --
 -- Safe to run again at any time: it empties the catalog tables and reloads them in a single
 -- transaction (npm run db:seed). contact_messages is never touched.
@@ -12,9 +13,9 @@ truncate table public.lot_photos, public.lots, public.auctions, public.agents
 -- Agents ----------------------------------------------------------------------------------------
 
 insert into public.agents (name, photo_url, phone, whatsapp) values
-  ('Martín Olivera',  '/images/agents/martin-olivera.svg', '099 000 101', '59899000101'),
-  ('Lucía Pereyra',   '/images/agents/lucia-pereyra.svg',  '099 000 102', '59899000102'),
-  ('Federico Sosa',   '/images/agents/federico-sosa.svg',  '099 000 103', '59899000103');
+  ('Martín Olivera',  '/images/agents/martin-olivera.svg', '+598 99 338 710', '59899338710'),
+  ('Lucía Pereyra',   '/images/agents/lucia-pereyra.svg',  '+598 99 338 710', '59899338710'),
+  ('Federico Sosa',   '/images/agents/federico-sosa.svg',  '+598 99 338 710', '59899338710');
 
 -- Auctions --------------------------------------------------------------------------------------
 -- local(days, time): a day relative to today at a given local time in Montevideo.
@@ -26,33 +27,30 @@ language sql stable as $$
 $$;
 
 insert into public.auctions
-  (number, type, starts_at, venue, department, stream_url, status, image_url, notes)
+  (number, type, starts_at, venue, department, status, image_url, notes)
 values
   (118, 'fair', pg_temp.local(-38, '09:30'),
-   'Local de Ferias Tranquera, Ruta 3 km 372', 'Paysandú', null, 'finished',
+   'Local de Ferias Tranquera, Ruta 3 km 372', 'Paysandú', 'finished',
    '/images/auctions/fair-1.svg',
    'Feria mensual de reposición. Plazo: contado o 30 días. Comisión 3 % + IVA.'),
 
   (119, 'screen', pg_temp.local(-10, '14:00'),
-   'Salón Los Ceibos, Salto', 'Salto',
-   'https://www.youtube.com/@tranqueradepaysandu/live', 'finished',
+   'Salón Los Ceibos, Salto', 'Salto', 'finished',
    '/images/auctions/screen-2.svg',
    'Remate por pantalla del norte. Plazo: 60 días con garantía bancaria.'),
 
   (120, 'screen', now() - interval '25 minutes',
-   'Estudio Tranquera, Paysandú', 'Paysandú',
-   'https://www.youtube.com/@tranqueradepaysandu/live', 'live',
+   'Estudio Tranquera, Paysandú', 'Paysandú', 'live',
    '/images/auctions/screen-1.svg',
    'Transmisión en vivo. Ofertas telefónicas a través de los agentes.'),
 
   (121, 'screen', pg_temp.local(6, '10:00'),
-   'Estudio Tranquera, Paysandú', 'Paysandú',
-   'https://www.youtube.com/@tranqueradepaysandu/live', 'upcoming',
+   'Estudio Tranquera, Paysandú', 'Paysandú', 'upcoming',
    '/images/auctions/screen-2.svg',
    'Gran remate de primavera. Plazo: 30, 60 o 90 días. Fletes coordinados por la empresa.'),
 
   (122, 'fair', pg_temp.local(20, '09:30'),
-   'Local de Ferias de Young', 'Río Negro', null, 'upcoming',
+   'Local de Ferias de Young', 'Río Negro', 'upcoming',
    null,
    'Feria de reposición del sur del litoral. Plazo: contado o 30 días.');
 

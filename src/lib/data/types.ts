@@ -18,7 +18,6 @@ export type Auction = {
   startsAt: string;
   venue: string;
   department: Department;
-  streamUrl: string | null;
   /** Status shown to visitors: the stored status, corrected by the start time (see status.ts). */
   status: AuctionStatus;
   imageUrl: string | null;

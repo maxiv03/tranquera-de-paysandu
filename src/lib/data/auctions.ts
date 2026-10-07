@@ -23,7 +23,6 @@ export function mapAuction(
     startsAt: row.starts_at,
     venue: row.venue,
     department: row.department as Auction["department"],
-    streamUrl: row.stream_url,
     status: effectiveStatus(row.status, row.starts_at, now),
     imageUrl: row.image_url,
     notes: row.notes,
