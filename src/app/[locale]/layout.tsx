@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { routing } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/site";
 import "../globals.css";
 
 const archivo = Archivo({
@@ -29,7 +30,7 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("brand");
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    metadataBase: new URL(SITE_URL),
     title: { default: t("name"), template: `%s · ${t("name")}` },
     description: t("description"),
     openGraph: {

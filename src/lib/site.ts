@@ -1,5 +1,14 @@
-/** Absolute URL for share links and messages. Set NEXT_PUBLIC_SITE_URL in each environment. */
+/**
+ * Public base URL of the site: NEXT_PUBLIC_SITE_URL (production, custom domain), else the URL
+ * Vercel gives each deployment (previews), else localhost.
+ */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : "http://localhost:3000");
+
+/** Absolute URL for share links, metadata and messages. */
 export function absoluteUrl(path: string) {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  return new URL(path, base).toString();
+  return new URL(path, SITE_URL).toString();
 }

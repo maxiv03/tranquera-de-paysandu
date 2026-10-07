@@ -47,3 +47,6 @@ supabase/.branches
 
 # local screenshots for review
 /screenshots
+
+# vercel link
+.vercel
