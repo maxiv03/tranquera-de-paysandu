@@ -82,7 +82,9 @@ Reuse before creating. Current building blocks:
   `EmptyState`, `FilterChips` (URL-driven link chips), `CoverImage` + `BrandCover` (fallback).
 - `brand/`: `Logo`, `LogoMark`.
 - `auctions/`: `AuctionCard`, `StatusBadge` (+ `LiveDot`), `AuctionTypeBadge`.
-- `lots/`: `LotCard`, `CategoryBadge`.
+- `lots/`: `LotCard` (horizontal on phones), `CategoryBadge`, `LotCatalog`, `LotGallery`,
+  `LotMap` (Leaflet + OSM, lazy), `AgentCard`, `ShareButton`, `LotNavigation`.
+- `ui/FilterSheet`: phone-only bottom sheet (native `<dialog>`) behind a fixed "Filter" button.
 - `layout/`: `SiteHeader`, `SiteFooter`, `MobileMenu`, `LanguageSwitcher`, `ContactList`,
   `WhatsAppButton` / `WhatsAppFab`.
 
@@ -95,6 +97,13 @@ Rules:
 - **Every WhatsApp link starts with the demo prefix** (`whatsapp.prefix` in messages). Use
   `WhatsAppButton` or `whatsappUrl()` with `${t("whatsapp.prefix")} …`, never a bare wa.me link.
 - Company contact data lives in `src/lib/company.ts`; all agents share the demo WhatsApp number.
+- Phone catalog pages show `CATALOG_PAGE_SIZE` lots plus a "show more" link (`show` param);
+  larger screens show every lot. Floating buttons sit at the bottom corners: keep the footer's
+  extra bottom padding on phones.
+- Share links and WhatsApp messages use absolute URLs from `absoluteUrl()` (`src/lib/site.ts`),
+  so `NEXT_PUBLIC_SITE_URL` must be set per environment.
+- Maps use the public OpenStreetMap tiles with attribution, lazy-loaded; fine for a demo, switch
+  to a tile provider with a key if traffic grows.
 - Anything `position: fixed` rendered inside the header must be portaled to `<body>` (the
   header's backdrop-filter becomes its containing block).
 
@@ -111,7 +120,7 @@ Rules:
 
 - Query params are language-neutral (same keys and values in both locales) so the switcher can
   copy them: auction list `view=finished`, `type=screen|fair`; catalog `category`,
-  `department`, `weight=under200|200to300|300to400|over400`. Parsing and facet counts live in
+  `department`, `weight=under200|200to300|300to400|over400`, `show` (phone paging). Parsing and facet counts live in
   `src/lib/catalog-filters.ts`; defaults stay out of the URL.
 - Parts of a page that read `searchParams` go inside `<Suspense>` with a skeleton; the rest of
   the page stays prerendered.
