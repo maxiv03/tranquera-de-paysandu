@@ -74,6 +74,8 @@ project is shared: a reset affects everyone, so tell the team.
 
 ## Deploying to Vercel
 
+Production: **https://tranquera-de-paysandu.vercel.app**
+
 The site runs on a personal **Vercel Hobby** account, connected to the GitHub repo
 `maxiv03/tranquera-de-paysandu`, where teammates are collaborators.
 
@@ -81,6 +83,8 @@ The site runs on a personal **Vercel Hobby** account, connected to the GitHub re
 
 1. On vercel.com, sign in with the owner's GitHub account → **Add New… → Project** → import
    `tranquera-de-paysandu`. Framework preset: **Next.js**; keep the default build settings.
+   `vercel.json` pins `"framework": "nextjs"`, so a project created from the CLI (which
+   defaults to "Other" and serves only `public/`, every route a 404) still builds correctly.
 2. Every push to `main` deploys to production; every other branch or pull request gets a preview
    URL.
 3. Teammates are added as collaborators on **GitHub** (repo Settings → Collaborators). Hobby
