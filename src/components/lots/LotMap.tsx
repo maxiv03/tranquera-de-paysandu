@@ -76,7 +76,7 @@ export function LotMap({
   }, [latitude, longitude]);
 
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-card ring-1 ring-line sm:aspect-[16/7]">
+    <div className="relative aspect-[16/10] overflow-hidden rounded-card ring-1 ring-line sm:aspect-auto sm:h-[350px]">
       <div
         ref={containerRef}
         role="region"

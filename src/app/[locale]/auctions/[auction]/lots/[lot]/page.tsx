@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { Check, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { getFormatter, getTranslations } from "next-intl/server";
@@ -11,6 +11,7 @@ import { LotGallery, type GalleryItem } from "@/components/lots/LotGallery";
 import { LotMap } from "@/components/lots/LotMap";
 import { LotNavigation } from "@/components/lots/LotNavigation";
 import { ShareButton } from "@/components/lots/ShareButton";
+import { Badge } from "@/components/ui/Badge";
 import { BrandCover } from "@/components/ui/BrandCover";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { DateBlock } from "@/components/ui/DateBlock";
@@ -88,6 +89,7 @@ function LotView({ detail }: { detail: LotDetail }) {
   const locale = useLocale() as Locale;
   const { lot, auction } = detail;
 
+  const sold = auction.status === "finished";
   const lotTitle = t("lot.title", { number: lot.number });
   const auctionTitle = t("auction.title", { number: auction.number });
   const category = t(`lotCategory.${lot.category}`);
@@ -145,7 +147,14 @@ function LotView({ detail }: { detail: LotDetail }) {
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <CategoryBadge category={lot.category} />
-              <StatusBadge status={auction.status} />
+              {sold ? (
+                <Badge tone="accent" className="bg-accent text-white ring-accent">
+                  <Check className="size-3.5" aria-hidden="true" />
+                  {t("lot.sold")}
+                </Badge>
+              ) : (
+                <StatusBadge status={auction.status} />
+              )}
             </div>
             <h1 className="mt-3 text-3xl leading-tight font-bold sm:text-4xl">
               {lotTitle}
@@ -160,6 +169,18 @@ function LotView({ detail }: { detail: LotDetail }) {
             <h2 id="key-data" className="sr-only">
               {t("lotPage.keyData")}
             </h2>
+            {sold && lot.referencePriceUsdPerKg !== null && (
+              <dl className="mb-4 flex items-baseline justify-between gap-3 rounded-lg bg-accent-soft px-4 py-3">
+                <dt className="text-sm font-medium text-accent-hover">
+                  {t("lot.referencePrice")}
+                </dt>
+                <dd className="font-display text-2xl font-bold text-accent-hover tabular">
+                  {t("units.usdPerKg", {
+                    value: format.number(lot.referencePriceUsdPerKg, "price"),
+                  })}
+                </dd>
+              </dl>
+            )}
             <dl className="grid grid-cols-3 gap-4">
               <Stat
                 label={t("lot.heads")}
@@ -206,17 +227,22 @@ function LotView({ detail }: { detail: LotDetail }) {
 
           <div>
             <h2 className="font-sans text-xs font-semibold tracking-wider text-ink-subtle uppercase">
-              {t("lotPage.inAuction")}
+              {sold ? t("lotPage.soldIn") : t("lotPage.inAuction")}
             </h2>
             <Link
               href={auctionHref}
               className="mt-2 flex items-center gap-3 rounded-card bg-surface p-3 ring-1 ring-line transition-shadow hover:shadow-card"
             >
-              <DateBlock date={auction.startsAt} />
+              <DateBlock date={auction.startsAt} today={auction.startsToday} />
               <span className="min-w-0">
                 <span className="block font-display text-lg font-bold">
                   {auctionTitle}
                 </span>
+                {auction.title && (
+                  <span className="block text-sm font-medium text-accent">
+                    {auction.title}
+                  </span>
+                )}
                 <span className="mt-1 block text-sm text-ink-muted tabular">
                   {t("units.time", {
                     time: format.dateTime(new Date(auction.startsAt), "time"),

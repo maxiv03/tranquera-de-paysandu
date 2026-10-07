@@ -86,6 +86,7 @@ export default async function AuctionPage({ params, searchParams }: Props) {
         >
           <FilteredCatalog
             number={catalog.auction.number}
+            sold={catalog.auction.status === "finished"}
             lots={catalog.lots}
             searchParams={searchParams}
           />
@@ -121,10 +122,12 @@ function CatalogHeading() {
 
 async function FilteredCatalog({
   number,
+  sold,
   lots,
   searchParams,
 }: {
   number: number;
+  sold: boolean;
   lots: Lot[];
   searchParams: Promise<SearchParams>;
 }) {
@@ -136,6 +139,7 @@ async function FilteredCatalog({
       filters={parseCatalogFilters(params)}
       show={parseShowCount(params)}
       sectionId="catalog"
+      sold={sold}
     />
   );
 }

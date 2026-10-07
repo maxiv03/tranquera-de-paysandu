@@ -31,8 +31,11 @@ export function LotCatalog({
   filters,
   show = CATALOG_PAGE_SIZE,
   sectionId,
+  sold = false,
 }: {
   auctionNumber: number;
+  /** The auction has finished: lots show as sold with their reference price. */
+  sold?: boolean;
   lots: Lot[];
   filters: CatalogFilters;
   /** Lots visible on phones. */
@@ -132,7 +135,7 @@ export function LotCatalog({
               key={lot.id}
               className={`flex min-w-0 [&>article]:flex-1 ${index >= show ? "max-sm:hidden" : ""}`}
             >
-              <LotCard lot={lot} auctionNumber={auctionNumber} />
+              <LotCard lot={lot} auctionNumber={auctionNumber} sold={sold} />
             </li>
           ))}
         </ul>
