@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { WhatsAppFab } from "@/components/layout/WhatsAppButton";
+import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
