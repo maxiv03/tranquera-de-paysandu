@@ -4,6 +4,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { locale } from "next/root-params";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { WhatsAppFab } from "@/components/layout/WhatsAppButton";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -34,11 +37,25 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function LocaleLayout({ children }: LayoutProps<"/[locale]">) {
   const current = await locale();
   if (!hasLocale(routing.locales, current)) notFound();
+  const t = await getTranslations("nav");
 
   return (
     <html lang={current} className={`${archivo.variable} ${bitter.variable}`}>
       <body className="flex min-h-dvh flex-col">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <a
+            href="#content"
+            className="sr-only z-50 rounded-lg bg-primary px-4 py-3 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          >
+            {t("skipToContent")}
+          </a>
+          <SiteHeader />
+          <main id="content" className="flex flex-1 flex-col">
+            {children}
+          </main>
+          <SiteFooter />
+          <WhatsAppFab />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

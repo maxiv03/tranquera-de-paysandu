@@ -13,6 +13,7 @@ export const routing = defineRouting({
       es: "/remates/[auction]/lotes/[lot]",
       en: "/auctions/[auction]/lots/[lot]",
     },
+    "/live": { es: "/en-vivo", en: "/live" },
     "/services": { es: "/servicios", en: "/services" },
     "/services/[service]": { es: "/servicios/[service]", en: "/services/[service]" },
     "/contact": { es: "/contacto", en: "/contact" },

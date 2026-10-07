@@ -5,7 +5,7 @@ export default function NotFound() {
   const t = useTranslations("notFound");
 
   return (
-    <main className="container-page flex flex-1 flex-col items-start justify-center py-16">
+    <div className="container-page flex flex-1 flex-col items-start justify-center py-16">
       <h1 className="text-3xl font-bold">{t("title")}</h1>
       <p className="mt-3 max-w-lg text-ink-muted">{t("description")}</p>
       <Link
@@ -14,6 +14,6 @@ export default function NotFound() {
       >
         {t("backHome")}
       </Link>
-    </main>
+    </div>
   );
 }
