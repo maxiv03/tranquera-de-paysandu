@@ -7,6 +7,8 @@ export type FilterOption = {
   href: ComponentProps<typeof Link>["href"];
   active: boolean;
   count?: number;
+  /** No results with the other filters: shown dimmed, not clickable. */
+  disabled?: boolean;
 };
 
 /**
@@ -29,25 +31,32 @@ export function FilterChips({
       <ul className="-mx-4 flex [scrollbar-width:none] gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
         {options.map((option) => (
           <li key={option.key} className="shrink-0">
-            <Link
-              href={option.href}
-              scroll={false}
-              aria-current={option.active ? "true" : undefined}
-              className={`inline-flex min-h-9 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition-colors ${
-                option.active
-                  ? "border-primary bg-primary text-white"
-                  : "border-line-strong bg-surface text-ink hover:border-primary hover:text-primary"
-              }`}
-            >
-              {option.label}
-              {option.count !== undefined && (
-                <span
-                  className={`text-xs tabular ${option.active ? "text-white/75" : "text-ink-subtle"}`}
-                >
-                  {option.count}
-                </span>
-              )}
-            </Link>
+            {option.disabled && !option.active ? (
+              <span className="inline-flex min-h-9 cursor-not-allowed items-center gap-1.5 rounded-full border border-dashed border-line-strong px-3.5 text-sm text-ink-subtle">
+                {option.label}
+                <span className="text-xs tabular">{option.count ?? 0}</span>
+              </span>
+            ) : (
+              <Link
+                href={option.href}
+                scroll={false}
+                aria-current={option.active ? "true" : undefined}
+                className={`inline-flex min-h-9 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition-colors ${
+                  option.active
+                    ? "border-primary bg-primary text-white"
+                    : "border-line-strong bg-surface text-ink hover:border-primary hover:text-primary"
+                }`}
+              >
+                {option.label}
+                {option.count !== undefined && (
+                  <span
+                    className={`text-xs tabular ${option.active ? "text-white/75" : "text-ink-subtle"}`}
+                  >
+                    {option.count}
+                  </span>
+                )}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

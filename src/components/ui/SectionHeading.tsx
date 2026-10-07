@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 export function SectionHeading({
+  id,
   eyebrow,
   title,
   description,
@@ -8,6 +9,8 @@ export function SectionHeading({
   as: Heading = "h2",
   className = "",
 }: {
+  /** Heading id, for aria-labelledby on the parent section. */
+  id?: string;
   eyebrow?: string;
   title: string;
   description?: string;
@@ -26,6 +29,7 @@ export function SectionHeading({
           </p>
         )}
         <Heading
+          id={id}
           className={`font-bold ${eyebrow ? "mt-2" : ""} ${Heading === "h1" ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl"}`}
         >
           {title}
