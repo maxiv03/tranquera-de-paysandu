@@ -134,7 +134,8 @@
     "results": "{shown, plural, one {# lote} other {# lotes}} de {total}",
     "emptyTitle": "No hay lotes con estos filtros",
     "emptyDescription": "Probá quitar algún filtro para ver más lotes.",
-    "metaDescription": "{type} del {date} en {venue}, {department}. {lots} y {heads}."
+    "metaDescription": "{type} del {date} en {venue}, {department}. {lots} y {heads}.",
+    "showMore": "Ver más lotes ({count})"
   },
   "catalogFilters": {
     "category": "Categoría",
@@ -145,7 +146,12 @@
       "200to300": "200–300 kg",
       "300to400": "300–400 kg",
       "over400": "Más de 400 kg"
-    }
+    },
+    "open": "Filtrar",
+    "title": "Filtrar lotes",
+    "close": "Cerrar filtros",
+    "activeCount": "{count, plural, one {# filtro activo} other {# filtros activos}}",
+    "showResults": "{count, plural, =0 {Sin lotes con estos filtros} one {Ver # lote} other {Ver # lotes}}"
   },
   "live": {
     "metaTitle": "En vivo",

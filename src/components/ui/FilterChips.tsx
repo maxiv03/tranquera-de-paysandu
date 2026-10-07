@@ -13,22 +13,30 @@ export type FilterOption = {
 
 /**
  * One filter dimension as a row of link chips. Filters live in the URL, so every chip is a real
- * link: shareable, works without JavaScript and the back button undoes it. On phones the row
- * scrolls sideways instead of wrapping.
+ * link: shareable, works without JavaScript and the back button undoes it.
  */
 export function FilterChips({
   label,
   options,
+  layout = "scroll",
 }: {
   label: string;
   options: FilterOption[];
+  /** "scroll": on phones, one row that scrolls sideways. "wrap": wrapped lines (inside panels). */
+  layout?: "scroll" | "wrap";
 }) {
   return (
     <div role="group" aria-label={label} className="min-w-0">
       <p className="mb-2 text-xs font-semibold tracking-wider text-ink-subtle uppercase">
         {label}
       </p>
-      <ul className="-mx-4 flex [scrollbar-width:none] gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+      <ul
+        className={
+          layout === "wrap"
+            ? "flex flex-wrap gap-2"
+            : "-mx-4 flex [scrollbar-width:none] gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
+        }
+      >
         {options.map((option) => (
           <li key={option.key} className="shrink-0">
             {option.disabled && !option.active ? (

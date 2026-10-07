@@ -2,8 +2,10 @@ import { useTranslations } from "next-intl";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { FilterChips, type FilterOption } from "@/components/ui/FilterChips";
+import { FilterSheet } from "@/components/ui/FilterSheet";
 import { Link } from "@/i18n/navigation";
 import {
+  CATALOG_PAGE_SIZE,
   facetCounts,
   filterLots,
   hasActiveFilters,
@@ -18,15 +20,25 @@ import type { Lot } from "@/lib/data/types";
 import { DEPARTMENTS, LOT_CATEGORIES, type LotCategory } from "@/lib/domain";
 import { LotCard } from "./LotCard";
 
-/** Filterable lot grid for one auction. Filters come from the URL (see catalog-filters.ts). */
+/**
+ * Filterable lot grid for one auction. Filters and paging come from the URL (catalog-filters.ts).
+ * Phones: filters live in a bottom sheet and the grid shows `show` lots plus a "show more" link;
+ * larger screens show the inline filter panel and every lot.
+ */
 export function LotCatalog({
   auctionNumber,
   lots,
   filters,
+  show = CATALOG_PAGE_SIZE,
+  sectionId,
 }: {
   auctionNumber: number;
   lots: Lot[];
   filters: CatalogFilters;
+  /** Lots visible on phones. */
+  show?: number;
+  /** Id of the catalog section: the phone "Filter" button shows while it is on screen. */
+  sectionId: string;
 }) {
   const t = useTranslations();
   const shown = filterLots(lots, filters);
@@ -70,19 +82,33 @@ export function LotCatalog({
     ];
   };
 
+  const dimensions = [
+    { key: "category", label: t("catalogFilters.category") },
+    { key: "department", label: t("catalogFilters.department") },
+    { key: "weight", label: t("catalogFilters.weight") },
+  ] as const;
+  const activeCount = Object.values(filters).filter(Boolean).length;
+  const hidden = shown.length - show;
+  const activeQuery = Object.fromEntries(
+    Object.entries(filters).filter(([, value]) => value),
+  ) as Record<string, string>;
+
   return (
     <>
-      <div className="mt-6 grid gap-5 rounded-card bg-surface p-4 ring-1 ring-line sm:p-5 lg:grid-cols-3">
-        <FilterChips
-          label={t("catalogFilters.category")}
-          options={optionsFor("category")}
-        />
-        <FilterChips
-          label={t("catalogFilters.department")}
-          options={optionsFor("department")}
-        />
-        <FilterChips label={t("catalogFilters.weight")} options={optionsFor("weight")} />
+      <div className="mt-6 hidden gap-5 rounded-card bg-surface p-5 ring-1 ring-line sm:grid lg:grid-cols-3">
+        {dimensions.map(({ key, label }) => (
+          <FilterChips key={key} label={label} options={optionsFor(key)} />
+        ))}
       </div>
+      <FilterSheet
+        targetId={sectionId}
+        activeCount={activeCount}
+        resultCount={shown.length}
+      >
+        {dimensions.map(({ key, label }) => (
+          <FilterChips key={key} label={label} options={optionsFor(key)} layout="wrap" />
+        ))}
+      </FilterSheet>
 
       <div className="mt-5 flex min-h-9 items-center justify-between gap-3">
         <p className="text-sm text-ink-muted" aria-live="polite">
@@ -101,13 +127,28 @@ export function LotCatalog({
 
       {shown.length > 0 ? (
         <ul className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {shown.map((lot) => (
-            <li key={lot.id} className="flex min-w-0 [&>article]:flex-1">
+          {shown.map((lot, index) => (
+            <li
+              key={lot.id}
+              className={`flex min-w-0 [&>article]:flex-1 ${index >= show ? "max-sm:hidden" : ""}`}
+            >
               <LotCard lot={lot} auctionNumber={auctionNumber} />
             </li>
           ))}
         </ul>
-      ) : (
+      ) : null}
+      {hidden > 0 && (
+        <div className="mt-6 flex justify-center sm:hidden">
+          <Link
+            href={href({ ...activeQuery, show: String(show + CATALOG_PAGE_SIZE) })}
+            scroll={false}
+            className={buttonStyles({ variant: "secondary", className: "w-full" })}
+          >
+            {t("auctionPage.showMore", { count: hidden })}
+          </Link>
+        </div>
+      )}
+      {shown.length === 0 && (
         <div className="mt-4">
           <EmptyState
             title={t("auctionPage.emptyTitle")}

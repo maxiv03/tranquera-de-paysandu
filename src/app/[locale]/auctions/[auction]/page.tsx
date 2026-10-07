@@ -8,7 +8,11 @@ import { LotCatalog } from "@/components/lots/LotCatalog";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CardGridSkeleton } from "@/components/ui/Skeleton";
-import { parseCatalogFilters, type SearchParams } from "@/lib/catalog-filters";
+import {
+  parseCatalogFilters,
+  parseShowCount,
+  type SearchParams,
+} from "@/lib/catalog-filters";
 import { getAllAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog } from "@/lib/data/lots";
 import type { Lot } from "@/lib/data/types";
@@ -124,6 +128,14 @@ async function FilteredCatalog({
   lots: Lot[];
   searchParams: Promise<SearchParams>;
 }) {
-  const filters = parseCatalogFilters(await searchParams);
-  return <LotCatalog auctionNumber={number} lots={lots} filters={filters} />;
+  const params = await searchParams;
+  return (
+    <LotCatalog
+      auctionNumber={number}
+      lots={lots}
+      filters={parseCatalogFilters(params)}
+      show={parseShowCount(params)}
+      sectionId="catalog"
+    />
+  );
 }

@@ -60,6 +60,11 @@
     @apply outline-2 outline-offset-2 outline-primary;
   }
 
+  /* Modal dialogs (filter sheet) lock the page scroll behind them. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
   ::selection {
     @apply bg-straw-soft text-ink;
   }

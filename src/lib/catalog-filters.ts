@@ -121,3 +121,15 @@ export function withFilter(
     string
   >;
 }
+
+// Catalog paging (phones only: larger screens show every lot) ---------------------------------
+
+export const CATALOG_PAGE_SIZE = 12;
+const MAX_SHOW = 240;
+
+/** How many lots to show on phones: `show` param, a multiple of the page size. */
+export function parseShowCount(params: SearchParams): number {
+  const value = Number(single(params.show));
+  if (!Number.isInteger(value) || value <= CATALOG_PAGE_SIZE) return CATALOG_PAGE_SIZE;
+  return Math.min(Math.ceil(value / CATALOG_PAGE_SIZE) * CATALOG_PAGE_SIZE, MAX_SHOW);
+}

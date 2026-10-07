@@ -134,7 +134,8 @@
     "results": "{shown, plural, one {# lot} other {# lots}} of {total}",
     "emptyTitle": "No lots match these filters",
     "emptyDescription": "Try removing a filter to see more lots.",
-    "metaDescription": "{type} on {date} at {venue}, {department}. {lots} and {heads}."
+    "metaDescription": "{type} on {date} at {venue}, {department}. {lots} and {heads}.",
+    "showMore": "Show more lots ({count})"
   },
   "catalogFilters": {
     "category": "Category",
@@ -145,7 +146,12 @@
       "200to300": "200–300 kg",
       "300to400": "300–400 kg",
       "over400": "Over 400 kg"
-    }
+    },
+    "open": "Filter",
+    "title": "Filter lots",
+    "close": "Close filters",
+    "activeCount": "{count, plural, one {# active filter} other {# active filters}}",
+    "showResults": "{count, plural, =0 {No lots match these filters} one {Show # lot} other {Show # lots}}"
   },
   "live": {
     "metaTitle": "Live",
