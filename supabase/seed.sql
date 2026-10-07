@@ -35,17 +35,17 @@ values
    'Feria mensual de reposición. Plazo: contado o 30 días. Comisión 3 % + IVA.'),
 
   (119, 'screen', pg_temp.local(-10, '14:00'),
-   'Salón Los Ceibos, Salto', 'Salto', 'finished',
+   'Salón Los Ceibos', 'Salto', 'finished',
    '/images/auctions/screen-2.svg',
    'Remate por pantalla del norte. Plazo: 60 días con garantía bancaria.'),
 
-  (120, 'screen', now() - interval '25 minutes',
-   'Estudio Tranquera, Paysandú', 'Paysandú', 'live',
+  (120, 'screen', date_bin('15 minutes', now() - interval '20 minutes', timestamptz '2000-01-01'),
+   'Estudio Tranquera', 'Paysandú', 'live',
    '/images/auctions/screen-1.svg',
    'Transmisión en vivo. Ofertas telefónicas a través de los agentes.'),
 
   (121, 'screen', pg_temp.local(6, '10:00'),
-   'Estudio Tranquera, Paysandú', 'Paysandú', 'upcoming',
+   'Estudio Tranquera', 'Paysandú', 'upcoming',
    '/images/auctions/screen-2.svg',
    'Gran remate de primavera. Plazo: 30, 60 o 90 días. Fletes coordinados por la empresa.'),
 
