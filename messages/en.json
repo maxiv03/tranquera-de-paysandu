@@ -21,10 +21,6 @@
     "liveNow": "Auction live now",
     "main": "Main navigation"
   },
-  "home": {
-    "title": "Cattle auctions you can trust on the Uruguay River coast",
-    "intro": "We are getting the site ready. Soon you will be able to browse upcoming auctions and the lot catalog."
-  },
   "notFound": {
     "title": "We couldn't find this page",
     "description": "The link may be mistyped or the content may no longer be available.",
@@ -213,5 +209,90 @@
   },
   "dateBlock": {
     "today": "Today"
+  },
+  "home": {
+    "title": "Cattle auctions you can trust on the Uruguay River coast",
+    "intro": "Screen auctions and saleyard fairs from Paysandú. Over 25 years connecting breeders, fatteners and slaughterhouses.",
+    "featuredUpcoming": "Next auction",
+    "featuredLive": "Live now",
+    "startsIn": "Starts in",
+    "startsAt": "Starts on {date} at {time}",
+    "viewCatalog": "View catalog",
+    "servicesEyebrow": "What we do",
+    "servicesTitle": "Services for every stage of the business",
+    "servicesDescription": "From the auction to the freight, our agents across the region handle every deal.",
+    "upcomingEyebrow": "Schedule",
+    "upcomingTitle": "Upcoming auctions",
+    "seeSchedule": "See full schedule",
+    "noUpcoming": "No auctions scheduled right now.",
+    "contactEyebrow": "Contact",
+    "contactTitle": "Let us talk about your next deal",
+    "contactDescription": "Write to us and an agent will reply the same day. Or ask us directly on WhatsApp.",
+    "officeTitle": "Head office",
+    "officeMapLabel": "Map of the office in Paysandú",
+    "heroCta": "View schedule"
+  },
+  "countdown": {
+    "days": "{count, plural, one {day} other {days}}",
+    "hours": "hours",
+    "minutes": "min",
+    "seconds": "sec",
+    "started": "The auction has started"
+  },
+  "services": {
+    "learnMore": "Learn more",
+    "slaughterhouse-shipments": {
+      "title": "Slaughterhouse shipments",
+      "summary": "We arrange the sale and shipment of finished cattle with the main slaughterhouses in the country."
+    },
+    "private-deals": {
+      "title": "Private deals",
+      "summary": "Direct sales between producers, backed by the reliability of the firm."
+    },
+    "screen-auctions": {
+      "title": "Screen auctions",
+      "summary": "Cattle filmed on the farm and sold on a broadcast, with no transport or shrink."
+    },
+    "land": {
+      "title": "Land sales and leases",
+      "summary": "Livestock and crop farms on the Uruguay River coast, with advice at every step."
+    },
+    "appraisals": {
+      "title": "Appraisals",
+      "summary": "Cattle and land appraisals for banks, estates and private owners."
+    },
+    "transport": {
+      "title": "Transport",
+      "summary": "Freight arranged with licensed carriers and tracking for every load."
+    },
+    "fairs": {
+      "title": "Saleyard fairs",
+      "summary": "Replacement cattle fairs at our Paysandú saleyard and across the region."
+    },
+    "otherTitle": "Looking for something else?",
+    "otherSummary": "Tell us what you need and an agent will advise you.",
+    "otherCta": "Ask us"
+  },
+  "contactForm": {
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "message": "Message",
+    "messagePlaceholder": "Tell us which cattle or land you want to buy, sell or appraise.",
+    "contactHint": "Leave a phone number or an email so we can reply.",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "success": "Thank you! We got your message and will contact you today.",
+    "sendAnother": "Send another message",
+    "errors": {
+      "name": "Enter your name.",
+      "contact": "Enter a phone number or an email.",
+      "email": "Check the email address.",
+      "phone": "Check the phone number.",
+      "message": "Write your message (at least 5 characters).",
+      "server": "We could not send your message. Try again or message us on WhatsApp."
+    },
+    "optional": "optional",
+    "demoNotice": "Demo form: messages are stored but nobody answers them."
   }
 }

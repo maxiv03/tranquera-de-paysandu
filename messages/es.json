@@ -21,10 +21,6 @@
     "liveNow": "Remate en vivo ahora",
     "main": "Navegación principal"
   },
-  "home": {
-    "title": "Remates de ganado con respaldo en el litoral",
-    "intro": "Estamos preparando el sitio. Muy pronto vas a poder ver la cartelera de remates y el catálogo de lotes."
-  },
   "notFound": {
     "title": "No encontramos esta página",
     "description": "Puede que el enlace esté mal escrito o que el contenido ya no esté disponible.",
@@ -213,5 +209,90 @@
   },
   "dateBlock": {
     "today": "Hoy"
+  },
+  "home": {
+    "title": "Remates de ganado con respaldo en el litoral",
+    "intro": "Remates por pantalla y ferias desde Paysandú. Más de 25 años acercando a criadores, invernadores y frigoríficos.",
+    "featuredUpcoming": "Próximo remate",
+    "featuredLive": "En vivo ahora",
+    "startsIn": "Comienza en",
+    "startsAt": "Comienza el {date} a las {time} h",
+    "viewCatalog": "Ver catálogo",
+    "servicesEyebrow": "Qué hacemos",
+    "servicesTitle": "Servicios para cada etapa del negocio",
+    "servicesDescription": "Desde el remate hasta el flete, acompañamos cada operación con agentes en todo el litoral.",
+    "upcomingEyebrow": "Agenda",
+    "upcomingTitle": "Próximos remates",
+    "seeSchedule": "Ver cartelera completa",
+    "noUpcoming": "No hay remates programados por ahora.",
+    "contactEyebrow": "Contacto",
+    "contactTitle": "Hablemos de su próximo negocio",
+    "contactDescription": "Escribinos y un agente te responde en el día. Si preferís, consultanos directo por WhatsApp.",
+    "officeTitle": "Oficina central",
+    "officeMapLabel": "Mapa de la oficina en Paysandú",
+    "heroCta": "Ver cartelera"
+  },
+  "countdown": {
+    "days": "{count, plural, one {día} other {días}}",
+    "hours": "horas",
+    "minutes": "min",
+    "seconds": "seg",
+    "started": "El remate ya comenzó"
+  },
+  "services": {
+    "learnMore": "Conocer más",
+    "slaughterhouse-shipments": {
+      "title": "Embarques a frigoríficos",
+      "summary": "Coordinamos la venta y el embarque de ganado gordo con los principales frigoríficos del país."
+    },
+    "private-deals": {
+      "title": "Negocios particulares",
+      "summary": "Compra y venta directa entre productores, con la seriedad y el respaldo de la firma."
+    },
+    "screen-auctions": {
+      "title": "Remates por pantalla",
+      "summary": "Ganado filmado en el campo y vendido en transmisión, sin traslados ni desbaste."
+    },
+    "land": {
+      "title": "Venta y arrendamiento de campos",
+      "summary": "Campos ganaderos y agrícolas en el litoral, con asesoramiento en cada paso."
+    },
+    "appraisals": {
+      "title": "Tasaciones",
+      "summary": "Tasaciones de ganado y campos para bancos, sucesiones y particulares."
+    },
+    "transport": {
+      "title": "Transporte",
+      "summary": "Fletes coordinados con transportistas habilitados y seguimiento de cada carga."
+    },
+    "fairs": {
+      "title": "Ferias",
+      "summary": "Ferias de reposición en nuestro local de Paysandú y en la región."
+    },
+    "otherTitle": "¿Buscás otra cosa?",
+    "otherSummary": "Contanos qué necesitás y un agente te asesora.",
+    "otherCta": "Consultar"
+  },
+  "contactForm": {
+    "name": "Nombre",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "messagePlaceholder": "Contanos qué ganado o campo querés comprar, vender o tasar.",
+    "contactHint": "Dejanos un teléfono o un correo para responderte.",
+    "submit": "Enviar mensaje",
+    "sending": "Enviando…",
+    "success": "¡Gracias! Recibimos tu mensaje y te contactamos en el día.",
+    "sendAnother": "Enviar otro mensaje",
+    "errors": {
+      "name": "Ingresá tu nombre.",
+      "contact": "Ingresá un teléfono o un correo.",
+      "email": "Revisá el correo electrónico.",
+      "phone": "Revisá el teléfono.",
+      "message": "Escribí tu mensaje (mínimo 5 caracteres).",
+      "server": "No pudimos enviar el mensaje. Probá de nuevo o escribinos por WhatsApp."
+    },
+    "optional": "opcional",
+    "demoNotice": "Formulario de demostración: los mensajes se guardan pero nadie los responde."
   }
 }
