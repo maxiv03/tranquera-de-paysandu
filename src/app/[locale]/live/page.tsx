@@ -19,11 +19,16 @@ import { getAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog } from "@/lib/data/lots";
 import type { AuctionCatalog, Auction } from "@/lib/data/types";
 import { LIVE_LOT_ATTRIBUTE } from "@/lib/live";
+import { alternatesFor } from "@/lib/seo";
 import { LIVE_VIDEO, posterFor } from "@/lib/media";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("live");
-  return { title: t("metaTitle"), description: t("noneDescription") };
+  return {
+    title: t("metaTitle"),
+    description: t("noneDescription"),
+    alternates: await alternatesFor("/live"),
+  };
 }
 
 // The broadcast depends on cached reads under the [locale] root param (URL data for the App

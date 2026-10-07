@@ -14,6 +14,7 @@ import {
   type SearchParams,
 } from "@/lib/catalog-filters";
 import { getAllAuctions } from "@/lib/data/auctions";
+import { alternatesFor } from "@/lib/seo";
 import { getAuctionCatalog } from "@/lib/data/lots";
 
 type Props = PageProps<"/[locale]/auctions/[auction]">;
@@ -51,7 +52,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       lots: t("units.lots", { count: auction.lotCount }),
       heads: t("units.heads", { count: auction.headCount }),
     }),
-    openGraph: auction.imageUrl ? { images: [auction.imageUrl] } : undefined,
+    // The share image comes from opengraph-image.tsx next to this page.
+    alternates: await alternatesFor({
+      pathname: "/auctions/[auction]",
+      params: { auction: String(auction.number) },
+    }),
   };
 }
 

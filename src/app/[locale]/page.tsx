@@ -13,12 +13,14 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AuctionGridSkeleton, FeaturedAuctionSkeleton } from "@/components/ui/Skeleton";
 import { Link } from "@/i18n/navigation";
 import { getAuctions } from "@/lib/data/auctions";
+import { alternatesFor } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("brand");
   return {
     title: { absolute: `${t("name")} · ${t("tagline")}` },
     description: t("description"),
+    alternates: await alternatesFor("/"),
   };
 }
 

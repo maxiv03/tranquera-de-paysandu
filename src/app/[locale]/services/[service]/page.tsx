@@ -19,6 +19,7 @@ import { redirect } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { COMPANY } from "@/lib/company";
 import { getAuctions } from "@/lib/data/auctions";
+import { alternatesFor } from "@/lib/seo";
 import { SERVICES, serviceBySlug, type Service } from "@/lib/services";
 
 type Props = PageProps<"/[locale]/services/[service]">;
@@ -56,6 +57,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t(`${service.key}.title`),
     description: t(`${service.key}.summary`),
     openGraph: { images: [service.image] },
+    alternates: await alternatesFor((locale) => ({
+      pathname: "/services/[service]",
+      params: { service: service.slugs[locale] },
+    })),
   };
 }
 

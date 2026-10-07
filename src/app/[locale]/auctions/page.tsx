@@ -11,11 +11,16 @@ import { TabLinks } from "@/components/ui/TabLinks";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { parseAuctionListParams, type SearchParams } from "@/lib/catalog-filters";
 import { getAuctions } from "@/lib/data/auctions";
+import { alternatesFor } from "@/lib/seo";
 import { AUCTION_TYPES, type AuctionType } from "@/lib/domain";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("auctions");
-  return { title: t("metaTitle"), description: t("description") };
+  return {
+    title: t("metaTitle"),
+    description: t("description"),
+    alternates: await alternatesFor("/auctions"),
+  };
 }
 
 export default function AuctionsPage({ searchParams }: PageProps<"/[locale]/auctions">) {

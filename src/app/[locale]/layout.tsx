@@ -32,6 +32,12 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
     title: { default: t("name"), template: `%s · ${t("name")}` },
     description: t("description"),
+    openGraph: {
+      type: "website",
+      siteName: t("name"),
+      locale: (await locale()) === "en" ? "en_US" : "es_UY",
+    },
+    twitter: { card: "summary_large_image" },
   };
 }
 

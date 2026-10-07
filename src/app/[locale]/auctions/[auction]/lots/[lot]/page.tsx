@@ -24,6 +24,7 @@ import { getAllAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog, getLotDetail } from "@/lib/data/lots";
 import type { LotDetail } from "@/lib/data/types";
 import { posterFor } from "@/lib/media";
+import { alternatesFor } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/auctions/[auction]/lots/[lot]">;
@@ -75,7 +76,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       auction: auction.number,
       date: format.dateTime(new Date(auction.startsAt), "medium"),
     }),
-    openGraph: lot.photos[0] ? { images: [lot.photos[0].url] } : undefined,
+    // The share image comes from opengraph-image.tsx next to this page.
+    alternates: await alternatesFor({
+      pathname: "/auctions/[auction]/lots/[lot]",
+      params: { auction: String(auction.number), lot: String(lot.number) },
+    }),
   };
 }
 
