@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { AuctionTypeBadge } from "@/components/auctions/AuctionTypeBadge";
 import { StatusBadge } from "@/components/auctions/StatusBadge";
 import { AgentCard } from "@/components/lots/AgentCard";
@@ -15,6 +16,7 @@ import { LocationMap } from "@/components/map/LocationMap";
 import { BrandCover } from "@/components/ui/BrandCover";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { DateBlock } from "@/components/ui/DateBlock";
+import { LotDetailSkeleton } from "@/components/ui/Skeleton";
 import { Stat } from "@/components/ui/Stat";
 import { getPathname, Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -77,7 +79,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function LotPage({ params }: Props) {
+// The whole lot view depends on params and cached reads (URL data), so it streams inside
+// Suspense with a skeleton of the same layout.
+export default function LotPage({ params }: Props) {
+  return (
+    <Suspense
+      fallback={
+        <div className="container-page py-6 sm:py-10">
+          <div className="h-5" />
+          <div className="mt-5">
+            <LotDetailSkeleton />
+          </div>
+        </div>
+      }
+    >
+      <LotLoader params={params} />
+    </Suspense>
+  );
+}
+
+async function LotLoader({ params }: Pick<Props, "params">) {
   const detail = await loadLot(params);
   if (!detail) notFound();
   return <LotView detail={detail} />;

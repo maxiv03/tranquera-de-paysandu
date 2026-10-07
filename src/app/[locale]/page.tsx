@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 import { AuctionCard } from "@/components/auctions/AuctionCard";
 import { ContactSection } from "@/components/contact/ContactSection";
-import { HomeHero } from "@/components/home/HomeHero";
+import { FeaturedAuction, HomeHero } from "@/components/home/HomeHero";
 import { ServiceGrid } from "@/components/services/ServiceGrid";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { AuctionGridSkeleton, FeaturedAuctionSkeleton } from "@/components/ui/Skeleton";
 import { Link } from "@/i18n/navigation";
 import { getAuctions } from "@/lib/data/auctions";
-import type { Auction } from "@/lib/data/types";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("brand");
@@ -21,15 +22,18 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function HomePage() {
-  // The live auction or, if none, the next one is featured; the rest follow in the list.
-  const [featured = null, ...rest] = await getAuctions("upcoming");
-
+// Sections that read auction data stream inside Suspense: cached reads under the [locale] root
+// param count as URL data for the App Shell, which stays static (hero text, services, contact).
+export default function HomePage() {
   return (
     <>
-      <HomeHero featured={featured} next={featured?.status === "live" ? rest[0] : null} />
+      <HomeHero>
+        <Suspense fallback={<FeaturedAuctionSkeleton />}>
+          <Featured />
+        </Suspense>
+      </HomeHero>
       <ServicesSection />
-      <UpcomingSection auctions={rest.slice(0, 3)} />
+      <UpcomingSection />
       <section
         id="contact"
         aria-labelledby="contact-title"
@@ -38,6 +42,17 @@ export default async function HomePage() {
         <ContactSection />
       </section>
     </>
+  );
+}
+
+async function Featured() {
+  const [featured, next] = await getAuctions("upcoming");
+  if (!featured) return null;
+  return (
+    <FeaturedAuction
+      auction={featured}
+      next={featured.status === "live" ? (next ?? null) : null}
+    />
   );
 }
 
@@ -58,15 +73,18 @@ function ServicesSection() {
   );
 }
 
-function UpcomingSection({ auctions }: { auctions: Auction[] }) {
+function ScheduleLink() {
   const t = useTranslations("home");
-  const scheduleLink = (
+  return (
     <Link href="/auctions" className={buttonStyles({ variant: "secondary", size: "sm" })}>
       {t("seeSchedule")}
       <ArrowRight aria-hidden="true" />
     </Link>
   );
+}
 
+function UpcomingSection() {
+  const t = useTranslations("home");
   return (
     <section aria-labelledby="upcoming-title" className="bg-surface py-14 sm:py-20">
       <div className="container-page">
@@ -74,22 +92,32 @@ function UpcomingSection({ auctions }: { auctions: Auction[] }) {
           id="upcoming-title"
           eyebrow={t("upcomingEyebrow")}
           title={t("upcomingTitle")}
-          action={scheduleLink}
+          action={<ScheduleLink />}
         />
-        {auctions.length > 0 ? (
-          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {auctions.map((auction) => (
-              <li key={auction.id} className="flex [&>article]:flex-1">
-                <AuctionCard auction={auction} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="mt-8">
-            <EmptyState title={t("noUpcoming")} action={scheduleLink} />
-          </div>
-        )}
+        <div className="mt-8">
+          <Suspense fallback={<AuctionGridSkeleton count={3} />}>
+            <UpcomingList />
+          </Suspense>
+        </div>
       </div>
     </section>
+  );
+}
+
+/** Upcoming auctions after the featured one (shown in the hero). */
+async function UpcomingList() {
+  const t = await getTranslations("home");
+  const auctions = (await getAuctions("upcoming")).slice(1, 4);
+  if (auctions.length === 0) {
+    return <EmptyState title={t("noUpcoming")} action={<ScheduleLink />} />;
+  }
+  return (
+    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {auctions.map((auction) => (
+        <li key={auction.id} className="flex [&>article]:flex-1">
+          <AuctionCard auction={auction} />
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -1,5 +1,6 @@
 import { ArrowRight, Clock, MapPin, Radio } from "lucide-react";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { LiveDot } from "@/components/auctions/StatusBadge";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
@@ -9,23 +10,19 @@ import { Link } from "@/i18n/navigation";
 import type { Auction } from "@/lib/data/types";
 import { Countdown } from "./Countdown";
 
-const FALLBACK_IMAGE = "/images/auctions/cover-6.webp";
+const HERO_IMAGE = "/images/auctions/cover-4.webp";
 
-/** Home hero: brand statement over a field photo, plus the featured (live or next) auction. */
-export function HomeHero({
-  featured,
-  next,
-}: {
-  featured: Auction | null;
-  /** When the featured auction is live: the following one, shown with its countdown. */
-  next?: Auction | null;
-}) {
+/**
+ * Home hero: brand statement over a field photo. Static, so it ships in the App Shell; the
+ * featured auction arrives through `children` (streamed inside Suspense by the page).
+ */
+export function HomeHero({ children }: { children?: ReactNode }) {
   const t = useTranslations();
 
   return (
     <section className="relative isolate overflow-hidden bg-primary-strong text-paper">
       <Image
-        src={featured?.imageUrl ?? FALLBACK_IMAGE}
+        src={HERO_IMAGE}
         alt=""
         fill
         sizes="100vw"
@@ -62,13 +59,20 @@ export function HomeHero({
           </div>
         </div>
 
-        {featured && <FeaturedAuction auction={featured} next={next ?? null} />}
+        {children}
       </div>
     </section>
   );
 }
 
-function FeaturedAuction({ auction, next }: { auction: Auction; next: Auction | null }) {
+/** The live auction or, if none, the next one. Under a live one, `next` shows its countdown. */
+export function FeaturedAuction({
+  auction,
+  next,
+}: {
+  auction: Auction;
+  next: Auction | null;
+}) {
   const t = useTranslations();
   const format = useFormatter();
   const startsAt = new Date(auction.startsAt);

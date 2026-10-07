@@ -135,8 +135,11 @@ Rules:
   copy them: auction list `view=finished`, `type=screen|fair`; catalog `category`,
   `department`, `weight=under200|200to300|300to400|over400`, `show` (phone paging). Parsing and facet counts live in
   `src/lib/catalog-filters.ts`; defaults stay out of the URL.
-- Parts of a page that read `searchParams` go inside `<Suspense>` with a skeleton; the rest of
-  the page stays prerendered.
+- **App Shell rule (Partial Prefetching):** any `params`/`searchParams` read _and any cached
+  data read_ (`"use cache"` under the `[locale]` root param counts as URL data) must sit inside
+  `<Suspense>` with a skeleton from `components/ui/Skeleton.tsx` that mirrors the real layout.
+  Pages stay sync; data lives in async child components. Check `next dev` for the
+  "URL data outside of Suspense" insight after touching a page. Never use `instant = false`.
 - Unknown auction numbers render the localized not-found page with `noindex` but HTTP 200: with
   partial prerendering the response streams before `notFound()` runs (documented Next behavior).
 

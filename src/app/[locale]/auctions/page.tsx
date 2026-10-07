@@ -6,7 +6,7 @@ import { AuctionCard } from "@/components/auctions/AuctionCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { FilterChips } from "@/components/ui/FilterChips";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CardGridSkeleton } from "@/components/ui/Skeleton";
+import { AuctionGridSkeleton } from "@/components/ui/Skeleton";
 import { TabLinks } from "@/components/ui/TabLinks";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { parseAuctionListParams, type SearchParams } from "@/lib/catalog-filters";
@@ -24,7 +24,7 @@ export default function AuctionsPage({ searchParams }: PageProps<"/[locale]/auct
   return (
     <div className="container-page py-10 sm:py-14">
       <SectionHeading as="h1" title={t("title")} description={t("description")} />
-      <Suspense fallback={<CardGridSkeleton count={3} />}>
+      <Suspense fallback={<AuctionGridSkeleton count={3} />}>
         <AuctionResults searchParams={searchParams} />
       </Suspense>
     </div>

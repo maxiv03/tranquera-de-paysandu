@@ -2,6 +2,7 @@ import { ArrowRight, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import { useFormatter, useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 import { AuctionCard } from "@/components/auctions/AuctionCard";
 import { AuctionTypeBadge } from "@/components/auctions/AuctionTypeBadge";
 import { LiveDot } from "@/components/auctions/StatusBadge";
@@ -12,6 +13,7 @@ import { LoopVideo } from "@/components/media/LoopVideo";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { LiveSkeleton } from "@/components/ui/Skeleton";
 import { Link } from "@/i18n/navigation";
 import { getAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog } from "@/lib/data/lots";
@@ -24,17 +26,24 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t("metaTitle"), description: t("noneDescription") };
 }
 
-export default async function LivePage() {
+// The broadcast depends on cached reads under the [locale] root param (URL data for the App
+// Shell), so it streams inside Suspense.
+export default function LivePage() {
+  return (
+    <div className="container-page py-6 sm:py-10">
+      <Suspense fallback={<LiveSkeleton />}>
+        <LiveContent />
+      </Suspense>
+    </div>
+  );
+}
+
+async function LiveContent() {
   const upcoming = await getAuctions("upcoming");
   const live = upcoming.find((a) => a.status === "live");
   const catalog = live ? await getAuctionCatalog(live.number) : null;
   const next = upcoming.find((a) => a.status === "upcoming") ?? null;
-
-  return (
-    <div className="container-page py-6 sm:py-10">
-      {catalog ? <LiveBroadcast catalog={catalog} /> : <NothingLive next={next} />}
-    </div>
-  );
+  return catalog ? <LiveBroadcast catalog={catalog} /> : <NothingLive next={next} />;
 }
 
 function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog }) {

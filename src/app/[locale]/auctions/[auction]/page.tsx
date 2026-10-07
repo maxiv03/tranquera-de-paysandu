@@ -7,7 +7,7 @@ import { AuctionHero } from "@/components/auctions/AuctionHero";
 import { LotCatalog } from "@/components/lots/LotCatalog";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CardGridSkeleton } from "@/components/ui/Skeleton";
+import { AuctionHeroSkeleton, LotGridSkeleton } from "@/components/ui/Skeleton";
 import {
   parseCatalogFilters,
   parseShowCount,
@@ -15,7 +15,6 @@ import {
 } from "@/lib/catalog-filters";
 import { getAllAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog } from "@/lib/data/lots";
-import type { Lot } from "@/lib/data/types";
 
 type Props = PageProps<"/[locale]/auctions/[auction]">;
 
@@ -56,17 +55,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function AuctionPage({ params, searchParams }: Props) {
+async function loadCatalog(params: Props["params"]) {
   const number = parseNumber((await params).auction);
-  const catalog = number ? await getAuctionCatalog(number) : null;
-  if (!catalog) notFound();
+  return number ? getAuctionCatalog(number) : null;
+}
 
+// Both data regions stream inside Suspense: params and cached reads under the [locale] root
+// param are URL data, so the App Shell keeps only the layout and the catalog heading.
+export default function AuctionPage({ params, searchParams }: Props) {
   return (
     <div className="container-page py-6 sm:py-10">
-      <AuctionBreadcrumbs number={catalog.auction.number} />
-      <div className="mt-5">
-        <AuctionHero auction={catalog.auction} />
-      </div>
+      <Suspense
+        fallback={
+          <>
+            <div className="h-5" />
+            <div className="mt-5">
+              <AuctionHeroSkeleton />
+            </div>
+          </>
+        }
+      >
+        <AuctionHeader params={params} />
+      </Suspense>
 
       <section
         id="catalog"
@@ -74,25 +84,24 @@ export default async function AuctionPage({ params, searchParams }: Props) {
         className="mt-14 scroll-mt-20"
       >
         <CatalogHeading />
-        {/* Filters read the URL: only this part renders per request. */}
-        <Suspense
-          fallback={
-            <CardGridSkeleton
-              count={4}
-              aspect="aspect-[4/3]"
-              columns="sm:grid-cols-2 lg:grid-cols-4"
-            />
-          }
-        >
-          <FilteredCatalog
-            number={catalog.auction.number}
-            sold={catalog.auction.status === "finished"}
-            lots={catalog.lots}
-            searchParams={searchParams}
-          />
+        <Suspense fallback={<LotGridSkeleton count={8} />}>
+          <Catalog params={params} searchParams={searchParams} />
         </Suspense>
       </section>
     </div>
+  );
+}
+
+async function AuctionHeader({ params }: Pick<Props, "params">) {
+  const catalog = await loadCatalog(params);
+  if (!catalog) notFound();
+  return (
+    <>
+      <AuctionBreadcrumbs number={catalog.auction.number} />
+      <div className="mt-5">
+        <AuctionHero auction={catalog.auction} />
+      </div>
+    </>
   );
 }
 
@@ -120,26 +129,20 @@ function CatalogHeading() {
   );
 }
 
-async function FilteredCatalog({
-  number,
-  sold,
-  lots,
-  searchParams,
-}: {
-  number: number;
-  sold: boolean;
-  lots: Lot[];
-  searchParams: Promise<SearchParams>;
-}) {
-  const params = await searchParams;
+async function Catalog({ params, searchParams }: Props) {
+  const [catalog, query] = await Promise.all([
+    loadCatalog(params),
+    searchParams as Promise<SearchParams>,
+  ]);
+  if (!catalog) return null;
   return (
     <LotCatalog
-      auctionNumber={number}
-      lots={lots}
-      filters={parseCatalogFilters(params)}
-      show={parseShowCount(params)}
+      auctionNumber={catalog.auction.number}
+      lots={catalog.lots}
+      filters={parseCatalogFilters(query)}
+      show={parseShowCount(query)}
       sectionId="catalog"
-      sold={sold}
+      sold={catalog.auction.status === "finished"}
     />
   );
 }
