@@ -197,7 +197,7 @@ Sample data is concentrated on the Uruguay River coast (Paysandú, Salto, Río N
 Tacuarembó) with a few lots from other departments. `supabase/seed.sql` is idempotent (truncate +
 reload in one transaction, `contact_messages` untouched) and its dates are relative to `now()`.
 
-Credentials live in `.env.local` (never committed); `.env.example` and the README document them.
+Credentials live in `.env.local` (never committed); `.env.example` and `docs/SETUP.md` document them.
 
 ### Caching and resilience
 
