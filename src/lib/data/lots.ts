@@ -68,5 +68,7 @@ export async function getLotDetail(
     lot: catalog.lots[index],
     previousLotNumber: catalog.lots[index - 1]?.number ?? null,
     nextLotNumber: catalog.lots[index + 1]?.number ?? null,
+    position: index + 1,
+    total: catalog.lots.length,
   };
 }

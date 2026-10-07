@@ -168,5 +168,37 @@
     "noneDescription": "Cuando un remate esté al aire lo vas a poder seguir desde esta página.",
     "next": "Próximo remate",
     "videoLabel": "Transmisión del remate N.º {number}"
+  },
+  "lotPage": {
+    "subtitle": "{count} {category} {breed}",
+    "metaDescription": "{heads} · {category} {breed} · {weight} de peso promedio · {location}. Remate N.º {auction}, {date}.",
+    "keyData": "Datos del lote",
+    "department": "Departamento",
+    "description": "Descripción",
+    "inAuction": "Se remata en",
+    "location": "Ubicación",
+    "approxLocation": "La ubicación es aproximada: el punto marca la zona del campo, no la dirección exacta.",
+    "mapLabel": "Mapa con la ubicación aproximada del lote {lot}",
+    "loadingMap": "Cargando mapa…",
+    "agent": "Agente a cargo",
+    "agentHelp": "Consultá por sanidad, flete o condiciones de pago.",
+    "agentMessage": "Hola {agent}, me interesa el lote {lot} del remate N.º {auction} ({heads}, {category}). {url}",
+    "share": "Compartir",
+    "copy": "Copiar enlace",
+    "copied": "Enlace copiado",
+    "shareText": "Lote {lot} del remate N.º {auction}: {summary}",
+    "previous": "Lote anterior",
+    "next": "Lote siguiente",
+    "position": "Lote {current} de {total}",
+    "backToCatalog": "Volver al catálogo",
+    "gallery": {
+      "label": "Fotos y video del lote",
+      "photo": "Foto {index} de {total}",
+      "video": "Video del lote",
+      "showPhoto": "Ver foto {index}",
+      "showVideo": "Ver video",
+      "previous": "Anterior",
+      "next": "Siguiente"
+    }
   }
 }

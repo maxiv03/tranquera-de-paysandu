@@ -168,5 +168,37 @@
     "noneDescription": "When an auction is on air you will be able to follow it from this page.",
     "next": "Next auction",
     "videoLabel": "Broadcast of auction #{number}"
+  },
+  "lotPage": {
+    "subtitle": "{count} {breed} {category}",
+    "metaDescription": "{heads} · {breed} {category} · {weight} average weight · {location}. Auction #{auction}, {date}.",
+    "keyData": "Lot details",
+    "department": "Department",
+    "description": "Description",
+    "inAuction": "Sold in",
+    "location": "Location",
+    "approxLocation": "The location is approximate: the pin marks the area of the farm, not the exact address.",
+    "mapLabel": "Map with the approximate location of lot {lot}",
+    "loadingMap": "Loading map…",
+    "agent": "Agent in charge",
+    "agentHelp": "Ask about health records, freight or payment terms.",
+    "agentMessage": "Hello {agent}, I am interested in lot {lot} of auction #{auction} ({heads}, {category}). {url}",
+    "share": "Share",
+    "copy": "Copy link",
+    "copied": "Link copied",
+    "shareText": "Lot {lot} of auction #{auction}: {summary}",
+    "previous": "Previous lot",
+    "next": "Next lot",
+    "position": "Lot {current} of {total}",
+    "backToCatalog": "Back to catalog",
+    "gallery": {
+      "label": "Lot photos and video",
+      "photo": "Photo {index} of {total}",
+      "video": "Lot video",
+      "showPhoto": "Show photo {index}",
+      "showVideo": "Show video",
+      "previous": "Previous",
+      "next": "Next"
+    }
   }
 }

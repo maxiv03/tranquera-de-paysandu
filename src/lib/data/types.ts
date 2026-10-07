@@ -53,4 +53,7 @@ export type LotDetail = {
   lot: Lot;
   previousLotNumber: number | null;
   nextLotNumber: number | null;
+  /** 1-based position in the auction catalog. */
+  position: number;
+  total: number;
 };
