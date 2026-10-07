@@ -193,3 +193,10 @@ derived in memory from one cached read (the dataset is small); keep it that way 
 2. No untranslated text: lint clean, i18n keys in sync, pages reviewed in both locales.
 3. Reviewed at 375px width (and desktop) — no horizontal scroll, readable hierarchy.
 4. Small commits with clear messages.
+
+## Backlog for Phase 7
+
+- Dynamic Open Graph images in both locales: per lot (photo, heads, category, average weight)
+  and per auction (date, type, number of lots).
+- Keep-alive endpoint + Vercel cron for the free Supabase project, which also rotates the demo
+  dates weekly so there are always upcoming auctions. Pages must keep serving if the DB is down.
