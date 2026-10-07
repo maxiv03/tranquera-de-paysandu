@@ -7,6 +7,7 @@ import { CategoryBadge } from "@/components/lots/CategoryBadge";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { Link } from "@/i18n/navigation";
 import type { Auction } from "@/lib/data/types";
+import { useLocalized } from "@/lib/localized";
 import { AuctionTypeBadge } from "./AuctionTypeBadge";
 import { StatusBadge } from "./StatusBadge";
 
@@ -14,6 +15,7 @@ import { StatusBadge } from "./StatusBadge";
 export function AuctionHero({ auction }: { auction: Auction }) {
   const t = useTranslations();
   const format = useFormatter();
+  const text = useLocalized();
   const startsAt = new Date(auction.startsAt);
   const title = t("auction.title", { number: auction.number });
 
@@ -37,7 +39,9 @@ export function AuctionHero({ auction }: { auction: Auction }) {
           <div>
             <h1 className="text-3xl leading-tight font-bold sm:text-4xl">{title}</h1>
             {auction.title && (
-              <p className="mt-1 text-lg font-medium text-accent">{auction.title}</p>
+              <p className="mt-1 text-lg font-medium text-accent">
+                {text(auction.title)}
+              </p>
             )}
           </div>
         </div>
@@ -95,7 +99,7 @@ export function AuctionHero({ auction }: { auction: Auction }) {
             <p className="text-xs font-semibold tracking-wider text-ink-subtle uppercase">
               {t("auctionPage.notes")}
             </p>
-            <p className="mt-1 text-ink-muted">{auction.notes}</p>
+            <p className="mt-1 text-ink-muted">{text(auction.notes)}</p>
           </div>
         )}
 

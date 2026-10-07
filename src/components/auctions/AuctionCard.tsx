@@ -5,6 +5,7 @@ import { CoverImage } from "@/components/ui/CoverImage";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { Link } from "@/i18n/navigation";
 import type { Auction } from "@/lib/data/types";
+import { useLocalized } from "@/lib/localized";
 import { AuctionTypeBadge } from "./AuctionTypeBadge";
 import { StatusBadge } from "./StatusBadge";
 
@@ -18,6 +19,7 @@ export function AuctionCard({
 }) {
   const t = useTranslations();
   const format = useFormatter();
+  const text = useLocalized();
   const title = t("auction.title", { number: auction.number });
   const isLive = auction.status === "live";
 
@@ -52,7 +54,7 @@ export function AuctionCard({
             </Link>
           </h3>
           {auction.title && (
-            <p className="mt-0.5 font-medium text-accent">{auction.title}</p>
+            <p className="mt-0.5 font-medium text-accent">{text(auction.title)}</p>
           )}
           <ul className="mt-2 space-y-1 text-sm text-ink-muted [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-ink-subtle">
             <li className="flex items-center gap-1.5">

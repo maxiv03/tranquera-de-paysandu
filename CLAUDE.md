@@ -163,9 +163,12 @@ Rules:
   (`/es/remates` ↔ `/en/auctions`); add every new route to `pathnames` in `src/i18n/routing.ts`
   and link with `Link` from `@/i18n/navigation` using the internal path.
 - The language switcher keeps the current page (same route + params).
-- **Only the interface is translated**: menus, buttons, labels, headings, metadata and list
-  values (auction type, status, lot category). **Sample content stays in Spanish** (auction
-  venue, lot descriptions, breeds, agent names).
+- The interface is translated through messages (menus, buttons, labels, headings, metadata and
+  list values). **Sample content** (auction name and terms, lot description and breed) has
+  optional English columns (`title_en`, `notes_en`, `description_en`, `breed_en`): data types
+  hold them as `Localized` (`src/lib/localized.ts`) and components show them with
+  `useLocalized()` / `pickLocalized()`, falling back to Spanish. Venues, places, departments
+  and people stay as they are.
 - Enum values are stored as English keys in the DB (`screen`, `fair`, `upcoming`, `steers`...)
   and displayed through messages (`t("lotCategory.steers")`). Never display a raw enum.
 - **No hardcoded UI text.** ESLint enforces it (`react/jsx-no-literals` + a rule for `alt`,

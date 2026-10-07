@@ -1,7 +1,7 @@
 import { Check, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { getFormatter, getTranslations } from "next-intl/server";
+import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { AuctionTypeBadge } from "@/components/auctions/AuctionTypeBadge";
@@ -23,6 +23,7 @@ import type { Locale } from "@/i18n/routing";
 import { getAllAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog, getLotDetail } from "@/lib/data/lots";
 import type { LotDetail } from "@/lib/data/types";
+import { pickLocalized, useLocalized } from "@/lib/localized";
 import { posterFor } from "@/lib/media";
 import { alternatesFor } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -68,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("lotPage.metaDescription", {
       heads: t("units.heads", { count: lot.headCount }),
       category: t(`lotCategory.${lot.category}`),
-      breed: lot.breed,
+      breed: pickLocalized(lot.breed, await getLocale()),
       weight: t("units.kg", { value: format.number(lot.avgWeightKg, "integer") }),
       location: lot.locationLabel
         ? `${lot.locationLabel}, ${lot.department}`
@@ -118,11 +119,13 @@ function LotView({ detail }: { detail: LotDetail }) {
   const sold = auction.status === "finished";
   const lotTitle = t("lot.title", { number: lot.number });
   const auctionTitle = t("auction.title", { number: auction.number });
+  const text = useLocalized();
+  const breed = text(lot.breed);
   const category = t(`lotCategory.${lot.category}`);
   const subtitle = t("lotPage.subtitle", {
     count: format.number(lot.headCount, "integer"),
     category: category.toLocaleLowerCase(locale),
-    breed: lot.breed,
+    breed,
   });
   const place = lot.locationLabel
     ? `${lot.locationLabel}, ${lot.department}`
@@ -164,7 +167,7 @@ function LotView({ detail }: { detail: LotDetail }) {
         <div className="lg:sticky lg:top-24 lg:self-start">
           <LotGallery
             items={gallery}
-            alt={`${lotTitle} · ${category} ${lot.breed}`}
+            alt={`${lotTitle} · ${category} ${breed}`}
             fallback={<BrandCover label={t("image.noPhoto")} />}
           />
         </div>
@@ -223,7 +226,7 @@ function LotView({ detail }: { detail: LotDetail }) {
               />
             </dl>
             <dl className="mt-4 grid grid-cols-2 gap-4 border-t border-line pt-4">
-              <Stat label={t("lot.breed")} value={lot.breed} />
+              <Stat label={t("lot.breed")} value={breed} />
               <Stat label={t("lotPage.department")} value={lot.department} />
             </dl>
           </section>
@@ -247,7 +250,7 @@ function LotView({ detail }: { detail: LotDetail }) {
               <h2 className="font-sans text-xs font-semibold tracking-wider text-ink-subtle uppercase">
                 {t("lotPage.description")}
               </h2>
-              <p className="mt-1 text-ink-muted">{lot.description}</p>
+              <p className="mt-1 text-ink-muted">{text(lot.description)}</p>
             </div>
           )}
 
@@ -266,7 +269,7 @@ function LotView({ detail }: { detail: LotDetail }) {
                 </span>
                 {auction.title && (
                   <span className="block text-sm font-medium text-accent">
-                    {auction.title}
+                    {text(auction.title)}
                   </span>
                 )}
                 <span className="mt-1 block text-sm text-ink-muted tabular">

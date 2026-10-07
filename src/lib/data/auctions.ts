@@ -4,6 +4,7 @@ import type { AuctionType } from "@/lib/domain";
 import { createSupabaseClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/database.types";
 import { demoLiveStart } from "@/lib/live";
+import { localized } from "@/lib/localized";
 import { effectiveStatus, isSameLocalDay } from "./status";
 import type { Auction } from "./types";
 
@@ -25,7 +26,7 @@ export function mapAuction(
     id: row.id,
     number: row.number,
     type: row.type,
-    title: row.title,
+    title: row.title ? localized(row.title, row.title_en) : null,
     startsAt,
     demoLive: row.demo_live,
     startsToday: isSameLocalDay(startsAt, now),
@@ -33,7 +34,7 @@ export function mapAuction(
     department: row.department as Auction["department"],
     status: row.demo_live ? "live" : effectiveStatus(row.status, row.starts_at, now),
     imageUrl: row.image_url,
-    notes: row.notes,
+    notes: row.notes ? localized(row.notes, row.notes_en) : null,
     lotCount: summary?.lot_count ?? 0,
     headCount: summary?.head_count ?? 0,
     categories: summary?.categories ?? [],

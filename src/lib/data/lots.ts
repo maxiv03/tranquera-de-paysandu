@@ -1,5 +1,6 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
+import { localized } from "@/lib/localized";
 import { createSupabaseClient } from "@/lib/supabase/server";
 import { AUCTIONS_TAG, getAuction } from "./auctions";
 import type { AuctionCatalog, Lot, LotDetail } from "./types";
@@ -26,13 +27,13 @@ async function getLotsForAuction(auctionId: number): Promise<Lot[]> {
     number: row.number,
     category: row.category,
     headCount: row.head_count,
-    breed: row.breed,
+    breed: localized(row.breed, row.breed_en),
     avgWeightKg: row.avg_weight_kg,
     department: row.department as Lot["department"],
     latitude: row.latitude,
     longitude: row.longitude,
     locationLabel: row.location_label,
-    description: row.description,
+    description: row.description ? localized(row.description, row.description_en) : null,
     videoUrl: row.video_url,
     referencePriceUsdPerKg: row.reference_price_usd_per_kg,
     photos: row.lot_photos,

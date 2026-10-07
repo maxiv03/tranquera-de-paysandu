@@ -1,5 +1,6 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import { getAuction } from "@/lib/data/auctions";
+import { pickLocalized } from "@/lib/localized";
 import {
   OG_COLORS,
   OG_FILL,
@@ -106,7 +107,7 @@ export default async function Image({
                   color: OG_COLORS.straw,
                 }}
               >
-                {auction.title}
+                {pickLocalized(auction.title, locale)}
               </span>
             )}
             <span

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/Badge";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { Link } from "@/i18n/navigation";
 import type { Lot } from "@/lib/data/types";
+import { useLocalized } from "@/lib/localized";
 import { CategoryBadge } from "./CategoryBadge";
 
 /**
@@ -22,13 +23,14 @@ export function LotCard({
 }) {
   const t = useTranslations();
   const format = useFormatter();
+  const text = useLocalized();
   const title = t("lot.title", { number: lot.number });
 
   return (
     <article className="group relative flex min-w-0 overflow-hidden rounded-card bg-surface shadow-card ring-1 ring-line transition-shadow hover:shadow-lg sm:flex-col">
       <CoverImage
         src={lot.photos[0]?.url}
-        alt={`${title} · ${t(`lotCategory.${lot.category}`)} ${lot.breed}`}
+        alt={`${title} · ${t(`lotCategory.${lot.category}`)} ${text(lot.breed)}`}
         sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 128px"
         className="w-32 shrink-0 self-stretch sm:aspect-[4/3] sm:w-auto"
       />
@@ -53,7 +55,7 @@ export function LotCard({
       <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
         <div className="flex items-center justify-between gap-2">
           <CategoryBadge category={lot.category} />
-          <span className="truncate text-sm text-ink-subtle">{lot.breed}</span>
+          <span className="truncate text-sm text-ink-subtle">{text(lot.breed)}</span>
         </div>
         <h3 className="mt-2 text-base leading-snug font-bold sm:mt-3 sm:text-lg">
           <Link

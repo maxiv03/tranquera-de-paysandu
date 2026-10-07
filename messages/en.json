@@ -50,7 +50,7 @@
     "lots": "{count, plural, one {# lot} other {# lots}}",
     "kg": "{value} kg",
     "time": "{time}",
-    "usdPerKg": "US$ {value}/kg"
+    "usdPerKg": "US${value}/kg"
   },
   "auction": {
     "title": "Auction #{number}",

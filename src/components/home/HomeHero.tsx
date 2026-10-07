@@ -8,6 +8,7 @@ import { buttonStyles } from "@/components/ui/button-styles";
 import { DateBlock } from "@/components/ui/DateBlock";
 import { Link } from "@/i18n/navigation";
 import type { Auction } from "@/lib/data/types";
+import { useLocalized } from "@/lib/localized";
 import { Countdown } from "./Countdown";
 
 const HERO_IMAGE = "/images/auctions/cover-4.webp";
@@ -76,6 +77,7 @@ export function FeaturedAuction({
 }) {
   const t = useTranslations();
   const format = useFormatter();
+  const text = useLocalized();
   const startsAt = new Date(auction.startsAt);
   const isLive = auction.status === "live";
   const time = format.dateTime(startsAt, "time");
@@ -95,7 +97,9 @@ export function FeaturedAuction({
           <h2 className="text-2xl leading-tight font-bold">
             {t("auction.title", { number: auction.number })}
           </h2>
-          {auction.title && <p className="font-medium text-accent">{auction.title}</p>}
+          {auction.title && (
+            <p className="font-medium text-accent">{text(auction.title)}</p>
+          )}
         </div>
       </div>
 
@@ -163,6 +167,7 @@ export function FeaturedAuction({
 function NextUp({ auction }: { auction: Auction }) {
   const t = useTranslations();
   const format = useFormatter();
+  const text = useLocalized();
   const startsAt = new Date(auction.startsAt);
   const time = format.dateTime(startsAt, "time");
 
@@ -180,7 +185,7 @@ function NextUp({ auction }: { auction: Auction }) {
       >
         {t("auction.title", { number: auction.number })}
         {auction.title && (
-          <span className="font-medium text-accent"> · {auction.title}</span>
+          <span className="font-medium text-accent"> · {text(auction.title)}</span>
         )}
       </Link>
       <div className="mt-2">

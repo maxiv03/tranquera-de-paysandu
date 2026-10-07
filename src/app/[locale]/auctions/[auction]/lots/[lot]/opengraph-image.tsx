@@ -1,5 +1,6 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import { getLotDetail } from "@/lib/data/lots";
+import { pickLocalized } from "@/lib/localized";
 import {
   OG_COLORS,
   OG_SIZE,
@@ -109,7 +110,7 @@ export default async function Image({
                 marginTop: 2,
               }}
             >
-              {detail.lot.breed}
+              {pickLocalized(detail.lot.breed, locale)}
             </span>
             <div style={{ display: "flex", gap: 14, marginTop: 30 }}>
               {stats.map((stat) => (

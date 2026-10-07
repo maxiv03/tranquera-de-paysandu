@@ -19,6 +19,7 @@ import { getAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog } from "@/lib/data/lots";
 import type { AuctionCatalog, Auction } from "@/lib/data/types";
 import { LIVE_LOT_ATTRIBUTE } from "@/lib/live";
+import { useLocalized } from "@/lib/localized";
 import { alternatesFor } from "@/lib/seo";
 import { LIVE_VIDEO, posterFor } from "@/lib/media";
 
@@ -55,6 +56,7 @@ function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog
   const t = useTranslations();
   const format = useFormatter();
   const title = t("auction.title", { number: auction.number });
+  const text = useLocalized();
   const auctionHref = {
     pathname: "/auctions/[auction]" as const,
     params: { auction: String(auction.number) },
@@ -69,7 +71,9 @@ function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog
         </span>
         <div>
           <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-          {auction.title && <p className="font-medium text-accent">{auction.title}</p>}
+          {auction.title && (
+            <p className="font-medium text-accent">{text(auction.title)}</p>
+          )}
         </div>
       </div>
 
