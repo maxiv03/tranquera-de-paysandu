@@ -1,7 +1,7 @@
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { COMPANY } from "@/lib/company";
-import { whatsappUrl } from "@/lib/whatsapp";
+import { demoMessage, whatsappUrl } from "@/lib/whatsapp";
 
 /** Company contact lines (phone, WhatsApp, email, office). Used in the footer and the menu. */
 export function ContactList({ inverted = false }: { inverted?: boolean }) {
@@ -20,7 +20,7 @@ export function ContactList({ inverted = false }: { inverted?: boolean }) {
       value: COMPANY.phone,
       href: whatsappUrl(
         COMPANY.whatsapp,
-        `${t("whatsapp.prefix")} ${t("whatsapp.general")}`,
+        demoMessage(t("whatsapp.prefix"), t("whatsapp.general")),
       ),
       external: true,
     },
