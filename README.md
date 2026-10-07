@@ -61,4 +61,4 @@ transaction, so running it again never duplicates data. Dates are relative to th
 it, which also refreshes the demo (finished, live and upcoming auctions). Contact messages are
 never touched. The project is shared: a reset affects everyone, so tell the team.
 
-Placeholder images are generated with `node scripts/generate-placeholders.mjs`.
+Placeholder images are generated with `node scripts/generate-avatars.mjs`.

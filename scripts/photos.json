@@ -1,0 +1,67 @@
+{
+  "source": "Pexels (https://www.pexels.com/license/)",
+  "covers": [
+    { "id": 30606205, "author": "Michelle Chadwick", "file": "auctions/cover-1" },
+    { "id": 13542232, "author": "Maria Teresa Ghezzi", "file": "auctions/cover-2" },
+    { "id": 32306170, "author": "Tomas Asurmendi", "file": "auctions/cover-3" },
+    { "id": 34258740, "author": "Tomas Asurmendi", "file": "auctions/cover-4" },
+    { "id": 34258744, "author": "Tomas Asurmendi", "file": "auctions/cover-5" },
+    { "id": 32255198, "author": "Tomas Asurmendi", "file": "auctions/cover-6" },
+    { "id": 13424110, "author": "Imperioame", "file": "auctions/cover-7" }
+  ],
+  "lots": {
+    "calves": [
+      { "id": 19203538, "author": "Joseba Garcia Moya" },
+      { "id": 29057172, "author": "Fox70" },
+      { "id": 31669670, "author": "Nikola Tomasic" },
+      { "id": 35259958, "author": "Joost Vanos" },
+      { "id": 5092864, "author": "Malcolm Garret" },
+      { "id": 6422352, "author": "DeAnn DaSilva" },
+      { "id": 8707822, "author": "Chris Black" },
+      { "id": 4488403, "author": "Will Kirk" },
+      { "id": 27207625, "author": "NC Farm Bureau Mark" },
+      { "id": 27207618, "author": "NC Farm Bureau Mark" },
+      { "id": 39420139, "author": "Jonathan Gobarden" },
+      { "id": 30028254, "author": "Maria Putinica" }
+    ],
+    "steers": [
+      { "id": 11629419, "author": "Eric Garcia" },
+      { "id": 18518279, "author": "Elisa Giaccaglia" },
+      { "id": 31111065, "author": "NC Farm Bureau Mark" },
+      { "id": 14514729, "author": "Ravish M" },
+      { "id": 27207632, "author": "NC Farm Bureau Mark" },
+      { "id": 27207617, "author": "NC Farm Bureau Mark" },
+      { "id": 7573234, "author": "Larsoeya" },
+      { "id": 26765048, "author": "Dario Rawert" },
+      { "id": 33963060, "author": "Christina99999" },
+      { "id": 7164014, "author": "NC Farm Bureau Mark" },
+      { "id": 7512355, "author": "NC Farm Bureau Mark" }
+    ],
+    "heifers": [
+      { "id": 27207619, "author": "NC Farm Bureau Mark" },
+      { "id": 13064130, "author": "Olavi Anttila" },
+      { "id": 25947852, "author": "Christina99999" },
+      { "id": 27568762, "author": "Maria Ines" },
+      { "id": 33949992, "author": "Christina99999" },
+      { "id": 34676155, "author": "User 2156436039" },
+      { "id": 15418103, "author": "Jan Zakelj" },
+      { "id": 21371875, "author": "Megan Durkin" },
+      { "id": 11629414, "author": "Eric Garcia" },
+      { "id": 38439586, "author": "Jiri Dockal" }
+    ],
+    "cows": [
+      { "id": 10357322, "author": "Tom Fisk" },
+      { "id": 27139037, "author": "Rob Munro" },
+      { "id": 27207621, "author": "NC Farm Bureau Mark" },
+      { "id": 27207635, "author": "NC Farm Bureau Mark" },
+      { "id": 28424334, "author": "Julito Elizalde" },
+      { "id": 28424335, "author": "Julito Elizalde" },
+      { "id": 39547551, "author": "Azvern" },
+      { "id": 5770400, "author": "Carsten Kohler" },
+      { "id": 7164011, "author": "NC Farm Bureau Mark" },
+      { "id": 7164013, "author": "NC Farm Bureau Mark" },
+      { "id": 14479218, "author": "Denitsa Kireva" },
+      { "id": 27207626, "author": "NC Farm Bureau Mark" }
+    ]
+  }
+}

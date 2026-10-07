@@ -27,5 +27,8 @@ const args = process.argv.slice(2).map((arg) => arg.replace("{ref}", projectRef)
 
 // Run the CLI entry point with node directly: no shell, so SQL arguments are not split on Windows.
 const cli = createRequire(import.meta.url).resolve("supabase/dist/supabase.js");
-const result = spawnSync(process.execPath, [cli, ...args], { stdio: "inherit", env: process.env });
+const result = spawnSync(process.execPath, [cli, ...args], {
+  stdio: "inherit",
+  env: process.env,
+});
 process.exit(result.status ?? 1);
