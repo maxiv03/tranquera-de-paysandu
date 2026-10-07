@@ -7,7 +7,7 @@ import {
   Truck,
   Warehouse,
 } from "lucide-react";
-import type { ServiceSlug } from "@/lib/services";
+import type { ServiceKey } from "@/lib/services";
 
 const icons = {
   "screen-auctions": MonitorPlay,
@@ -17,15 +17,15 @@ const icons = {
   land: Fence,
   appraisals: ClipboardCheck,
   transport: Truck,
-} satisfies Record<ServiceSlug, unknown>;
+} satisfies Record<ServiceKey, unknown>;
 
 export function ServiceIcon({
-  slug,
+  service,
   className = "size-6",
 }: {
-  slug: ServiceSlug;
+  service: ServiceKey;
   className?: string;
 }) {
-  const Icon = icons[slug];
+  const Icon = icons[service];
   return <Icon className={className} aria-hidden="true" />;
 }

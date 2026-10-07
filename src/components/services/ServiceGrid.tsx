@@ -1,31 +1,39 @@
 import { ArrowRight } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { Link } from "@/i18n/navigation";
-import { SERVICES } from "@/lib/services";
+import type { Locale } from "@/i18n/routing";
+import { SERVICES, type ServiceKey } from "@/lib/services";
 import { ServiceIcon } from "./ServiceIcon";
 
-/** All services as cards, plus a closing card that invites to ask on WhatsApp. */
-export function ServiceGrid() {
+/**
+ * Services as cards (all, or all but `exclude` on a service page), plus a closing card that
+ * invites to ask on WhatsApp.
+ */
+export function ServiceGrid({ exclude }: { exclude?: ServiceKey }) {
   const t = useTranslations("services");
+  const locale = useLocale() as Locale;
 
   return (
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {SERVICES.map(({ slug }) => (
-        <li key={slug} className="flex">
+      {SERVICES.filter((service) => service.key !== exclude).map(({ key, slugs }) => (
+        <li key={key} className="flex">
           <article className="group relative flex flex-1 flex-col rounded-card bg-surface p-5 ring-1 ring-line transition-shadow hover:shadow-card">
             <span className="inline-flex size-11 items-center justify-center rounded-lg bg-primary-soft text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-              <ServiceIcon slug={slug} />
+              <ServiceIcon service={key} />
             </span>
             <h3 className="mt-4 text-lg leading-snug font-bold">
               <Link
-                href={{ pathname: "/services/[service]", params: { service: slug } }}
+                href={{
+                  pathname: "/services/[service]",
+                  params: { service: slugs[locale] },
+                }}
                 className="after:absolute after:inset-0 after:content-[''] group-has-[a:focus-visible]:after:rounded-card group-has-[a:focus-visible]:after:outline-2 group-has-[a:focus-visible]:after:outline-primary focus-visible:outline-none"
               >
-                {t(`${slug}.title`)}
+                {t(`${key}.title`)}
               </Link>
             </h3>
-            <p className="mt-1.5 flex-1 text-sm text-ink-muted">{t(`${slug}.summary`)}</p>
+            <p className="mt-1.5 flex-1 text-sm text-ink-muted">{t(`${key}.summary`)}</p>
             <span className="mt-4 flex items-center gap-1 text-sm font-semibold text-primary">
               {t("learnMore")}
               <ArrowRight

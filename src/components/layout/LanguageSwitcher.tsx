@@ -6,6 +6,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { translateServiceSlug } from "@/lib/services";
 
 type Href = Parameters<typeof Link>[0]["href"];
 
@@ -25,6 +26,14 @@ function SwitcherLink({
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { locale: _locale, ...routeParams } = params;
+  // Params that are words in the URL get translated too (service slugs).
+  if (pathname === "/services/[service]" && typeof routeParams.service === "string") {
+    routeParams.service = translateServiceSlug(
+      routeParams.service,
+      locale as Locale,
+      target,
+    );
+  }
   const href = { pathname, params: routeParams, query } as Href;
 
   return (
@@ -56,7 +65,8 @@ function SwitcherWithQuery({ className }: { className: string }) {
 
 /**
  * Link to the same page in the other locale: same route, same params and same filters
- * (/es/remates/121?categoria=… ↔ /en/auctions/121?…). A real link, so it works without JS.
+ * (/es/remates/121?category=… ↔ /en/auctions/121?…), translating localized params such as
+ * service slugs (/es/servicios/ferias ↔ /en/services/saleyard-fairs). A real link, works without JS.
  * The prerendered HTML has the link without the query; it gains the filters on hydration.
  */
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
