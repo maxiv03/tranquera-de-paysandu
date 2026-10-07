@@ -98,6 +98,35 @@ Rules:
 - Anything `position: fixed` rendered inside the header must be portaled to `<body>` (the
   header's backdrop-filter becomes its containing block).
 
+## Routes and URL state
+
+| Internal path                      | es                        | en                        |
+| ---------------------------------- | ------------------------- | ------------------------- |
+| `/auctions`                        | `/es/remates`             | `/en/auctions`            |
+| `/auctions/[auction]`              | `/es/remates/121`         | `/en/auctions/121`        |
+| `/auctions/[auction]/lots/[lot]`   | `/es/remates/121/lotes/3` | `/en/auctions/121/lots/3` |
+| `/live`                            | `/es/en-vivo`             | `/en/live`                |
+| `/services`, `/services/[service]` | `/es/servicios`           | `/en/services`            |
+| `/contact`                         | `/es/contacto`            | `/en/contact`             |
+
+- Query params are language-neutral (same keys and values in both locales) so the switcher can
+  copy them: auction list `view=finished`, `type=screen|fair`; catalog `category`,
+  `department`, `weight=under200|200to300|300to400|over400`. Parsing and facet counts live in
+  `src/lib/catalog-filters.ts`; defaults stay out of the URL.
+- Parts of a page that read `searchParams` go inside `<Suspense>` with a skeleton; the rest of
+  the page stays prerendered.
+- Unknown auction numbers render the localized not-found page with `noindex` but HTTP 200: with
+  partial prerendering the response streams before `notFound()` runs (documented Next behavior).
+
+## Media
+
+- All images and videos live in `public/` and every third-party file is listed in
+  `CREDITS.md` (source, author, license, processing).
+- Videos: muted MP4 + `-poster.webp`, made with `scripts/optimize-video.mjs`; play them with
+  `LoopVideo` (lazy, pauses off-screen, no autoplay with reduced motion). `posterFor()` and
+  `LIVE_VIDEO` are in `src/lib/media.ts`.
+- After reseeding, `rm -rf .next` before a local build: the build reuses cached data otherwise.
+
 ## Language rules
 
 - Routes: `/es/...` and `/en/...`, Spanish is the default. Public paths are translated
