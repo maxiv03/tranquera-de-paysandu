@@ -50,7 +50,9 @@ export const SERVICES = [
 }[];
 
 // Every service may carry auctionType (only the auction services define it).
-export type Service = (typeof SERVICES)[number] & { readonly auctionType?: "screen" | "fair" };
+export type Service = (typeof SERVICES)[number] & {
+  readonly auctionType?: "screen" | "fair";
+};
 export type ServiceKey = Service["key"];
 
 export function serviceBySlug(locale: Locale, slug: string): Service | undefined {

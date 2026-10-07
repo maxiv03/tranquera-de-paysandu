@@ -3,6 +3,7 @@ import { cacheLife, cacheTag } from "next/cache";
 import type { AuctionType } from "@/lib/domain";
 import { createSupabaseClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/database.types";
+import { demoLiveStart } from "@/lib/live";
 import { effectiveStatus, isSameLocalDay } from "./status";
 import type { Auction } from "./types";
 
@@ -16,16 +17,21 @@ export function mapAuction(
   summary: SummaryRow | undefined,
   now: number,
 ): Auction {
+  // The demo live auction ignores its stored date: it is on air in the current 2-hour block.
+  const startsAt = row.demo_live
+    ? new Date(demoLiveStart(now)).toISOString()
+    : row.starts_at;
   return {
     id: row.id,
     number: row.number,
     type: row.type,
     title: row.title,
-    startsAt: row.starts_at,
-    startsToday: isSameLocalDay(row.starts_at, now),
+    startsAt,
+    demoLive: row.demo_live,
+    startsToday: isSameLocalDay(startsAt, now),
     venue: row.venue,
     department: row.department as Auction["department"],
-    status: effectiveStatus(row.status, row.starts_at, now),
+    status: row.demo_live ? "live" : effectiveStatus(row.status, row.starts_at, now),
     imageUrl: row.image_url,
     notes: row.notes,
     lotCount: summary?.lot_count ?? 0,

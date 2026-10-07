@@ -44,6 +44,9 @@ export type Database = {
       auctions: {
         Row: {
           created_at: string
+          demo_day_offset: number | null
+          demo_live: boolean
+          demo_time: string | null
           department: string
           id: number
           image_url: string | null
@@ -57,6 +60,9 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          demo_day_offset?: number | null
+          demo_live?: boolean
+          demo_time?: string | null
           department: string
           id?: never
           image_url?: string | null
@@ -70,6 +76,9 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          demo_day_offset?: number | null
+          demo_live?: boolean
+          demo_time?: string | null
           department?: string
           id?: never
           image_url?: string | null
@@ -107,6 +116,21 @@ export type Database = {
           message?: string
           name?: string
           phone?: string | null
+        }
+        Relationships: []
+      }
+      demo_state: {
+        Row: {
+          key: string
+          value: string
+        }
+        Insert: {
+          key: string
+          value?: string
+        }
+        Update: {
+          key?: string
+          value?: string
         }
         Relationships: []
       }
@@ -231,7 +255,7 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      rotate_demo_dates: { Args: { force?: boolean }; Returns: boolean }
     }
     Enums: {
       auction_status: "upcoming" | "live" | "finished"

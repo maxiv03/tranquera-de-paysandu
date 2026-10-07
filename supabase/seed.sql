@@ -9,6 +9,7 @@ begin;
 
 truncate table public.lot_photos, public.lots, public.auctions, public.agents
   restart identity cascade;
+delete from public.demo_state;
 
 -- Agents ----------------------------------------------------------------------------------------
 
@@ -18,6 +19,9 @@ insert into public.agents (name, photo_url, phone, whatsapp) values
   ('Federico Sosa',   '/images/agents/federico-sosa.svg',  '+598 99 338 710', '59899338710');
 
 -- Auctions --------------------------------------------------------------------------------------
+-- Each auction stores where it sits relative to today (demo_day_offset + demo_time) so the daily
+-- cron can re-anchor the dates weekly (rotate_demo_dates). Auction 120 is the demo live auction:
+-- the app derives its start time from the current time, so it is always on air.
 -- local(days, time): a day relative to today at a given local time in Montevideo.
 
 create function pg_temp.local(days integer, at_time time) returns timestamptz
@@ -45,7 +49,7 @@ values
    '/images/auctions/cover-4.webp',
    'Transmisión en vivo. Ofertas telefónicas a través de los agentes.'),
 
-  (121, 'screen', 'Gran remate de primavera', pg_temp.local(6, '10:00'),
+  (121, 'screen', 'Gran remate de primavera', pg_temp.local(9, '10:00'),
    'Estudio Tranquera', 'Paysandú', 'upcoming',
    '/images/auctions/cover-5.webp',
    'Plazo: 30, 60 o 90 días. Fletes coordinados por la empresa.'),
@@ -54,6 +58,19 @@ values
    'Local de Ferias de Young', 'Río Negro', 'upcoming',
    null,
    'Feria de terneros y vaquillonas de reposición. Plazo: contado o 30 días.');
+
+-- Demo schedule: offsets used by rotate_demo_dates() (keep them in sync with the dates above;
+-- upcoming auctions sit more than 7 days ahead so a weekly rotation never lets them start).
+
+update public.auctions a set demo_day_offset = v.days, demo_time = v.at_time
+from (values
+  (118, -38, time '09:30'), (119, -10, time '14:00'), (121, 9, time '10:00'), (122, 20, time '09:30')
+) as v (number, days, at_time)
+where a.number = v.number;
+
+update public.auctions set demo_live = true where number = 120;
+
+insert into public.demo_state (key, value) values ('last_rotation', now());
 
 -- Lots ------------------------------------------------------------------------------------------
 

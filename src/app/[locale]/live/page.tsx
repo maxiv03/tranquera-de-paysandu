@@ -89,12 +89,7 @@ function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog
         <aside className="flex flex-col gap-5 rounded-card bg-surface p-5 ring-1 ring-line">
           <div>
             <AuctionTypeBadge type={auction.type} />
-            <p className="mt-3 font-semibold tabular">
-              {t("live.startedAt", {
-                time: format.dateTime(new Date(auction.startsAt), "time"),
-              })}
-            </p>
-            <p className="mt-1 flex items-start gap-1.5 text-sm text-ink-muted">
+            <p className="mt-3 flex items-start gap-1.5 text-sm text-ink-muted">
               <MapPin
                 className="mt-0.5 size-4 shrink-0 text-ink-subtle"
                 aria-hidden="true"
@@ -112,6 +107,7 @@ function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog
           <LiveLotTracker
             auctionNumber={auction.number}
             startsAt={auction.startsAt}
+            demo={auction.demoLive}
             lots={lots.map((lot) => ({
               number: lot.number,
               summary: `${t("units.heads", { count: lot.headCount })} · ${t(`lotCategory.${lot.category}`)} · ${t("units.kg", { value: format.number(lot.avgWeightKg, "integer") })}`,

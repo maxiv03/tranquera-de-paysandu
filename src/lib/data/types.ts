@@ -18,6 +18,8 @@ export type Auction = {
   /** Display name, e.g. "Gran remate de primavera" (sample content, not translated). */
   title: string | null;
   startsAt: string;
+  /** Always-live demo auction: start time follows the clock (see src/lib/live.ts). */
+  demoLive: boolean;
   /** Starts today in Montevideo time (computed when the data is read). */
   startsToday: boolean;
   venue: string;
