@@ -4,18 +4,26 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useRef, useState } from "react";
 
 /**
- * OpenStreetMap with a branded pin and a circle that marks the approximate area. Leaflet (~40 KB)
+ * OpenStreetMap with a branded pin (and, for lots, a circle that marks the approximate area). Leaflet (~40 KB)
  * is only downloaded when the map gets near the viewport. Scroll-wheel zoom is off so the page
  * keeps scrolling over the map.
  */
-export function LotMap({
+export function LocationMap({
   latitude,
   longitude,
   label,
   loadingLabel,
+  approximate = false,
+  zoom = 10,
+  className = "aspect-[16/10] sm:aspect-auto sm:h-[350px]",
 }: {
   latitude: number;
   longitude: number;
+  /** Draw a circle around the pin: the position is only the area, not the exact place. */
+  approximate?: boolean;
+  zoom?: number;
+  /** Size of the map box. */
+  className?: string;
   /** Accessible name of the map region. */
   label: string;
   loadingLabel: string;
@@ -40,19 +48,20 @@ export function LotMap({
         map = L.map(container, {
           scrollWheelZoom: false,
           attributionControl: true,
-        }).setView(position, 10);
+        }).setView(position, zoom);
         L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
           maxZoom: 18,
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         }).addTo(map);
-        L.circle(position, {
-          radius: 2500,
-          color: "#2e4a36",
-          weight: 1.5,
-          fillColor: "#2e4a36",
-          fillOpacity: 0.12,
-        }).addTo(map);
+        if (approximate)
+          L.circle(position, {
+            radius: 2500,
+            color: "#2e4a36",
+            weight: 1.5,
+            fillColor: "#2e4a36",
+            fillOpacity: 0.12,
+          }).addTo(map);
         L.marker(position, {
           keyboard: false,
           icon: L.divIcon({
@@ -73,10 +82,12 @@ export function LotMap({
       observer.disconnect();
       map?.remove();
     };
-  }, [latitude, longitude]);
+  }, [latitude, longitude, approximate, zoom]);
 
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-card ring-1 ring-line sm:aspect-auto sm:h-[350px]">
+    <div
+      className={`relative overflow-hidden rounded-card ring-1 ring-line ${className}`}
+    >
       <div
         ref={containerRef}
         role="region"
