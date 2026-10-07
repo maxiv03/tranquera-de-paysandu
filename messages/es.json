@@ -68,7 +68,8 @@
     "avgWeight": "Peso promedio",
     "breed": "Raza",
     "category": "Categoría",
-    "location": "Ubicación"
+    "location": "Ubicación",
+    "hasVideo": "Video"
   },
   "image": {
     "noPhoto": "Sin foto disponible",
@@ -100,6 +101,66 @@
   "common": {
     "seeAll": "Ver todos",
     "call": "Llamar",
-    "backTo": "Volver a {page}"
+    "backTo": "Volver a {page}",
+    "breadcrumb": "Ruta de navegación",
+    "loading": "Cargando…"
+  },
+  "auctions": {
+    "metaTitle": "Cartelera de remates",
+    "title": "Cartelera de remates",
+    "description": "Remates por pantalla y ferias de reposición en el litoral y todo el país. Consultá fecha, lugar y catálogo de cada remate.",
+    "scope": "Mostrar",
+    "upcoming": "Próximos",
+    "finished": "Finalizados",
+    "type": "Tipo",
+    "emptyUpcomingTitle": "No hay remates programados",
+    "emptyFinishedTitle": "Todavía no hay remates finalizados",
+    "emptyDescription": "Probá con otro filtro o escribinos para enterarte de las próximas fechas.",
+    "count": "{count, plural, one {# remate} other {# remates}}"
+  },
+  "auctionPage": {
+    "breadcrumb": "Remates",
+    "date": "Fecha",
+    "time": "Hora",
+    "venue": "Lugar",
+    "summary": "Resumen",
+    "notes": "Condiciones",
+    "ask": "Consultar por este remate",
+    "askMessage": "Quisiera información sobre el remate N.º {number}.",
+    "finishedNote": "Este remate ya finalizó. El catálogo queda disponible como referencia.",
+    "liveNote": "Este remate se está transmitiendo ahora.",
+    "catalog": "Catálogo de lotes",
+    "catalogDescription": "Filtrá por categoría, departamento o peso promedio.",
+    "results": "{shown, plural, one {# lote} other {# lotes}} de {total}",
+    "emptyTitle": "No hay lotes con estos filtros",
+    "emptyDescription": "Probá quitar algún filtro para ver más lotes.",
+    "metaDescription": "{type} del {date} en {venue}, {department}. {lots} y {heads}."
+  },
+  "catalogFilters": {
+    "category": "Categoría",
+    "department": "Departamento",
+    "weight": "Peso promedio",
+    "weightRange": {
+      "under200": "Menos de 200 kg",
+      "200to300": "200–300 kg",
+      "300to400": "300–400 kg",
+      "over400": "Más de 400 kg"
+    }
+  },
+  "live": {
+    "metaTitle": "En vivo",
+    "title": "En vivo",
+    "onAir": "Al aire",
+    "demoNotice": "Transmisión de demostración: el video es ilustrativo.",
+    "startedAt": "Comenzó a las {time} h",
+    "bid": "Ofertar por WhatsApp",
+    "bidMessage": "Quiero ofertar en el remate N.º {number}.",
+    "bidHelp": "Las ofertas se toman por teléfono o WhatsApp a través de nuestros agentes.",
+    "catalog": "Lotes de este remate",
+    "viewCatalog": "Ver catálogo completo",
+    "noneTitle": "No hay un remate en vivo en este momento",
+    "noneDescription": "Cuando un remate esté al aire lo vas a poder seguir desde esta página.",
+    "next": "Próximo remate",
+    "videoLabel": "Transmisión del remate N.º {number}"
   }
 }

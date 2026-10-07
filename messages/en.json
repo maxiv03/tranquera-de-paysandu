@@ -68,7 +68,8 @@
     "avgWeight": "Average weight",
     "breed": "Breed",
     "category": "Category",
-    "location": "Location"
+    "location": "Location",
+    "hasVideo": "Video"
   },
   "image": {
     "noPhoto": "No photo available",
@@ -100,6 +101,66 @@
   "common": {
     "seeAll": "See all",
     "call": "Call",
-    "backTo": "Back to {page}"
+    "backTo": "Back to {page}",
+    "breadcrumb": "Breadcrumb",
+    "loading": "Loading…"
+  },
+  "auctions": {
+    "metaTitle": "Auction schedule",
+    "title": "Auction schedule",
+    "description": "Screen auctions and saleyard fairs on the Uruguay River coast and across the country. Check the date, venue and catalog of each auction.",
+    "scope": "Show",
+    "upcoming": "Upcoming",
+    "finished": "Finished",
+    "type": "Type",
+    "emptyUpcomingTitle": "No auctions scheduled",
+    "emptyFinishedTitle": "No finished auctions yet",
+    "emptyDescription": "Try another filter or message us to hear about upcoming dates.",
+    "count": "{count, plural, one {# auction} other {# auctions}}"
+  },
+  "auctionPage": {
+    "breadcrumb": "Auctions",
+    "date": "Date",
+    "time": "Time",
+    "venue": "Venue",
+    "summary": "Summary",
+    "notes": "Terms",
+    "ask": "Ask about this auction",
+    "askMessage": "I would like information about auction #{number}.",
+    "finishedNote": "This auction has finished. The catalog remains available for reference.",
+    "liveNote": "This auction is being broadcast now.",
+    "catalog": "Lot catalog",
+    "catalogDescription": "Filter by category, department or average weight.",
+    "results": "{shown, plural, one {# lot} other {# lots}} of {total}",
+    "emptyTitle": "No lots match these filters",
+    "emptyDescription": "Try removing a filter to see more lots.",
+    "metaDescription": "{type} on {date} at {venue}, {department}. {lots} and {heads}."
+  },
+  "catalogFilters": {
+    "category": "Category",
+    "department": "Department",
+    "weight": "Average weight",
+    "weightRange": {
+      "under200": "Under 200 kg",
+      "200to300": "200–300 kg",
+      "300to400": "300–400 kg",
+      "over400": "Over 400 kg"
+    }
+  },
+  "live": {
+    "metaTitle": "Live",
+    "title": "Live",
+    "onAir": "On air",
+    "demoNotice": "Demo broadcast: the video is for illustration only.",
+    "startedAt": "Started at {time}",
+    "bid": "Bid on WhatsApp",
+    "bidMessage": "I want to bid in auction #{number}.",
+    "bidHelp": "Bids are taken by phone or WhatsApp through our agents.",
+    "catalog": "Lots in this auction",
+    "viewCatalog": "View full catalog",
+    "noneTitle": "No auction is live right now",
+    "noneDescription": "When an auction is on air you will be able to follow it from this page.",
+    "next": "Next auction",
+    "videoLabel": "Broadcast of auction #{number}"
   }
 }
