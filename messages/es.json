@@ -463,5 +463,10 @@
   "contactPage": {
     "metaTitle": "Contacto",
     "metaDescription": "Escribinos, llamanos o visitanos en Paysandú."
+  },
+  "error": {
+    "title": "No pudimos cargar esta sección",
+    "description": "Puede ser un problema momentáneo de conexión. Probá de nuevo en unos segundos o escribinos por WhatsApp.",
+    "retry": "Reintentar"
   }
 }

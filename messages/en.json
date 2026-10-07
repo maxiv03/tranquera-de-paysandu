@@ -463,5 +463,10 @@
   "contactPage": {
     "metaTitle": "Contact",
     "metaDescription": "Write to us, call us or visit us in Paysandú."
+  },
+  "error": {
+    "title": "We could not load this section",
+    "description": "It may be a temporary connection problem. Try again in a few seconds or message us on WhatsApp.",
+    "retry": "Try again"
   }
 }
