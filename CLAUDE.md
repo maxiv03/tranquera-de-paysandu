@@ -104,6 +104,10 @@ Rules:
   so `NEXT_PUBLIC_SITE_URL` must be set per environment.
 - Maps use the public OpenStreetMap tiles with attribution, lazy-loaded; fine for a demo, switch
   to a tile provider with a key if traffic grows.
+- Never import plain values (constants, helpers) from a `"use client"` module into a server
+  component: they arrive as client references. Put shared values in `src/lib/` (e.g. `live.ts`).
+- In-page WhatsApp buttons carry `data-whatsapp-cta` (added by `WhatsAppButton`); the floating
+  button hides while one is visible. Prefilled messages go through `demoMessage()`.
 - Anything `position: fixed` rendered inside the header must be portaled to `<body>` (the
   header's backdrop-filter becomes its containing block).
 

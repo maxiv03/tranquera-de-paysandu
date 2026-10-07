@@ -6,6 +6,7 @@ import { AuctionCard } from "@/components/auctions/AuctionCard";
 import { AuctionTypeBadge } from "@/components/auctions/AuctionTypeBadge";
 import { LiveDot } from "@/components/auctions/StatusBadge";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { LiveLotTracker } from "@/components/live/LiveLotTracker";
 import { LotCard } from "@/components/lots/LotCard";
 import { LoopVideo } from "@/components/media/LoopVideo";
 import { buttonStyles } from "@/components/ui/button-styles";
@@ -15,6 +16,7 @@ import { Link } from "@/i18n/navigation";
 import { getAuctions } from "@/lib/data/auctions";
 import { getAuctionCatalog } from "@/lib/data/lots";
 import type { AuctionCatalog, Auction } from "@/lib/data/types";
+import { LIVE_LOT_ATTRIBUTE } from "@/lib/live";
 import { LIVE_VIDEO, posterFor } from "@/lib/media";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -51,7 +53,10 @@ function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog
           <LiveDot />
           {t("live.title")}
         </span>
-        <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
+        <div>
+          <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
+          {auction.title && <p className="font-medium text-accent">{auction.title}</p>}
+        </div>
       </div>
 
       <div className="mt-5 grid gap-6 lg:grid-cols-[1fr_340px]">
@@ -95,6 +100,14 @@ function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog
               {t("units.heads", { count: auction.headCount })}
             </p>
           </div>
+          <LiveLotTracker
+            auctionNumber={auction.number}
+            startsAt={auction.startsAt}
+            lots={lots.map((lot) => ({
+              number: lot.number,
+              summary: `${t("units.heads", { count: lot.headCount })} · ${t(`lotCategory.${lot.category}`)} · ${t("units.kg", { value: format.number(lot.avgWeightKg, "integer") })}`,
+            }))}
+          />
           <div className="mt-auto space-y-3">
             <WhatsAppButton
               size="lg"
@@ -118,8 +131,16 @@ function LiveBroadcast({ catalog: { auction, lots } }: { catalog: AuctionCatalog
         <SectionHeading id="live-lots" title={t("live.catalog")} />
         <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {lots.map((lot) => (
-            <li key={lot.id} className="flex min-w-0 [&>article]:flex-1">
+            <li
+              key={lot.id}
+              {...{ [LIVE_LOT_ATTRIBUTE]: lot.number }}
+              className="group/live relative flex min-w-0 rounded-card ring-offset-2 ring-offset-paper transition-shadow aria-[current=true]:ring-2 aria-[current=true]:ring-live [&>article]:flex-1"
+            >
               <LotCard lot={lot} auctionNumber={auction.number} />
+              <span className="absolute -top-2.5 right-3 z-10 hidden items-center gap-1.5 rounded-full bg-live px-2.5 py-0.5 text-xs font-bold text-white uppercase shadow group-aria-[current=true]/live:inline-flex">
+                <LiveDot />
+                {t("live.currentBadge")}
+              </span>
             </li>
           ))}
         </ul>

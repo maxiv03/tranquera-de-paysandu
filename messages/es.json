@@ -53,7 +53,8 @@
     "heads": "{count, plural, one {# cabeza} other {# cabezas}}",
     "lots": "{count, plural, one {# lote} other {# lotes}}",
     "kg": "{value} kg",
-    "time": "{time} h"
+    "time": "{time} h",
+    "usdPerKg": "US$ {value}/kg"
   },
   "auction": {
     "title": "Remate N.º {number}",
@@ -69,7 +70,10 @@
     "breed": "Raza",
     "category": "Categoría",
     "location": "Ubicación",
-    "hasVideo": "Video"
+    "hasVideo": "Video",
+    "sold": "Vendido",
+    "referencePrice": "Precio de referencia",
+    "referencePriceShort": "Precio ref."
   },
   "image": {
     "noPhoto": "Sin foto disponible",
@@ -167,7 +171,12 @@
     "noneTitle": "No hay un remate en vivo en este momento",
     "noneDescription": "Cuando un remate esté al aire lo vas a poder seguir desde esta página.",
     "next": "Próximo remate",
-    "videoLabel": "Transmisión del remate N.º {number}"
+    "videoLabel": "Transmisión del remate N.º {number}",
+    "onTrack": "En pista ahora",
+    "progress": "Lote {current} de {total}",
+    "trackHelp": "Avance simulado para la demo.",
+    "currentBadge": "En pista",
+    "lastLot": "Último lote del remate"
   },
   "lotPage": {
     "subtitle": "{count} {category} {breed}",
@@ -199,6 +208,10 @@
       "showVideo": "Ver video",
       "previous": "Anterior",
       "next": "Siguiente"
-    }
+    },
+    "soldIn": "Se remató en"
+  },
+  "dateBlock": {
+    "today": "Hoy"
   }
 }

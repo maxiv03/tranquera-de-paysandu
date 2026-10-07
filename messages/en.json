@@ -53,7 +53,8 @@
     "heads": "{count, plural, one {# head} other {# head}}",
     "lots": "{count, plural, one {# lot} other {# lots}}",
     "kg": "{value} kg",
-    "time": "{time}"
+    "time": "{time}",
+    "usdPerKg": "US$ {value}/kg"
   },
   "auction": {
     "title": "Auction #{number}",
@@ -69,7 +70,10 @@
     "breed": "Breed",
     "category": "Category",
     "location": "Location",
-    "hasVideo": "Video"
+    "hasVideo": "Video",
+    "sold": "Sold",
+    "referencePrice": "Reference price",
+    "referencePriceShort": "Ref. price"
   },
   "image": {
     "noPhoto": "No photo available",
@@ -167,7 +171,12 @@
     "noneTitle": "No auction is live right now",
     "noneDescription": "When an auction is on air you will be able to follow it from this page.",
     "next": "Next auction",
-    "videoLabel": "Broadcast of auction #{number}"
+    "videoLabel": "Broadcast of auction #{number}",
+    "onTrack": "In the ring now",
+    "progress": "Lot {current} of {total}",
+    "trackHelp": "Simulated progress for the demo.",
+    "currentBadge": "In the ring",
+    "lastLot": "Last lot of the auction"
   },
   "lotPage": {
     "subtitle": "{count} {breed} {category}",
@@ -175,7 +184,7 @@
     "keyData": "Lot details",
     "department": "Department",
     "description": "Description",
-    "inAuction": "Sold in",
+    "inAuction": "Up for auction at",
     "location": "Location",
     "approxLocation": "The location is approximate: the pin marks the area of the farm, not the exact address.",
     "mapLabel": "Map with the approximate location of lot {lot}",
@@ -199,6 +208,10 @@
       "showVideo": "Show video",
       "previous": "Previous",
       "next": "Next"
-    }
+    },
+    "soldIn": "Sold at"
+  },
+  "dateBlock": {
+    "today": "Today"
   }
 }
