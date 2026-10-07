@@ -1,10 +1,16 @@
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { COMPANY } from "@/lib/company";
 import { demoMessage, whatsappUrl } from "@/lib/whatsapp";
 
-/** Company contact lines (phone, WhatsApp, email, office). Used in the footer and the menu. */
-export function ContactList({ inverted = false }: { inverted?: boolean }) {
+/** Company contact lines (phone, WhatsApp, email, office, optional hours). */
+export function ContactList({
+  inverted = false,
+  withHours = false,
+}: {
+  inverted?: boolean;
+  withHours?: boolean;
+}) {
   const t = useTranslations();
   const muted = inverted ? "text-paper/60" : "text-ink-subtle";
   const items = [
@@ -31,6 +37,15 @@ export function ContactList({ inverted = false }: { inverted?: boolean }) {
       href: `mailto:${COMPANY.email}`,
     },
     { icon: MapPin, label: t("contactInfo.address"), value: COMPANY.address },
+    ...(withHours
+      ? [
+          {
+            icon: Clock,
+            label: t("contactInfo.hours"),
+            value: t("contactInfo.hoursValue"),
+          },
+        ]
+      : []),
   ];
 
   return (

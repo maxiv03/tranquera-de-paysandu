@@ -30,7 +30,7 @@ export function ContactSection({ headingLevel = "h2" }: { headingLevel?: "h1" | 
             {t("home.officeTitle")}
           </h2>
           <div className="mt-4">
-            <ContactList />
+            <ContactList withHours />
           </div>
           <WhatsAppButton className="mt-5 w-full" />
         </div>
