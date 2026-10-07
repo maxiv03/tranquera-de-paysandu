@@ -51,6 +51,7 @@ export type Database = {
           number: number
           starts_at: string
           status: Database["public"]["Enums"]["auction_status"]
+          title: string | null
           type: Database["public"]["Enums"]["auction_type"]
           venue: string
         }
@@ -63,6 +64,7 @@ export type Database = {
           number: number
           starts_at: string
           status?: Database["public"]["Enums"]["auction_status"]
+          title?: string | null
           type: Database["public"]["Enums"]["auction_type"]
           venue: string
         }
@@ -75,6 +77,7 @@ export type Database = {
           number?: number
           starts_at?: string
           status?: Database["public"]["Enums"]["auction_status"]
+          title?: string | null
           type?: Database["public"]["Enums"]["auction_type"]
           venue?: string
         }
@@ -152,6 +155,7 @@ export type Database = {
           location_label: string | null
           longitude: number | null
           number: number
+          reference_price_usd_per_kg: number | null
           video_url: string | null
         }
         Insert: {
@@ -169,6 +173,7 @@ export type Database = {
           location_label?: string | null
           longitude?: number | null
           number: number
+          reference_price_usd_per_kg?: number | null
           video_url?: string | null
         }
         Update: {
@@ -186,6 +191,7 @@ export type Database = {
           location_label?: string | null
           longitude?: number | null
           number?: number
+          reference_price_usd_per_kg?: number | null
           video_url?: string | null
         }
         Relationships: [

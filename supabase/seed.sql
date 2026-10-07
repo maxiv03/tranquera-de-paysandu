@@ -27,32 +27,33 @@ language sql stable as $$
 $$;
 
 insert into public.auctions
-  (number, type, starts_at, venue, department, status, image_url, notes)
+  (number, type, title, starts_at, venue, department, status, image_url, notes)
 values
-  (118, 'fair', pg_temp.local(-38, '09:30'),
+  (118, 'fair', 'Feria mensual de reposición', pg_temp.local(-38, '09:30'),
    'Local de Ferias Tranquera, Ruta 3 km 372', 'Paysandú', 'finished',
-   '/images/auctions/fair-1.svg',
-   'Feria mensual de reposición. Plazo: contado o 30 días. Comisión 3 % + IVA.'),
+   '/images/auctions/cover-2.webp',
+   'Plazo: contado o 30 días. Comisión 3 % + IVA.'),
 
-  (119, 'screen', pg_temp.local(-10, '14:00'),
+  (119, 'screen', 'Remate del norte', pg_temp.local(-10, '14:00'),
    'Salón Los Ceibos', 'Salto', 'finished',
-   '/images/auctions/screen-2.svg',
-   'Remate por pantalla del norte. Plazo: 60 días con garantía bancaria.'),
+   '/images/auctions/cover-1.webp',
+   'Plazo: 60 días con garantía bancaria.'),
 
-  (120, 'screen', date_bin('15 minutes', now() - interval '20 minutes', timestamptz '2000-01-01'),
+  (120, 'screen', 'Remate de invernada',
+   date_bin('15 minutes', now() - interval '20 minutes', timestamptz '2000-01-01'),
    'Estudio Tranquera', 'Paysandú', 'live',
-   '/images/auctions/screen-1.svg',
+   '/images/auctions/cover-4.webp',
    'Transmisión en vivo. Ofertas telefónicas a través de los agentes.'),
 
-  (121, 'screen', pg_temp.local(6, '10:00'),
+  (121, 'screen', 'Gran remate de primavera', pg_temp.local(6, '10:00'),
    'Estudio Tranquera', 'Paysandú', 'upcoming',
-   '/images/auctions/screen-2.svg',
-   'Gran remate de primavera. Plazo: 30, 60 o 90 días. Fletes coordinados por la empresa.'),
+   '/images/auctions/cover-5.webp',
+   'Plazo: 30, 60 o 90 días. Fletes coordinados por la empresa.'),
 
-  (122, 'fair', pg_temp.local(20, '09:30'),
+  (122, 'fair', 'Especial terneros', pg_temp.local(20, '09:30'),
    'Local de Ferias de Young', 'Río Negro', 'upcoming',
    null,
-   'Feria de reposición del sur del litoral. Plazo: contado o 30 días.');
+   'Feria de terneros y vaquillonas de reposición. Plazo: contado o 30 días.');
 
 -- Lots ------------------------------------------------------------------------------------------
 
@@ -62,7 +63,7 @@ insert into public.lots
 select a.id, v.number, v.category::public.lot_category, v.head_count, v.breed, v.avg_weight_kg,
   v.department, v.latitude, v.longitude, v.location_label, v.description, g.id
 from (values
-  -- 118 · Feria · Paysandú (finished)
+  -- 118 · Feria mensual de reposición · Paysandú (finished)
   (118,  1, 'calves',  32, 'Hereford',         168, 'Paysandú',   -32.362, -57.214, 'Guichón',             'Terneros machos de destete, parejos, sanos y descornados.',                 'Martín Olivera'),
   (118,  2, 'calves',  28, 'Aberdeen Angus',   175, 'Paysandú',   -32.391, -57.583, 'Piedras Coloradas',   'Terneros negros de buena conformación, vacunados contra clostridiosis.',    'Martín Olivera'),
   (118,  3, 'heifers', 18, 'Hereford',         265, 'Paysandú',   -31.934, -57.861, 'Quebracho',           'Vaquillonas de sobreaño, aptas para entorar en primavera.',                 'Martín Olivera'),
@@ -74,7 +75,7 @@ from (values
   (118,  9, 'steers',  25, 'Hereford',         390, 'Paysandú',   -31.702, -57.698, 'Chapicuy',            'Novillos de sobreaño muy parejos, criados en campo natural.',               'Martín Olivera'),
   (118, 10, 'calves',  35, 'Braford',          160, 'Artigas',    -30.731, -57.322, 'Baltasar Brum',       'Terneros Braford rústicos, ideales para recría.',                           'Lucía Pereyra'),
 
-  -- 119 · Pantalla · Salto (finished)
+  -- 119 · Remate del norte · Salto (finished)
   (119,  1, 'steers',  85, 'Hereford',         410, 'Salto',      -31.102, -57.031, 'Colonia Lavalleja',   'Novillos Hereford de 2 años, terminados en campo mejorado.',                'Lucía Pereyra'),
   (119,  2, 'calves', 120, 'Cruza británica',  175, 'Salto',      -30.795, -57.762, 'Belén',               'Ternerada de destete, machos y hembras apartados por sexo.',                'Lucía Pereyra'),
   (119,  3, 'heifers', 60, 'Hereford',         310, 'Salto',      -31.288, -57.121, 'Laureles',            'Vaquillonas preñadas de 3 meses con toro Hereford.',                        'Lucía Pereyra'),
@@ -85,7 +86,7 @@ from (values
   (119,  8, 'steers',  65, 'Aberdeen Angus',   455, 'Paysandú',   -32.351, -57.152, 'Guichón',             'Novillos Angus listos para embarque a frigorífico.',                        'Martín Olivera'),
   (119,  9, 'cows',    40, 'Hereford',         495, 'Río Negro',  -32.951, -58.033, 'Nuevo Berlín',        'Vacas gordas, aptas para cuota de exportación.',                            'Federico Sosa'),
 
-  -- 120 · Pantalla · Paysandú (live)
+  -- 120 · Remate de invernada · Paysandú (live)
   (120,  1, 'steers', 110, 'Hereford',         430, 'Paysandú',   -32.402, -56.904, 'Merinos',             'Novillos Hereford de exportación, de peso muy parejo.',                     'Martín Olivera'),
   (120,  2, 'calves', 150, 'Cruza británica',  185, 'Río Negro',  -32.421, -57.392, 'Algorta',             'Ternerada de primavera, mansa y bien criada.',                              'Federico Sosa'),
   (120,  3, 'heifers', 70, 'Aberdeen Angus',   300, 'Soriano',    -33.871, -57.372, 'Cardona',             'Vaquillonas Angus de sobreaño, coloradas y negras.',                        'Federico Sosa'),
@@ -95,7 +96,7 @@ from (values
   (120,  7, 'heifers', 45, 'Hereford',         345, 'Durazno',    -33.343, -55.632, 'Sarandí del Yí',      'Vaquillonas para entore, con diagnóstico de aptitud reproductiva.',         'Federico Sosa'),
   (120,  8, 'steers',  60, 'Aberdeen Angus',   480, 'Paysandú',   -31.942, -57.893, 'Quebracho',           'Novillos pesados, terminados a grano en los últimos 60 días.',              'Martín Olivera'),
 
-  -- 121 · Pantalla · Paysandú (upcoming, featured)
+  -- 121 · Gran remate de primavera · Paysandú (upcoming, featured, 28 lots)
   (121,  1, 'steers', 120, 'Hereford',         420, 'Paysandú',   -32.364, -57.182, 'Guichón',             'Novillos Hereford de 2 a 3 años, muy parejos, para embarque.',              'Martín Olivera'),
   (121,  2, 'steers',  90, 'Aberdeen Angus',   400, 'Río Negro',  -32.662, -58.121, 'San Javier',          'Novillos Angus negros criados en campo mejorado.',                          'Federico Sosa'),
   (121,  3, 'calves', 140, 'Hereford',         180, 'Paysandú',   -32.383, -57.968, 'Porvenir',            'Terneros Hereford machos, destete de otoño, descornados.',                  'Martín Olivera'),
@@ -108,20 +109,48 @@ from (values
   (121, 10, 'calves', 130, 'Aberdeen Angus',   195, 'Río Negro',  -32.688, -57.632, 'Young',               'Terneros Angus pesados y parejos.',                                         'Federico Sosa'),
   (121, 11, 'heifers', 55, 'Brangus',          305, 'Cerro Largo',-32.512, -54.521, 'Fraile Muerto',       'Vaquillonas Brangus con buena adaptación a los campos del este.',           'Federico Sosa'),
   (121, 12, 'steers',  70, 'Hereford',         445, 'Florida',    -33.731, -56.331, 'Sarandí Grande',      'Novillos gordos, listos para frigorífico.',                                 'Martín Olivera'),
+  (121, 13, 'calves',  95, 'Hereford',         185, 'Salto',      -31.152, -57.648, 'Itapebí',             'Terneros Hereford de destete, con sanidad al día.',                         'Lucía Pereyra'),
+  (121, 14, 'calves', 120, 'Aberdeen Angus',   190, 'Paysandú',   -32.062, -57.362, 'Cerro Chato',         'Terneros Angus negros, parejos en peso y tamaño.',                          'Martín Olivera'),
+  (121, 15, 'steers',  75, 'Braford',          395, 'Río Negro',  -32.831, -57.062, 'Grecco',              'Novillos Braford de 2 años, mansos, para invernada corta.',                 'Federico Sosa'),
+  (121, 16, 'heifers', 50, 'Aberdeen Angus',   330, 'Soriano',    -33.532, -57.418, 'Egaña',               'Vaquillonas Angus aptas para entore, con revisación ginecológica.',         'Federico Sosa'),
+  (121, 17, 'cows',    35, 'Hereford',         450, 'Tacuarembó', -31.902, -55.471, 'Ansina',              'Vacas de invernada con buena dentición.',                                   'Federico Sosa'),
+  (121, 18, 'calves', 160, 'Cruza británica',  175, 'Río Negro',  -32.712, -57.618, 'Young',               'Ternerada cruza británica de primavera, muy pareja.',                       'Federico Sosa'),
+  (121, 19, 'steers', 100, 'Hereford',         410, 'Paysandú',   -32.151, -57.702, 'Queguay',             'Novillos Hereford de campo, de buena estructura.',                          'Martín Olivera'),
+  (121, 20, 'heifers', 65, 'Hereford',         280, 'Salto',      -31.452, -57.602, 'Ruta 3',              'Vaquillonas Hereford de sobreaño, coloradas, muy parejas.',                 'Lucía Pereyra'),
+  (121, 21, 'cows',    45, 'Braford',          470, 'Artigas',    -30.402, -56.471, 'Artigas',             'Vacas Braford de invernada, sanas y en buen estado.',                       'Lucía Pereyra'),
+  (121, 22, 'steers',  60, 'Aberdeen Angus',   430, 'Soriano',    -33.531, -58.212, 'Dolores',             'Novillos Angus para terminar en corral.',                                   'Federico Sosa'),
+  (121, 23, 'calves',  85, 'Braford',          170, 'Tacuarembó', -31.731, -55.982, 'Tacuarembó',          'Terneros Braford rústicos, ideales para el norte.',                         'Federico Sosa'),
+  (121, 24, 'heifers', 40, 'Brangus',          315, 'Rivera',     -31.201, -55.752, 'Tranqueras',          'Vaquillonas Brangus de muy buena conformación.',                            'Federico Sosa'),
+  (121, 25, 'cows',    30, 'Aberdeen Angus',   480, 'Río Negro',  -32.552, -57.402, 'Ruta 20',             'Vacas Angus preñadas con toro Angus.',                                      'Federico Sosa'),
+  (121, 26, 'steers',  90, 'Hereford',         375, 'Paysandú',   -31.952, -57.402, 'Ruta 26',             'Novillos Hereford de sobreaño para recría.',                                'Martín Olivera'),
+  (121, 27, 'calves', 110, 'Hereford',         200, 'Salto',      -31.432, -57.952, 'Colonia 18 de Julio', 'Terneros Hereford pesados, destete de otoño.',                              'Lucía Pereyra'),
+  (121, 28, 'heifers', 55, 'Cruza británica',  300, 'Paysandú',   -32.332, -57.202, 'Guichón',             'Vaquillonas cruza británica para entorar en primavera.',                    'Martín Olivera'),
 
-  -- 122 · Feria · Río Negro (upcoming, no cover image: shows the branded default)
+  -- 122 · Especial terneros · Río Negro (upcoming, no cover image: shows the branded default)
   (122,  1, 'calves',  30, 'Hereford',         165, 'Río Negro',  -32.704, -57.652, 'Young',               'Terneros Hereford de destete con buena sanidad.',                           'Federico Sosa'),
   (122,  2, 'calves',  25, 'Aberdeen Angus',   175, 'Río Negro',  -32.982, -58.051, 'Nuevo Berlín',        'Terneros Angus negros, mansos y parejos.',                                  'Federico Sosa'),
   (122,  3, 'heifers', 20, 'Hereford',         270, 'Soriano',    -33.692, -57.562, 'José Enrique Rodó',   'Vaquillonas de sobreaño en muy buen estado.',                               'Federico Sosa'),
-  (122,  4, 'steers',  22, 'Cruza británica',  360, 'Paysandú',   -32.398, -56.912, 'Merinos',             'Novillos cruza británica para invernada corta.',                            'Martín Olivera'),
-  (122,  5, 'cows',    18, 'Hereford',         430, 'Río Negro',  -32.612, -57.512, 'Menafra',             'Vacas de invernada, vacías, con buena dentición.',                          'Federico Sosa'),
+  (122,  4, 'calves',  26, 'Cruza británica',  185, 'Paysandú',   -32.398, -56.912, 'Merinos',             'Terneros cruza británica, machos, listos para recría.',                     'Martín Olivera'),
+  (122,  5, 'calves',  20, 'Hereford',         190, 'Río Negro',  -32.612, -57.512, 'Menafra',             'Terneros Hereford pesados, con doble vacuna.',                              'Federico Sosa'),
   (122,  6, 'heifers', 24, 'Braford',          285, 'Paysandú',   -32.098, -57.398, 'Lorenzo Geyres',      'Vaquillonas Braford, aptas para entorar este año.',                         'Martín Olivera'),
-  (122,  7, 'steers',  28, 'Hereford',         375, 'Flores',     -33.962, -57.102, 'Ismael Cortinas',     'Novillos Hereford de 2 años, criados a campo.',                             'Federico Sosa'),
+  (122,  7, 'calves',  28, 'Hereford',         175, 'Flores',     -33.962, -57.102, 'Ismael Cortinas',     'Terneros Hereford de campo, muy mansos.',                                   'Federico Sosa'),
   (122,  8, 'calves',  35, 'Cruza británica',  180, 'Soriano',    -33.502, -57.798, 'Palmitas',            'Terneros cruza británica de destete, sin descornar.',                       'Federico Sosa')
 ) as v (auction_number, number, category, head_count, breed, avg_weight_kg, department,
         latitude, longitude, location_label, description, agent_name)
 join public.auctions a on a.number = v.auction_number
 join public.agents g on g.name = v.agent_name;
+
+-- Reference prices ------------------------------------------------------------------------------
+-- Finished auctions only: US$ per kg of live weight, in line with recent replacement markets.
+
+update public.lots l set reference_price_usd_per_kg = v.price
+from (values
+  (118, 1, 3.45), (118, 2, 3.50), (118, 3, 3.05), (118, 4, 2.82), (118, 5, 2.15),
+  (118, 6, 3.38), (118, 7, 3.10), (118, 8, 1.95), (118, 9, 2.78), (118, 10, 3.30),
+  (119, 1, 2.75), (119, 2, 3.42), (119, 3, 3.00), (119, 4, 2.05), (119, 5, 2.72),
+  (119, 6, 3.36), (119, 7, 3.08), (119, 8, 2.60), (119, 9, 2.10)
+) as v (auction_number, lot_number, price), public.auctions a
+where a.number = v.auction_number and l.auction_id = a.id and l.number = v.lot_number;
 
 -- Lot videos ------------------------------------------------------------------------------------
 -- A few lots have a short clip (public/videos, credited in CREDITS.md). Posters follow the
@@ -136,17 +165,56 @@ from (values
 where a.number = v.auction_number and l.auction_id = a.id and l.number = v.lot_number;
 
 -- Lot photos ------------------------------------------------------------------------------------
--- 1 to 3 placeholders per lot, rotating through the category's images.
+-- Photos come from per-category pools (public/images/lots/<category>-NN.webp, see CREDITS.md).
+-- Each lot gets 1 to 3 consecutive photos of its category, within the pool size, so no photo
+-- repeats between lots of the same auction (checked below).
 -- Two lots are left without photos on purpose, to show the branded fallback cover.
 
+with pool (category, size) as (
+  values ('calves', 12), ('steers', 11), ('heifers', 10), ('cows', 12)
+),
+lot_counts as (
+  select l.id, l.auction_id, l.category::text as category, l.number, a.number as auction_number,
+    -- Extra photos wanted beyond the first one.
+    case when l.number % 5 = 0 then 2 when l.number % 3 = 0 then 1 else 0 end as wanted_extra,
+    count(*) over (partition by l.auction_id, l.category) as lots_in_category
+  from public.lots l
+  join public.auctions a on a.id = l.auction_id
+  where (a.number, l.number) not in ((119, 4), (122, 8))
+),
+budgeted as (
+  -- Every lot gets one photo; extras are handed out in lot order while the pool lasts.
+  select lc.*, p.size,
+    1 + greatest(0, least(lc.wanted_extra,
+      p.size - lc.lots_in_category
+        - (sum(lc.wanted_extra) over (partition by lc.auction_id, lc.category order by lc.number)
+          - lc.wanted_extra)
+    )) as photos
+  from lot_counts lc
+  join pool p on p.category = lc.category
+),
+allocated as (
+  select *, sum(photos) over (partition by auction_id, category order by number) - photos as start
+  from budgeted
+)
 insert into public.lot_photos (lot_id, url, position)
-select l.id,
-  format('/images/lots/%s-%s.svg', l.category, (l.number + k) % 3 + 1),
+select al.id,
+  format('/images/lots/%s-%s.webp', al.category,
+    lpad(((al.start + k + al.auction_number * 5) % al.size + 1)::text, 2, '0')),
   k
-from public.lots l
-join public.auctions a on a.id = l.auction_id
-cross join lateral generate_series(0, l.number % 3) as k
-where (a.number, l.number) not in ((119, 4), (122, 8));
+from allocated al
+cross join lateral generate_series(0, al.photos - 1) as k;
+
+-- Fail the whole seed if a photo repeats between lots of the same auction.
+do $$
+begin
+  if exists (
+    select 1 from public.lot_photos ph join public.lots l on l.id = ph.lot_id
+    group by l.auction_id, ph.url having count(*) > 1
+  ) then
+    raise exception 'A lot photo repeats within an auction: enlarge the pool or use fewer photos';
+  end if;
+end $$;
 
 commit;
 
@@ -157,4 +225,6 @@ select
   (select sum(head_count) from public.lots) as heads,
   (select count(*) from public.lot_photos) as photos,
   (select count(*) from public.lots where video_url is not null) as videos,
-  (select count(*) from public.agents) as agents;
+  (select count(*) from public.lots where reference_price_usd_per_kg is not null) as priced,
+  (select lot_count from public.auction_summaries s join public.auctions a on a.id = s.auction_id
+    where a.number = 121) as lots_in_121;
