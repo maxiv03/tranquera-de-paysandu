@@ -104,6 +104,7 @@ function ServiceView({ service }: { service: Service }) {
           fill
           sizes="(min-width: 1152px) 1120px, 100vw"
           loading="eager"
+          quality={60}
           fetchPriority="high"
           className="-z-20 object-cover"
         />

@@ -66,6 +66,7 @@ export function LotGallery({
             fill
             sizes="(min-width: 1024px) 620px, 100vw"
             loading="eager"
+            quality={60}
             fetchPriority="high"
             unoptimized={current.src.endsWith(".svg")}
             className="object-cover"

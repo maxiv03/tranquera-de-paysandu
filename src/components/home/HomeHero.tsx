@@ -27,6 +27,7 @@ export function HomeHero({ children }: { children?: ReactNode }) {
         fill
         sizes="100vw"
         loading="eager"
+        quality={60}
         fetchPriority="high"
         className="-z-20 object-cover"
       />

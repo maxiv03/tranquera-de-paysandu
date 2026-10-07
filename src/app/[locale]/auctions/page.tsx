@@ -97,9 +97,10 @@ async function AuctionResults({ searchParams }: { searchParams: Promise<SearchPa
         />
       </div>
 
-      <p className="sr-only" aria-live="polite">
+      {/* Section heading for screen readers (h1 → h2 → card h3) that also announces the count. */}
+      <h2 className="sr-only" aria-live="polite">
         {t("auctions.count", { count: auctions.length })}
-      </p>
+      </h2>
 
       {auctions.length > 0 ? (
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

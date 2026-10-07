@@ -42,37 +42,35 @@ export function AuctionHero({ auction }: { auction: Auction }) {
           </div>
         </div>
 
-        <dl className="mt-6 grid gap-4 sm:grid-cols-2 [&_svg]:size-4 [&_svg]:text-ink-subtle">
-          <div className="flex gap-2.5">
-            <CalendarDays aria-hidden="true" className="mt-0.5 shrink-0" />
-            <div>
-              <dt className="text-xs text-ink-subtle">{t("auctionPage.date")}</dt>
-              <dd className="font-semibold first-letter:uppercase">
-                {format.dateTime(startsAt, "long")}
-              </dd>
-            </div>
+        {/* Valid dl: each div holds exactly one dt + dd; the icon lives inside the dt. */}
+        <dl className="mt-6 grid gap-4 sm:grid-cols-2 [&_dt_svg]:size-4 [&_dt_svg]:text-ink-subtle">
+          <div>
+            <dt className="flex items-center gap-1.5 text-xs text-ink-subtle">
+              <CalendarDays aria-hidden="true" className="shrink-0" />
+              {t("auctionPage.date")}
+            </dt>
+            <dd className="mt-0.5 pl-[1.375rem] font-semibold first-letter:uppercase">
+              {format.dateTime(startsAt, "long")}
+            </dd>
           </div>
-          <div className="flex gap-2.5">
-            <Clock aria-hidden="true" className="mt-0.5 shrink-0" />
-            <div>
-              <dt className="text-xs text-ink-subtle">{t("auctionPage.time")}</dt>
-              <dd className="font-semibold tabular">
-                {t("units.time", { time: format.dateTime(startsAt, "time") })}
-              </dd>
-            </div>
+          <div>
+            <dt className="flex items-center gap-1.5 text-xs text-ink-subtle">
+              <Clock aria-hidden="true" className="shrink-0" />
+              {t("auctionPage.time")}
+            </dt>
+            <dd className="mt-0.5 pl-[1.375rem] font-semibold tabular">
+              {t("units.time", { time: format.dateTime(startsAt, "time") })}
+            </dd>
           </div>
-          <div className="flex gap-2.5 sm:col-span-2">
-            <MapPin aria-hidden="true" className="mt-0.5 shrink-0" />
-            <div>
-              <dt className="text-xs text-ink-subtle">{t("auctionPage.venue")}</dt>
-              <dd className="font-semibold">
-                {auction.venue}
-                <span className="font-normal text-ink-muted">
-                  {" "}
-                  · {auction.department}
-                </span>
-              </dd>
-            </div>
+          <div className="sm:col-span-2">
+            <dt className="flex items-center gap-1.5 text-xs text-ink-subtle">
+              <MapPin aria-hidden="true" className="shrink-0" />
+              {t("auctionPage.venue")}
+            </dt>
+            <dd className="mt-0.5 pl-[1.375rem] font-semibold">
+              {auction.venue}
+              <span className="font-normal text-ink-muted"> · {auction.department}</span>
+            </dd>
           </div>
         </dl>
 

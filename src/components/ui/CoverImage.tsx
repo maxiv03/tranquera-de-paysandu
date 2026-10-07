@@ -28,6 +28,7 @@ export function CoverImage({
           fill
           sizes={sizes}
           loading={eager ? "eager" : "lazy"}
+          quality={eager ? 60 : 75}
           fetchPriority={eager ? "high" : "auto"}
           unoptimized={src.endsWith(".svg")}
           className="object-cover"
