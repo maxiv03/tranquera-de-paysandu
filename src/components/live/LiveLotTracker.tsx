@@ -5,12 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { LiveDot } from "@/components/auctions/StatusBadge";
 import { Link } from "@/i18n/navigation";
-import { LIVE_LOT_ATTRIBUTE, MINUTES_PER_LOT } from "@/lib/live";
-
-function currentIndex(startsAt: string, total: number) {
-  const minutes = (Date.now() - new Date(startsAt).getTime()) / 60_000;
-  return Math.min(Math.max(Math.floor(minutes / MINUTES_PER_LOT), 0), total - 1);
-}
+import { LIVE_LOT_ATTRIBUTE, lotIndexAt } from "@/lib/live";
 
 /**
  * "In the ring now" panel: which lot is being auctioned, simulated from the minutes since the
@@ -31,7 +26,7 @@ export function LiveLotTracker({
   const [index, setIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const update = () => setIndex(currentIndex(startsAt, lots.length));
+    const update = () => setIndex(lotIndexAt(startsAt, Date.now(), lots.length));
     update();
     const timer = setInterval(update, 15_000);
     return () => clearInterval(timer);
@@ -96,7 +91,7 @@ export function LiveLotTracker({
             style={{ width: `${progress}%` }}
           />
         </div>
-        <p className="mt-1.5 flex justify-between text-xs text-ink-muted tabular">
+        <p className="mt-1.5 text-xs font-semibold text-ink tabular">
           <span className="min-h-4">
             {index === null
               ? null
@@ -104,8 +99,8 @@ export function LiveLotTracker({
                 ? t("live.lastLot")
                 : t("live.progress", { current: index + 1, total: lots.length })}
           </span>
-          <span>{t("live.trackHelp")}</span>
         </p>
+        <p className="mt-0.5 text-xs text-ink-subtle">{t("live.trackHelp")}</p>
       </div>
     </div>
   );
