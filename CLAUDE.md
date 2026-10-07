@@ -73,6 +73,31 @@ src/
 - Mobile-first: design for 375px, then add `sm:`/`lg:` enhancements.
 - Missing image → `CoverImage` falls back to the branded default cover.
 
+## Components
+
+Reuse before creating. Current building blocks:
+
+- `ui/`: `buttonStyles()` (one look for buttons, links and anchors: primary, secondary, ghost,
+  accent, whatsapp, live), `Badge`, `DateBlock`, `SectionHeading`, `Stat` (inside a `<dl>`),
+  `EmptyState`, `FilterChips` (URL-driven link chips), `CoverImage` + `BrandCover` (fallback).
+- `brand/`: `Logo`, `LogoMark`.
+- `auctions/`: `AuctionCard`, `StatusBadge` (+ `LiveDot`), `AuctionTypeBadge`.
+- `lots/`: `LotCard`, `CategoryBadge`.
+- `layout/`: `SiteHeader`, `SiteFooter`, `MobileMenu`, `LanguageSwitcher`, `ContactList`,
+  `WhatsAppButton` / `WhatsAppFab`.
+
+Rules:
+
+- Cards are fully clickable through a stretched title link (`after:absolute after:inset-0`);
+  secondary actions inside a card need `relative z-10`.
+- Images go through `CoverImage` with a real `sizes`; only above-the-fold images use `eager`.
+- Icons come from `lucide-react`, always `aria-hidden` next to visible or sr-only text.
+- **Every WhatsApp link starts with the demo prefix** (`whatsapp.prefix` in messages). Use
+  `WhatsAppButton` or `whatsappUrl()` with `${t("whatsapp.prefix")} …`, never a bare wa.me link.
+- Company contact data lives in `src/lib/company.ts`; all agents share the demo WhatsApp number.
+- Anything `position: fixed` rendered inside the header must be portaled to `<body>` (the
+  header's backdrop-filter becomes its containing block).
+
 ## Language rules
 
 - Routes: `/es/...` and `/en/...`, Spanish is the default. Public paths are translated
