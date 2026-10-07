@@ -31,13 +31,19 @@ npm run build          # production build (must pass before closing a phase)
 npm run check          # typecheck + lint + i18n key parity
 npm run check:i18n     # es/en messages: same keys, no empty values, same ICU args
 npm run format         # prettier (with tailwind class sorting)
+npm run db:push        # apply migrations to the linked Supabase project
+npm run db:seed        # reset demo data (idempotent)
+npm run db:types       # regenerate src/lib/supabase/database.types.ts after schema changes
 ```
+
+The `db:*` scripts go through `scripts/supabase.mjs`, which loads `.env.local` and runs the
+Supabase CLI without a shell. Never print or log values from `.env.local`.
 
 ## Structure
 
 ```
 messages/{es,en}.json        UI strings. es is the reference locale.
-scripts/                     repo tooling (check-i18n.mjs)
+scripts/                     repo tooling (check-i18n, supabase CLI wrapper, placeholder generator)
 supabase/migrations/         SQL migrations (schema, RLS, views)
 supabase/seed.sql            sample data (dates relative to now())
 public/images/               all images (placeholders, covers, agents). No Supabase Storage.
@@ -48,6 +54,8 @@ src/
   components/ui/             generic building blocks (Button, Badge, Card, CoverImage...)
   components/<domain>/       auctions/, lots/, layout/, contact/ ...
   lib/data/                  server-only data access (the only place that queries Supabase)
+  lib/supabase/              client + generated database types (do not edit the types by hand)
+  lib/domain.ts              enums, departments and type guards shared by UI and data
   lib/                       helpers (format, whatsapp, etc.)
 ```
 
@@ -86,18 +94,31 @@ src/
 ## Data
 
 Tables: `agents`, `auctions`, `lots`, `lot_photos`, `contact_messages`, plus the view
-`auction_summaries` (lot and head counts per auction). Public read via RLS; `contact_messages`
-is insert-only for anonymous users. Services are not in the DB: they live in code
+`auction_summaries` (lot and head counts per auction). Public roles get least privilege on top of
+RLS: `SELECT` on the catalog, column-level `INSERT` on `contact_messages` (no read). New tables
+start closed: grant explicitly in their migration. Services are not in the DB: they live in code
 (`src/lib/services.ts`) with their texts in messages.
 
+- Auctions and lots are addressed by **number** in URLs (`/es/remates/121/lotes/3`), never by id:
+  numbers are stable across seed resets.
+- `status` shown to visitors comes from `effectiveStatus()` (`src/lib/data/status.ts`): a stored
+  "finished" wins; otherwise the start time decides (live for 5 h after start), so an
+  unattended demo never shows a past auction as upcoming.
+- Agent `whatsapp` is digits only in international format (`598…`), ready for `wa.me` links.
+
 Sample data is concentrated on the Uruguay River coast (Paysandú, Salto, Río Negro, Soriano,
-Tacuarembó) with a few lots from other departments. Seed dates are relative to `now()` so the
-demo always has upcoming and finished auctions.
+Tacuarembó) with a few lots from other departments. `supabase/seed.sql` is idempotent (truncate +
+reload in one transaction, `contact_messages` untouched) and its dates are relative to `now()`.
 
-Credentials live in `.env.local` (never committed); `.env.example` documents the variables.
+Credentials live in `.env.local` (never committed); `.env.example` and the README document them.
 
-Pages must keep serving (stale) when the database does not respond: cache data reads and never
-let a failed query crash a cached page.
+### Caching and resilience
+
+Every Supabase read in `src/lib/data/` is a `"use cache"` function with `cacheLife("catalog")`
+(defined in `next.config.ts`: revalidate 5 min, expire 30 days) and the `auctions` tag. Data
+functions **throw** on query errors instead of returning empty data, so a failure is never cached
+and the last good copy keeps being served while Supabase is paused or unreachable. Listings are
+derived in memory from one cached read (the dataset is small); keep it that way unless it grows.
 
 ## Definition of done (every phase)
 
