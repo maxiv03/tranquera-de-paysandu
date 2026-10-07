@@ -211,9 +211,20 @@ derived in memory from one cached read (the dataset is small); keep it that way 
 3. Reviewed at 375px width (and desktop) — no horizontal scroll, readable hierarchy.
 4. Small commits with clear messages.
 
-## Backlog for Phase 7
+## Demo schedule, cron and SEO
 
-- Dynamic Open Graph images in both locales: per lot (photo, heads, category, average weight)
-  and per auction (date, type, number of lots).
-- Keep-alive endpoint + Vercel cron for the free Supabase project, which also rotates the demo
-  dates weekly so there are always upcoming auctions. Pages must keep serving if the DB is down.
+- Auction `demo_live` (120) is always on air: `mapAuction` derives its start from the current
+  2-hour block (`demoLiveStart`, `src/lib/live.ts`) and forces status `live`; the tracker uses
+  the same rule in the browser. Don't give it a stored date that matters.
+- Other auctions keep `demo_day_offset`/`demo_time`; `rotate_demo_dates()` (SQL, service role
+  only) re-anchors them when the last rotation is 7+ days old. Upcoming offsets must stay > 7 days.
+- `/api/cron/daily` (vercel.json, once a day on Hobby): keep-alive query, rotation, then
+  `revalidateTag("auctions", "max")`. Requires `Authorization: Bearer $CRON_SECRET`.
+- `src/lib/supabase/admin.ts` (secret key) is for the cron only. `SUPABASE_URL` (server-only,
+  runtime) overrides the inlined public URL; handy to simulate an outage locally.
+- Every page sets `alternates: await alternatesFor(href)` (`src/lib/seo.ts`): canonical +
+  hreflang for es/en/x-default. `app/sitemap.ts` and `app/robots.ts` use `NEXT_PUBLIC_SITE_URL`.
+- Open Graph images: `opengraph-image.tsx` at `[locale]`, auction and lot level, built with
+  `src/lib/og.tsx` (Bitter/Archivo TTF in `src/assets/fonts`, local photos converted to JPEG;
+  both shipped via `outputFileTracingIncludes`). Don't set `openGraph.images` on those pages.
+- `app/[locale]/error.tsx` only shows when data fails and nothing is cached.
