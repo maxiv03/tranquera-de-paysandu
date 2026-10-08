@@ -145,8 +145,8 @@ Rules:
   `<Suspense>` with a skeleton from `components/ui/Skeleton.tsx` that mirrors the real layout.
   Pages stay sync; data lives in async child components. Check `next dev` for the
   "URL data outside of Suspense" insight after touching a page. Never use `instant = false`.
-- Unknown auction numbers render the localized not-found page with `noindex` but HTTP 200: with
-  partial prerendering the response streams before `notFound()` runs (documented Next behavior).
+- Unknown auction and lot numbers render the localized not-found page with `noindex` and HTTP
+  404 (verified in production).
 
 ## Media
 
